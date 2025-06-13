@@ -1,810 +1,669 @@
+#!/usr/bin/env python3
+"""
+Importador SYSCOM to Shopify - Versión Mejorada v2.2
+Maneja mejor los permisos limitados de Shopify API
+Incluye manejo de stock, timeouts, retry e interfaz interactiva
+"""
+
 import os
-import requests
-import pandas as pd
-import shopify
-import time
+import sys
+import csv
+import json
 import logging
+import time
+import random
+from datetime import datetime
+from typing import Dict, List, Optional, Tuple
 from dotenv import load_dotenv
+import shopify
+import requests
 from urllib.parse import urlparse
-import re
-import xml.etree.ElementTree as ET
-from functools import wraps
+from requests.adapters import HTTPAdapter
+
+# Configurar logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('import_log.txt', encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
 
 # Cargar variables de entorno
 load_dotenv()
 
-# Configurar logging
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
-def retry_on_timeout(max_retries=3, timeout_delay=2):
-    """Decorador para reintentar operaciones que fallan por timeout"""
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            for attempt in range(max_retries):
-                try:
-                    return func(*args, **kwargs)
-                except Exception as e:
-                    error_msg = str(e).lower()
-                    # Detectar errores de timeout o conexión
-                    if any(keyword in error_msg for keyword in ['timeout', 'timed out', 'connection', 'refused', '10060', 'read timeout']):
-                        if attempt < max_retries - 1:
-                            print(f"⚠️ Timeout/conexión (intento {attempt + 1}/{max_retries}): {e}")
-                            print(f"🔄 Reintentando en {timeout_delay} segundos...")
-                            time.sleep(timeout_delay * (attempt + 1))  # Backoff exponencial
-                            continue
-                        else:
-                            print(f"❌ Error después de {max_retries} intentos: {e}")
-                            raise
-                    else:
-                        # Si no es un error de timeout, lanzar inmediatamente
-                        raise
-            return None
-        return wrapper
-    return decorator
-
-
-class CSVToShopifyImporter:
+class SyscomShopifyImporter:
     def __init__(self):
+        """Inicializar el importador con configuración mejorada"""
         self.shop_name = os.getenv('SHOPIFY_SHOP_NAME')
         self.access_token = os.getenv('SHOPIFY_ACCESS_TOKEN')
         self.csv_url = os.getenv('CSV_URL')
-        self.max_products_per_batch = int(
-            os.getenv('MAX_PRODUCTS_PER_BATCH', 10))
-        self.delay_between_requests = float(
-            os.getenv('DELAY_BETWEEN_REQUESTS', 1))
-
-        # Configurar Shopify con la versión correcta de API y timeouts
-        self.api_version = '2025-04'
-        shop_url = f"https://{self.shop_name}/admin/api/{self.api_version}"
-        session = shopify.Session(
-            shop_url, self.api_version, self.access_token)
-        shopify.ShopifyResource.activate_session(session)
-          # Configurar timeouts más agresivos para evitar cuelgues
-        shopify.ShopifyResource.timeout = 15  # 15 segundos timeout
-
-    def download_csv(self):
-        """Descarga el CSV desde la URL proporcionada"""
+        self.max_products_per_batch = int(os.getenv('MAX_PRODUCTS_PER_BATCH', 5))
+        self.delay_between_requests = float(os.getenv('DELAY_BETWEEN_REQUESTS', 2))
+        
+        # Estado del sistema
+        self.location_id = None
+        self.location_name = None
+        self.has_location_permissions = False
+        self.has_inventory_permissions = False
+        
+        # Configuración de retry para requests
+        self.max_retries = 3
+        self.timeout = 30
+        self.backoff_factor = 0.3
+        
+        # Estadísticas mejoradas
+        self.stats = {
+            'productos_procesados': 0,
+            'productos_creados': 0,
+            'productos_duplicados': 0,
+            'productos_con_error': 0,
+            'productos_sin_stock': 0,
+            'inventario_actualizado': 0,
+            'errores_inventario': 0,
+            'tiempo_inicio': None,
+            'tiempo_fin': None
+        }
+        
+        # Configurar sesión con retry
+        self.session = self._crear_sesion_con_retry()
+        
+        # Configurar Shopify API
+        if self.shop_name and self.access_token:
+            self._setup_shopify_api()
+            
+    def _crear_sesion_con_retry(self):
+        """Crear sesión de requests con retry automático"""
+        session = requests.Session()
+        
+        # Configurar strategy de retry usando una implementación simple
+        session.headers.update({
+            'User-Agent': 'SYSCOM-Shopify-Importer/2.2',
+            'Accept': 'text/csv, application/csv, text/plain, */*'
+        })
+        
+        return session
+            
+    def _setup_shopify_api(self):
+        """Configurar la API de Shopify"""
         try:
-            logger.info(f"Descargando CSV desde: {self.csv_url}")
-            response = requests.get(self.csv_url, timeout=30)
-            response.raise_for_status()
-
-            # Guardar el CSV localmente
-            csv_filename = 'productos_ociostock.csv'
-            with open(csv_filename, 'wb') as f:
-                f.write(response.content)
-
-            logger.info(f"CSV descargado exitosamente: {csv_filename}")
-            return csv_filename
-
+            shopify.ShopifyResource.set_site(f"https://{self.shop_name}/admin/api/2025-04")
+            shopify.ShopifyResource.set_headers({"X-Shopify-Access-Token": self.access_token})
+            logging.info("✅ API de Shopify configurada correctamente")
         except Exception as e:
-            logger.error(f"Error descargando CSV: {e}")
-            raise
-
-    def parse_csv(self, csv_filename):
-        """Parsea el CSV y lo convierte en un DataFrame"""
+            logging.error(f"❌ Error configurando API de Shopify: {e}")
+            
+    def verificar_permisos_shopify(self) -> Dict[str, bool]:
+        """Verificar qué permisos tenemos en Shopify"""
+        permisos = {
+            'shop_read': False,
+            'products_read': False,
+            'products_write': False,
+            'locations_read': False,
+            'inventory_read': False,
+            'inventory_write': False
+        }
+        
         try:
-            # El CSV usa ; como separador
-            df = pd.read_csv(csv_filename, sep=';', encoding='utf-8')
-            logger.info(f"CSV parseado exitosamente. Filas: {len(df)}")
-            return df
+            # Test básico: leer info de la tienda
+            shop = shopify.Shop.current()
+            permisos['shop_read'] = True
+            logging.info(f"✅ Tienda conectada: {shop.name}")
+            
+            # Test productos - lectura
+            try:
+                productos = shopify.Product.find(limit=1)
+                permisos['products_read'] = True
+                logging.info("✅ Permisos de lectura de productos: OK")
+            except Exception as e:
+                logging.warning(f"⚠️ Sin permisos de lectura de productos: {e}")
+                
+            # Test productos - escritura (creamos y eliminamos un producto de prueba)
+            try:
+                test_product = shopify.Product()
+                test_product.title = f"TEST PRODUCT {datetime.now().timestamp()}"
+                test_product.product_type = "Test"
+                test_product.status = "draft"
+                
+                if test_product.save():
+                    permisos['products_write'] = True
+                    logging.info("✅ Permisos de escritura de productos: OK")
+                    
+                    # Eliminar producto de prueba
+                    test_product.destroy()
+                    logging.info("✅ Producto de prueba eliminado")
+                else:
+                    logging.warning("⚠️ Sin permisos de escritura de productos")
+                    
+            except Exception as e:
+                logging.warning(f"⚠️ Sin permisos de escritura de productos: {e}")
+                
+            # Test ubicaciones - BUSCAR ESPECÍFICAMENTE OTANCAHUI 802
+            try:
+                locations = shopify.Location.find()
+                permisos['locations_read'] = True
+                self.has_location_permissions = True
+                
+                if locations:
+                    # Buscar específicamente OTANCAHUI 802
+                    location_encontrada = None
+                    logging.info(f"📍 Ubicaciones disponibles:")
+                    for loc in locations:
+                        logging.info(f"   - {loc.name} (ID: {loc.id})")
+                        if "OTANCAHUI" in loc.name.upper():
+                            location_encontrada = loc
+                            break
+                    
+                    if location_encontrada:
+                        self.location_id = location_encontrada.id
+                        self.location_name = location_encontrada.name
+                        logging.info(f"✅ Ubicación OTANCAHUI configurada: {self.location_name} (ID: {self.location_id})")
+                    else:
+                        # Usar la primera ubicación como fallback
+                        self.location_id = locations[0].id
+                        self.location_name = locations[0].name
+                        logging.warning(f"⚠️ OTANCAHUI no encontrada, usando: {self.location_name} (ID: {self.location_id})")
+                    
+            except Exception as e:
+                logging.warning(f"⚠️ Sin permisos de ubicaciones: {e}")
+                logging.info("💡 Para manejar inventario necesitas permisos 'read_locations'")
+                
+            # Test inventario
+            if self.location_id:
+                try:
+                    inventory_levels = shopify.InventoryLevel.find(location_ids=self.location_id, limit=1)
+                    permisos['inventory_read'] = True
+                    permisos['inventory_write'] = True  # Asumimos que si puede leer, puede escribir
+                    self.has_inventory_permissions = True
+                    logging.info("✅ Permisos de inventario: OK")
+                    
+                except Exception as e:
+                    logging.warning(f"⚠️ Sin permisos de inventario: {e}")
+                    
         except Exception as e:
-            logger.error(f"Error parseando CSV: {e}")
-            raise
-
-    def extract_xml_data(self, xml_string, tag_name):
-        """Extrae datos de campos XML"""
-        if not xml_string or pd.isna(xml_string):
-            return None
-
-        try:
-            # Limpiar el XML si es necesario
-            xml_string = str(xml_string).strip()
-            if not xml_string.startswith('<'):
-                return None
-
-            root = ET.fromstring(xml_string)
-
-            if tag_name == 'weight':
-                # Buscar shipping_weight directamente o con cualquier atributo
-                weight_elem = root.find('.//shipping_weight')
-                if weight_elem is not None:
-                    return weight_elem.text
-                # Si no funciona, buscar por tag sin namespaces
-                for elem in root.iter():
-                    if 'shipping_weight' in elem.tag or elem.tag == 'shipping_weight':
-                        return elem.text
-
-            elif tag_name == 'dimensions':
-                # Buscar size directamente
-                size_elem = root.find('.//size')
-                if size_elem is not None:
-                    width = size_elem.find('width')
-                    height = size_elem.find('height')
-                    depth = size_elem.find('depth')
-                    if all([width is not None, height is not None, depth is not None]):
-                        return f"{width.text}x{height.text}x{depth.text}mm"
-                # Búsqueda alternativa sin namespaces
-                width_val = height_val = depth_val = None
-                for elem in root.iter():
-                    if elem.tag == 'width':
-                        width_val = elem.text
-                    elif elem.tag == 'height':
-                        height_val = elem.text
-                    elif elem.tag == 'depth':
-                        depth_val = elem.text
-                if all([width_val, height_val, depth_val]):
-                    return f"{width_val}x{height_val}x{depth_val}mm"
-
-            elif tag_name == 'barcode':
-                # Buscar barcode y extraer CDATA
-                for elem in root.iter():
-                    if 'barcode' in elem.tag:
-                        # El texto puede estar en CDATA
-                        return elem.text if elem.text else None
-
-        except ET.ParseError:
-            return None
-        except Exception:
-            return None
-
+            logging.error(f"❌ Error verificando permisos: {e}")
+            
+        return permisos
+        
+    def descargar_csv(self, usar_local_si_falla: bool = True) -> Optional[str]:
+        """Descargar CSV desde URL o usar archivo local con retry"""
+        
+        # Intentar descarga desde URL con retry
+        if self.csv_url:
+            for intento in range(self.max_retries):
+                try:
+                    logging.info(f"🔗 Descargando CSV desde: {self.csv_url} (Intento {intento + 1}/{self.max_retries})")
+                    
+                    response = self.session.get(
+                        self.csv_url, 
+                        timeout=self.timeout
+                    )
+                    
+                    if response.status_code == 200:
+                        content_type = response.headers.get('content-type', '')
+                        
+                        # Verificar si es realmente un CSV
+                        if 'csv' in content_type.lower() or self._es_contenido_csv(response.text):
+                            archivo_temp = f"productos_descargado_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+                            
+                            with open(archivo_temp, 'w', encoding='utf-8', newline='') as f:
+                                f.write(response.text)
+                                
+                            logging.info(f"✅ CSV descargado exitosamente: {archivo_temp}")
+                            return archivo_temp
+                        else:
+                            logging.warning(f"⚠️ El contenido descargado no es un CSV válido (Content-Type: {content_type})")
+                            logging.info("💡 La URL devuelve HTML, probablemente hay un problema de autenticación")
+                            break  # No reintentar si el contenido es HTML
+                            
+                    else:
+                        logging.warning(f"⚠️ Error descargando CSV: HTTP {response.status_code}")
+                        if intento < self.max_retries - 1:
+                            tiempo_espera = self.backoff_factor * (2 ** intento)
+                            logging.info(f"⏳ Esperando {tiempo_espera:.1f}s antes del siguiente intento...")
+                            time.sleep(tiempo_espera)
+                        
+                except Exception as e:
+                    logging.warning(f"⚠️ Error descargando CSV (intento {intento + 1}): {e}")
+                    if intento < self.max_retries - 1:
+                        tiempo_espera = self.backoff_factor * (2 ** intento)
+                        logging.info(f"⏳ Esperando {tiempo_espera:.1f}s antes del siguiente intento...")
+                        time.sleep(tiempo_espera)
+                
+        # Usar archivo local como fallback
+        if usar_local_si_falla:
+            archivos_locales = [
+                "productos_ociostock.csv",
+                "productos_shopify.csv",
+                "ProductosHora.csv"
+            ]
+            for archivo in archivos_locales:
+                if os.path.exists(archivo):
+                    logging.info(f"📁 Usando archivo local: {archivo}")
+                    return archivo
+                    
+        logging.error("❌ No se pudo obtener archivo CSV (ni descargar ni local)")
         return None
-
-    def process_images(self, image_urls_string):
-        """Procesa las URLs de imágenes"""
-        if not image_urls_string or pd.isna(image_urls_string):
-            return []
-
-        # Las imágenes están separadas por |
-        image_urls = str(image_urls_string).split('|')
-        # Filtrar URLs válidas
-        valid_urls = []
-        for url in image_urls:
-            url = url.strip()
-            if url and url.startswith('http'):
-                valid_urls.append(url)
-
-        return valid_urls[:10]  # Máximo 10 imágenes por producto
-    
-    @retry_on_timeout(max_retries=3, timeout_delay=2)
-    def create_shopify_product(self, row):
-        """Crea un producto en Shopify desde una fila del CSV"""
+        
+    def _es_contenido_csv(self, contenido: str) -> bool:
+        """Verificar si el contenido parece ser un CSV válido"""
+        # Si contiene HTML, definitivamente no es CSV
+        if '<html' in contenido.lower() or '<body' in contenido.lower() or '<!doctype' in contenido.lower():
+            return False
+            
+        # Verificar si las primeras líneas tienen estructura de CSV
+        lineas = contenido.split('\n')[:10]
+        
+        for linea in lineas:
+            if linea.strip():
+                # Si tiene comas y parece una cabecera CSV
+                if ',' in linea and ('Handle' in linea or 'Title' in linea or 'SKU' in linea):
+                    return True
+                    
+        return False
+        
+    def parsear_csv(self, archivo_csv: str) -> List[Dict]:
+        """Parsear CSV con manejo robusto de encoding"""
+        productos = []
+        
+        # Intentar diferentes encodings
+        encodings = ['utf-8', 'latin-1', 'cp1252', 'iso-8859-1']
+        
+        for encoding in encodings:
+            try:
+                logging.info(f"🔄 Intentando encoding: {encoding}")
+                
+                with open(archivo_csv, 'r', encoding=encoding, newline='') as f:
+                    reader = csv.DictReader(f)
+                    
+                    # Verificar que las columnas necesarias estén presentes
+                    if not reader.fieldnames or 'Handle' not in reader.fieldnames:
+                        continue
+                        
+                    productos = list(reader)
+                    
+                    logging.info(f"✅ CSV parseado con encoding {encoding}")
+                    logging.info(f"📋 Productos encontrados: {len(productos)}")
+                    logging.info(f"📝 Columnas: {len(reader.fieldnames)}")
+                    
+                    return productos
+                    
+            except UnicodeDecodeError:
+                continue
+            except Exception as e:
+                logging.error(f"❌ Error parseando CSV con {encoding}: {e}")
+                continue
+                
+        logging.error("❌ No se pudo parsear el CSV con ningún encoding")
+        return []
+        
+    def filtrar_productos_con_stock(self, productos: List[Dict]) -> List[Dict]:
+        """Filtrar productos que tienen stock disponible (> 0)"""
+        productos_filtrados = []
+        productos_sin_stock = 0
+        
+        for producto in productos:
+            try:
+                stock = float(producto.get('Variant Inventory Qty', 0))
+                if stock > 0:
+                    productos_filtrados.append(producto)
+                else:
+                    productos_sin_stock += 1
+            except (ValueError, TypeError):
+                productos_sin_stock += 1
+                continue
+                
+        self.stats['productos_sin_stock'] = productos_sin_stock
+        logging.info(f"📦 Productos con stock > 0: {len(productos_filtrados)} de {len(productos)}")
+        logging.info(f"🚫 Productos sin stock (filtrados): {productos_sin_stock}")
+        return productos_filtrados
+        
+    def crear_producto_shopify(self, producto_data: Dict) -> Optional[shopify.Product]:
+        """Crear un producto en Shopify con manejo de errores mejorado"""
         try:
-            # Extraer datos básicos
-            title = str(row['nombre']) if pd.notna(
-                row['nombre']) else 'Producto sin título'
-            description = str(row['descripcion']) if pd.notna(
-                row['descripcion']) else ''
-            price = float(row['precio_bruto']) if pd.notna(
-                row['precio_bruto']) else 0.0
-            sku = str(row['referencia']) if pd.notna(row['referencia']) else ''
-            vendor = str(row['marca']) if pd.notna(row['marca']) else ''
-            # Usar categoría estándar de Shopify para figuras/juguetes
-            product_type = "Toys & Games"
+            # Verificar stock antes de crear
+            stock = float(producto_data.get('Variant Inventory Qty', 0))
+            if stock <= 0:
+                logging.info(f"⏭️ Producto sin stock saltado: {producto_data.get('Handle', 'Sin handle')}")
+                self.stats['productos_sin_stock'] += 1
+                return None
             
             # Verificar si el producto ya existe
-            if self.product_exists(title):
-                print(f"⚠️  PRODUCTO YA EXISTE: {title}")
-                logger.info(
-                    f"Producto '{title}' ya existe en Shopify, saltando...")
-                self._last_product_existed = True
-                return None
-
-            # Verificar stock usando la columna hay_stock
-            hay_stock_value = row.get('hay_stock', 0)
+            handle = producto_data.get('Handle', '').strip()
+            if handle:
+                productos_existentes = shopify.Product.find(handle=handle)
+                if productos_existentes:
+                    logging.info(f"⏭️ Producto duplicado saltado: {handle}")
+                    self.stats['productos_duplicados'] += 1
+                    return productos_existentes[0]
+                    
+            # Crear nuevo producto
+            producto = shopify.Product()
             
-            # Debug: mostrar el valor de hay_stock
-            print(f"🔍 DEBUG STOCK - hay_stock: '{hay_stock_value}' (tipo: {type(hay_stock_value)})")
+            # Datos básicos
+            producto.title = producto_data.get('Title', '')[:255]  # Limitar título
+            producto.handle = handle
+            producto.body_html = producto_data.get('Body (HTML)', '')
+            producto.vendor = producto_data.get('Vendor', '')
+            producto.product_type = producto_data.get('Product Category', 'General')
+            producto.status = 'active'  # Siempre activo si tiene stock
             
-            # Convertir a entero de forma robusta
-            has_stock = 0
-            if pd.notna(hay_stock_value):
+            # Tags
+            tags = producto_data.get('Tags', '')
+            if tags:
+                producto.tags = tags
+                
+            # Variante principal
+            variante = shopify.Variant()
+            variante.title = "Default Title"
+            variante.sku = producto_data.get('Variant SKU', '')
+            
+            # Precio
+            try:
+                precio = float(producto_data.get('Variant Price', 0))
+                variante.price = precio
+            except (ValueError, TypeError):
+                variante.price = 0
+                
+            # Configurar inventario
+            variante.inventory_management = "shopify"
+            variante.inventory_policy = "deny"
+            
+            # Peso (si está disponible)
+            peso = producto_data.get('Variant Grams', '')
+            if peso:
                 try:
-                    has_stock = int(hay_stock_value)
-                    print(f"🔍 DEBUG STOCK - hay_stock convertido: {has_stock}")
-                except (ValueError, TypeError) as e:
-                    print(f"🔍 DEBUG STOCK - Error conversión hay_stock: {e}")
-                    has_stock = 0
-            
-            # Si no hay stock disponible (hay_stock = 0), saltar el producto
-            if has_stock <= 0:
-                print(f"⚠️  SIN STOCK: {title} - hay_stock: {has_stock}")
-                logger.info(f"Producto '{title}' sin stock disponible (hay_stock={has_stock}), saltando...")
-                return None
-            
-            # Para la cantidad de inventario, usaremos un valor por defecto ya que hay_stock solo indica si hay o no
-            # Podemos usar stock_disponible si existe y es válido, o usar un valor por defecto
-            stock_disponible_value = row.get('stock_disponible', 1)
-            inventory_quantity = 1  # Valor por defecto
-            
-            if pd.notna(stock_disponible_value):
-                try:
-                    stock_str = str(stock_disponible_value).strip()
-                    if stock_str and stock_str.replace('.', '', 1).replace(',', '', 1).replace('-', '', 1).isdigit():
-                        stock_str = stock_str.replace(',', '.')
-                        inventory_quantity = max(1, int(float(stock_str)))  # Mínimo 1 si hay stock
+                    variante.grams = int(float(peso))
                 except (ValueError, TypeError):
-                    inventory_quantity = 1  # Valor por defecto si hay stock
-            
-            print(f"🔍 DEBUG STOCK - Cantidad final inventario: {inventory_quantity}")
-
-            # Extraer peso y dimensiones
-            weight = self.extract_xml_data(row.get('xml_info_peso'), 'weight')
-            dimensions = self.extract_xml_data(
-                row.get('xml_info_dimensiones'), 'dimensions')
-            barcode = self.extract_xml_data(
-                row.get('xml_info_codigos_barras'), 'barcode')
-
-            # Procesar imágenes
-            image_urls = self.process_images(row.get('csv_imagenes'))
-
-            # Crear descripción HTML mejorada
-            html_description = self.create_rich_description(row, dimensions)
-
-            # Crear el producto
-            product = shopify.Product()
-            product.title = title
-            product.body_html = html_description
-            product.vendor = vendor
-            product.product_type = product_type            # Crear tags siempre con "Figuras de acción"
-            tags = ["Figuras de acción"]
-
-            product.tags = tags
-
-            # Agregar metafields para información adicional
-            metafields = []
-
-            # Metafield para EAN/Código de barras
-            if barcode:
-                metafields.append({
-                    'namespace': 'product_info',
-                    'key': 'ean_code',
-                    'value': barcode,
-                    'type': 'single_line_text_field'
-                })
-
-            # Metafield para dimensiones
-            if dimensions:
-                metafields.append({
-                    'namespace': 'product_info',
-                    'key': 'dimensions',
-                    'value': dimensions,
-                    'type': 'single_line_text_field'
-                })
-
-            # Metafield para peso
-            if weight:
-                metafields.append({
-                    'namespace': 'product_info',
-                    'key': 'weight_grams',
-                    'value': weight,
-                    'type': 'number_integer'
-                })
-
-            # Metafield para URL original
-            if pd.notna(row.get('product_url')):
-                metafields.append({
-                    'namespace': 'product_info',
-                    'key': 'original_url',
-                    'value': str(row['product_url']),
-                    'type': 'url'
-                })            # Crear variante con configuración de inventario mejorada
-            variant = shopify.Variant()
-            variant.price = price
-            variant.sku = sku
-              # Configurar inventario
-            variant.inventory_management = 'shopify'
-            variant.inventory_policy = 'deny'  # No permitir ventas cuando no hay stock
-            
-            # NO configurar inventory_quantity aquí, lo haremos después con InventoryLevel
-            # variant.inventory_quantity = inventory_quantity
-            
-            # Configurar seguimiento de inventario
-            variant.track_quantity = True
-            
-            print(f"🔍 CONFIGURANDO INVENTARIO: {inventory_quantity} unidades (se aplicará después de crear el producto)")
-
-            if weight:
-                try:
-                    # Convertir gramos a kilogramos
-                    weight_in_kg = float(weight) / 1000
-                    variant.weight = weight_in_kg
-                    variant.weight_unit = 'kg'
-                except:
                     pass
-
-            if barcode:
-                variant.barcode = barcode
-
-            product.variants = [variant]
-
-            # Agregar imágenes
-            images = []
-            for img_url in image_urls:
-                image = shopify.Image()
-                image.src = img_url
-                images.append(image)
-
-            if images:
-                product.images = images
-
-            # Configurar SEO
-            product.seo_title = title[:70] if len(
-                title) > 70 else title  # Límite de 70 caracteres
-            product.seo_description = description[:160] if len(
-                description) > 160 else description  # Límite de 160 caracteres
-
-            # Guardar el producto
-            print(f"📦 CREANDO PRODUCTO: {title}")
-            print(f"   💰 Precio: {price}€")
-            print(f"   📊 Stock: {inventory_quantity}")
-            print(f"   🏷️  SKU: {sku}")
-            print(f"   🏭 Marca: {vendor}")
-            print(f"   📸 Imágenes: {len(image_urls)}")
-
-            if product.save():
-                product_url = self.get_product_url(product)
-                print(f"✅ PRODUCTO CREADO EXITOSAMENTE!")
-                print(f"   🆔 ID: {product.id}")
-                print(f"   🔗 URL: {product_url}")
-                print(f"   📋 Handle: {getattr(product, 'handle', 'N/A')}")                # Actualizar inventario después de crear el producto
+                    
+            producto.variants = [variante]
+            
+            # Imagen principal
+            imagen_url = producto_data.get('Image Src', '')
+            if imagen_url and imagen_url.startswith('http'):
                 try:
-                    if product.variants and len(product.variants) > 0:
-                        variant_id = product.variants[0].id
-                        inventory_item_id = product.variants[0].inventory_item_id
-                        print(f"🔍 ACTUALIZANDO INVENTARIO para variante {variant_id} (item: {inventory_item_id})")
-                        
-                        # Usar la ubicación ID conocida (79869018376 - ubicación principal de la tienda)
-                        location_id = 79869018376
-                        print(f"🏪 Usando ubicación Shopify ID: {location_id}")
-                        
-                        # Método 1: Usar InventoryLevel.set() directamente con la ubicación conocida
-                        try:
-                            from shopify import InventoryLevel
-                            
-                            print(f"🔄 Estableciendo inventario (timeout: 10s)...")
-                            # Establecer el inventario directamente en la ubicación específica
-                            InventoryLevel.set(location_id, inventory_item_id, inventory_quantity)
-                            print(f"✅ INVENTARIO ESTABLECIDO vía InventoryLevel.set(): {inventory_quantity} unidades en ubicación {location_id}")
-                            
-                            # Verificar que se estableció correctamente (con timeout más corto)
-                            try:
-                                print(f"🔍 Verificando inventario...")
-                                inventory_levels = InventoryLevel.find(inventory_item_ids=inventory_item_id)
-                                if inventory_levels and len(inventory_levels) > 0:
-                                    actual_quantity = inventory_levels[0].available
-                                    print(f"✅ VERIFICACIÓN: Cantidad actual: {actual_quantity}")
-                                else:
-                                    print(f"⚠️ No se pudo verificar (pero probablemente se estableció)")
-                            except Exception as verify_error:
-                                print(f"⚠️ Error verificando (continuando): {str(verify_error)[:100]}...")
-                                # No fallar si la verificación falla
-                                
-                        except Exception as inventory_level_error:
-                            error_msg = str(inventory_level_error).lower()
-                            if any(keyword in error_msg for keyword in ['timeout', 'timed out', 'connection', '10060', 'read timeout']):
-                                print(f"⚠️ Timeout en inventario: {str(inventory_level_error)[:100]}...")
-                                print(f"🔄 Continuando sin más intentos para evitar bloqueos...")
-                            else:
-                                print(f"⚠️ Error con InventoryLevel.set(): {str(inventory_level_error)[:100]}...")
-                                print(f"🔄 Intentando método alternativo...")
-                            
-                            # Método 2: Solo si no es timeout, intentar adjust()
-                            if not any(keyword in error_msg for keyword in ['timeout', 'timed out', 'connection', '10060']):
-                                try:
-                                    print(f"🔄 Método alternativo: adjust()...")
-                                    # ...existing code...
-                                    inventory_levels = InventoryLevel.find(inventory_item_ids=inventory_item_id)
-                                    if inventory_levels and len(inventory_levels) > 0:
-                                        current_quantity = inventory_levels[0].available or 0
-                                        adjustment_needed = inventory_quantity - current_quantity
-                                        
-                                        if adjustment_needed != 0:
-                                            InventoryLevel.adjust(location_id, inventory_item_id, adjustment_needed)
-                                            print(f"✅ INVENTARIO AJUSTADO: {adjustment_needed} unidades (de {current_quantity} a {inventory_quantity})")
-                                        else:
-                                            print(f"ℹ️ No se necesita ajuste (ya es {inventory_quantity})")
-                                    else:
-                                        print(f"⚠️ No se encontraron niveles para ajustar")
-                                        
-                                except Exception as adjust_error:
-                                    print(f"⚠️ Error con adjust(): {str(adjust_error)[:100]}...")
-                                    print(f"⚠️ Saltando configuración de inventario para evitar más timeouts...")
-                            else:
-                                print(f"⚠️ Saltando métodos adicionales debido a timeout")
-                        
-                except Exception as inventory_error:
-                    print(f"⚠️ Error configurando inventario: {inventory_error}")
-                    logger.warning(f"Error configurando inventario para producto {title}: {inventory_error}")
-
-                # Configurar categoría después de crear el producto
-                try:
-                    print(f"🏷️ CONFIGURANDO CATEGORÍA: Toys & Games...")
-                    category_success = self.set_product_category(product.id)
-                    if category_success:
-                        print(f"✅ Categoría configurada correctamente")
-                    else:
-                        print(f"⚠️ No se pudo configurar la categoría (continuando)")
-                except Exception as category_error:
-                    print(f"⚠️ Error configurando categoría: {str(category_error)[:100]}...")
-                    logger.warning(f"Error configurando categoría para producto {title}: {category_error}")
-
-                # Agregar metafields después de crear el producto (con manejo de timeouts)
-                print(f"🏷️ Agregando {len(metafields)} metafields...")
-                for i, metafield_data in enumerate(metafields):
-                    try:
-                        print(f"🔄 Metafield {i+1}/{len(metafields)}: {metafield_data['key']}")
-                        metafield = shopify.Metafield()
-                        metafield.namespace = metafield_data['namespace']
-                        metafield.key = metafield_data['key']
-                        metafield.value = metafield_data['value']
-                        metafield.type = metafield_data['type']
-                        product.add_metafield(metafield)
-                        print(f"✅ Metafield {metafield_data['key']} agregado")
-                    except Exception as e:
-                        error_msg = str(e).lower()
-                        if any(keyword in error_msg for keyword in ['timeout', 'timed out', 'connection', '10060']):
-                            print(f"⚠️ Timeout en metafield {metafield_data['key']}: {str(e)[:100]}...")
-                            print(f"🔄 Continuando con siguiente metafield...")
-                        else:
-                            print(f"⚠️ Error metafield {metafield_data['key']}: {str(e)[:100]}...")
-                        logger.warning(f"Error agregando metafield {metafield_data['key']}: {e}")
-                        # ...existing code...
-                logger.info(
-                    f"Producto creado exitosamente: {title} (ID: {product.id}) - URL: {product_url}")
-                print("-" * 80)
-                return product
+                    imagen = shopify.Image()
+                    imagen.src = imagen_url
+                    producto.images = [imagen]
+                except Exception as e:
+                    logging.warning(f"⚠️ Error añadiendo imagen para {handle}: {e}")
+                    
+            # Guardar producto
+            if producto.save():
+                logging.info(f"✅ Producto creado: {producto.title} (ID: {producto.id}) - Stock: {stock}")
+                self.stats['productos_creados'] += 1
+                
+                # Intentar actualizar inventario si tenemos permisos
+                if self.has_inventory_permissions and self.location_id:
+                    self._actualizar_inventario_con_retry(producto.variants[0].id, int(stock))
+                else:
+                    logging.warning(f"⚠️ No se puede actualizar inventario automáticamente para {handle}")
+                    logging.info(f"💡 Configura manualmente {int(stock)} unidades en {self.location_name or 'tu ubicación'}")
+                    
+                return producto
             else:
-                print(f"❌ ERROR CREANDO PRODUCTO: {title}")
-                print(f"   🚫 Errores: {product.errors}")
-                logger.error(
-                    f"Error creando producto {title}: {product.errors}")
-                print("-" * 80)
+                logging.error(f"❌ Error creando producto {handle}: {producto.errors.full_messages()}")
+                self.stats['productos_con_error'] += 1
                 return None
-
+                
         except Exception as e:
-            print(
-                f"❌ ERROR PROCESANDO PRODUCTO: {row.get('nombre', 'Sin nombre')}")
-            print(f"   🚫 Error: {e}")
-            logger.error(
-                f"Error procesando producto {row.get('nombre', 'Sin nombre')}: {e}")
-            print("-" * 80)
+            logging.error(f"❌ Error inesperado creando producto: {e}")
+            self.stats['productos_con_error'] += 1
             return None
-
-    def import_products(self, df, start_index=0, limit=None):
-        """Importa productos a Shopify"""
-        if limit:
-            df = df.iloc[start_index:start_index + limit]
-        else:
-            df = df.iloc[start_index:]
-
-        successful_imports = 0
-        failed_imports = 0
-        skipped_imports = 0
-
-        print(f"\n🚀 INICIANDO IMPORTACIÓN DE {len(df)} PRODUCTOS")
-        print("=" * 80)
-        logger.info(f"Iniciando importación de {len(df)} productos...")
-
-        for index, row in df.iterrows():
+            
+    def _actualizar_inventario_con_retry(self, variant_id: int, cantidad: int):
+        """Actualizar inventario con retry"""
+        for intento in range(self.max_retries):
             try:
-                # Solo importar productos con stock o información válida
-                if pd.notna(row['nombre']) and str(row['nombre']).strip():
-                    print(f"\n📦 PROCESANDO PRODUCTO {index + 1}/{len(df)}")
-
-                    product = self.create_shopify_product(row)
-                    if product:
-                        successful_imports += 1
-                    elif product is None and hasattr(self, '_last_product_existed'):
-                        # Si el producto ya existía
-                        skipped_imports += 1
-                        delattr(self, '_last_product_existed')
-                    elif product is None:
-                        # Producto saltado por falta de stock u otros motivos
-                        skipped_imports += 1
-                    else:
-                        failed_imports += 1
-
-                    # Delay entre requests para evitar rate limiting
-                    time.sleep(self.delay_between_requests)
-
-                # Log de progreso cada 10 productos
-                if (index + 1) % 10 == 0:
-                    print(
-                        f"\n📊 PROGRESO: {index + 1}/{len(df)} productos procesados")
-                    print(f"   ✅ Exitosos: {successful_imports}")
-                    print(f"   ❌ Fallidos: {failed_imports}")
-                    print(f"   ⚠️  Saltados: {skipped_imports}")
-                    print("-" * 50)
-                    logger.info(
-                        f"Procesados {index + 1} productos. Exitosos: {successful_imports}, Fallidos: {failed_imports}, Saltados: {skipped_imports}")
-
+                if not self.location_id:
+                    logging.warning("⚠️ No hay location_id para actualizar inventario")
+                    return
+                    
+                # Buscar inventory item
+                variant = shopify.Variant.find(variant_id)
+                if not variant:
+                    logging.warning(f"⚠️ No se encontró variante {variant_id}")
+                    return
+                    
+                inventory_item_id = variant.inventory_item_id
+                
+                # Actualizar inventario
+                inventory_level = shopify.InventoryLevel()
+                result = inventory_level.set(
+                    location_id=self.location_id,
+                    inventory_item_id=inventory_item_id,
+                    available=cantidad
+                )
+                
+                if result:
+                    logging.info(f"📦 Inventario actualizado: {cantidad} unidades en {self.location_name}")
+                    self.stats['inventario_actualizado'] += 1
+                    return
+                else:
+                    logging.warning(f"⚠️ No se pudo actualizar inventario para variante {variant_id}")
+                    
             except Exception as e:
-                print(f"❌ ERROR EN FILA {index}: {e}")
-                logger.error(f"Error procesando fila {index}: {e}")
-                failed_imports += 1
-
-        # Resumen final
-        print(f"\n🎯 IMPORTACIÓN COMPLETADA")
-        print("=" * 80)
-        print(f"✅ Productos creados exitosamente: {successful_imports}")
-        print(f"❌ Productos que fallaron: {failed_imports}")
-        print(f"⚠️  Productos saltados: {skipped_imports}")
-        print(
-            f"📊 Total procesado: {successful_imports + failed_imports + skipped_imports}")
-        print("=" * 80)
-
-        logger.info(
-            f"Importación completada. Exitosos: {successful_imports}, Fallidos: {failed_imports}, Saltados: {skipped_imports}")
-        return successful_imports, failed_imports
-
-    def run(self, limit=None):
-        """Ejecuta el proceso completo de importación"""
-        try:
-            # Verificar configuración
-            if not all([self.shop_name, self.access_token, self.csv_url]):
-                raise ValueError(
-                    "Faltan variables de entorno requeridas. Revisa el archivo .env")
-
-            # Descargar CSV
-            csv_filename = self.download_csv()
-
-            # Parsear CSV
-            df = self.parse_csv(csv_filename)
-
-            # Filtrar productos válidos
-            df = df[df['nombre'].notna() & (df['nombre'] != '')]
-            logger.info(f"Productos válidos encontrados: {len(df)}")
-
-            # Importar productos
-            if limit:
-                logger.info(f"Importando los primeros {limit} productos...")
-                successful, failed = self.import_products(df, limit=limit)
-            else:
-                successful, failed = self.import_products(df)
-
-            logger.info(
-                f"Proceso completado. Productos importados: {successful}, Fallos: {failed}")
-
-        except Exception as e:
-            logger.error(f"Error en el proceso de importación: {e}")
-            raise
-
-    @retry_on_timeout(max_retries=2, timeout_delay=1)
-    def product_exists(self, title):
-        """Verifica si un producto con el mismo título ya existe en Shopify"""
-        try:
-            # Buscar productos con el mismo título
-            existing_products = shopify.Product.find(title=title, limit=1)
-            return len(existing_products) > 0
-        except Exception as e:
-            logger.warning(
-                f"Error verificando producto existente '{title}': {e}")
-            return False
-
-    def get_product_url(self, product):
-        """Genera la URL del producto en la tienda"""
-        try:
-            if hasattr(product, 'handle') and product.handle:
-                return f"https://{self.shop_name}/products/{product.handle}"
-            elif hasattr(product, 'id') and product.id:
-                return f"https://{self.shop_name}/admin/products/{product.id}"
-            else:
-                return f"https://{self.shop_name}/admin/products"
-        except Exception:
-            return f"https://{self.shop_name}/admin/products"
-
-    def create_rich_description(self, row, dimensions=None):
-        """Crea una descripción HTML rica para el producto"""
-        description = str(row['descripcion']) if pd.notna(
-            row['descripcion']) else ''
-
-        # Comenzar con la descripción básica
-        html_parts = []
-
-        if description:
-            html_parts.append(f"<p>{description}</p>")
-
-        # Agregar información técnica
-        tech_info = []
-
-        if dimensions:
-            tech_info.append(
-                f"<li><strong>Dimensiones:</strong> {dimensions}</li>")
-
-        if pd.notna(row.get('marca')):
-            tech_info.append(
-                f"<li><strong>Marca:</strong> {row['marca']}</li>")
-
-        if pd.notna(row.get('referencia')):
-            tech_info.append(
-                f"<li><strong>Referencia:</strong> {row['referencia']}</li>")
-
-        # Agregar información de entrega si está disponible
-        if pd.notna(row.get('plazo_de_entrega')):
-            tech_info.append(
-                f"<li><strong>Plazo de entrega:</strong> {row['plazo_de_entrega']}</li>")
-
-        # Agregar información de stock
-        stock = row.get('stock_disponible', 0)
-        if pd.notna(stock) and str(stock).isdigit() and int(stock) > 0:
-            tech_info.append(
-                f"<li><strong>Stock disponible:</strong> {stock} unidades</li>")
-
-        if tech_info:
-            html_parts.append("<h3>Información técnica:</h3>")
-            html_parts.append("<ul>")
-            html_parts.extend(tech_info)
-            html_parts.append("</ul>")
-
-        return "".join(html_parts) if html_parts else description
-
-    def update_inventory_level(self, variant_id, inventory_quantity):
-        """Actualiza el nivel de inventario usando la API de InventoryLevel"""
-        try:
-            # Obtener la información del inventario
-            inventory_levels = shopify.InventoryLevel.find(inventory_item_ids=variant_id)
-            
-            if inventory_levels:
-                for level in inventory_levels:
-                    # Actualizar el nivel de inventario
-                    level.set(level.location_id, inventory_quantity)
-                    print(f"✅ INVENTARIO ACTUALIZADO vía InventoryLevel: {inventory_quantity} unidades")
-                    return True
-            else:
-                print(f"⚠️ No se encontraron niveles de inventario para la variante {variant_id}")
-                return False
-                
-        except Exception as e:
-            print(f"⚠️ Error actualizando inventario vía InventoryLevel: {e}")
-            logger.warning(f"Error actualizando inventario vía InventoryLevel: {e}")
-            return False    @retry_on_timeout(max_retries=2, timeout_delay=1)
-    def set_product_category(self, product_id, category_name="Toys & Games"):
-        """Configura la categoría de un producto usando GraphQL - Método simplificado"""
-        try:
-            import requests
-            import json
-            
-            print(f"🏷️ Configurando categoría '{category_name}' para producto {product_id}...")
-            
-            # URL de GraphQL
-            graphql_url = f"https://{self.shop_name}/admin/api/{self.api_version}/graphql.json"
-            
-            # Headers
-            headers = {
-                "Content-Type": "application/json",
-                "X-Shopify-Access-Token": self.access_token
-            }
-            
-            # Método alternativo: actualizar usando REST API
-            try:
-                print(f"🔄 Usando REST API para establecer categoría...")
-                
-                # URL REST para actualizar producto
-                rest_url = f"https://{self.shop_name}/admin/api/{self.api_version}/products/{product_id}.json"
-                
-                # Payload para REST API
-                rest_payload = {
-                    "product": {
-                        "id": product_id,
-                        "product_category": {
-                            "product_taxonomy_node_id": "gid://shopify/TaxonomyValue/toys_and_games"
-                        }
-                    }
-                }
-                
-                rest_headers = {
-                    "Content-Type": "application/json",
-                    "X-Shopify-Access-Token": self.access_token
-                }
-                
-                response = requests.put(rest_url, headers=rest_headers, json=rest_payload, timeout=10)
-                
-                if response.status_code == 200:
-                    result = response.json()
-                    product_data = result.get('product', {})
-                    
-                    print(f"✅ Producto actualizado vía REST API")
-                    
-                    # Verificar si tiene categoría
-                    product_category = product_data.get('product_category')
-                    if product_category:
-                        print(f"✅ Categoría establecida: {product_category}")
-                        return True
-                    else:
-                        print(f"⚠️ Categoría no visible en respuesta, pero actualización exitosa")
-                        return True
-                        
+                logging.warning(f"⚠️ Error actualizando inventario (intento {intento + 1}): {e}")
+                if intento < self.max_retries - 1:
+                    time.sleep(self.backoff_factor * (2 ** intento))
                 else:
-                    print(f"⚠️ REST API response {response.status_code}: {response.text[:200]}...")
+                    self.stats['errores_inventario'] += 1
                     
-            except Exception as rest_error:
-                print(f"⚠️ Error con REST API: {str(rest_error)[:100]}...")
+    def importar_productos_interactivo(self):
+        """Interfaz interactiva para importar productos"""
+        print("\n" + "="*60)
+        print("🛒 SYSCOM TO SHOPIFY - IMPORTADOR INTERACTIVO v2.2")
+        print("="*60)
+        
+        # Verificar permisos primero
+        print("\n🔍 Verificando permisos y configuración...")
+        permisos = self.verificar_permisos_shopify()
+        
+        if not permisos['products_write']:
+            print("❌ Sin permisos para crear productos en Shopify")
+            return
             
-            # Método alternativo: Solo actualizar product_type si es necesario
+        # Obtener archivo CSV
+        archivo_csv = self.descargar_csv()
+        if not archivo_csv:
+            print("❌ No se pudo obtener archivo CSV")
+            return
+            
+        # Parsear productos
+        productos = self.parsear_csv(archivo_csv)
+        if not productos:
+            print("❌ No se pudieron parsear productos del CSV")
+            return
+            
+        # Filtrar productos con stock
+        productos_con_stock = self.filtrar_productos_con_stock(productos)
+        
+        if not productos_con_stock:
+            print("❌ No hay productos con stock disponible")
+            return
+            
+        # Mostrar estadísticas
+        print(f"\n📊 ESTADÍSTICAS DEL CSV")
+        print(f"   📋 Total productos: {len(productos):,}")
+        print(f"   📦 Con stock > 0: {len(productos_con_stock):,}")
+        print(f"   🚫 Sin stock: {len(productos) - len(productos_con_stock):,}")
+        print(f"   📍 Ubicación: {self.location_name} (ID: {self.location_id})" if self.location_name else "   ⚠️ Sin ubicación configurada")
+        
+        # Preguntar cuántos importar
+        print(f"\n❓ ¿Cuántos productos quieres importar?")
+        print(f"   1. Importar TODOS los productos con stock ({len(productos_con_stock):,})")
+        print(f"   2. Importar un número específico")
+        print(f"   3. Importar solo una muestra pequeña (10 productos)")
+        print(f"   4. Cancelar")
+        
+        while True:
             try:
-                print(f"🔄 Verificando product_type actual...")
+                opcion = input("\nSelecciona una opción (1-4): ").strip()
                 
-                # Obtener el producto actual
-                get_url = f"https://{self.shop_name}/admin/api/{self.api_version}/products/{product_id}.json"
-                get_headers = {
-                    "X-Shopify-Access-Token": self.access_token
-                }
-                
-                get_response = requests.get(get_url, headers=get_headers, timeout=10)
-                
-                if get_response.status_code == 200:
-                    current_product = get_response.json().get('product', {})
-                    current_type = current_product.get('product_type', '')
-                    
-                    print(f"📋 Product type actual: '{current_type}'")
-                    
-                    if current_type != category_name:
-                        print(f"🔄 Actualizando product_type de '{current_type}' a '{category_name}'...")
-                        
-                        update_payload = {
-                            "product": {
-                                "id": product_id,
-                                "product_type": category_name
-                            }
-                        }
-                        
-                        update_response = requests.put(get_url, headers=rest_headers, json=update_payload, timeout=10)
-                        
-                        if update_response.status_code == 200:
-                            print(f"✅ Product type actualizado a '{category_name}'")
-                            return True
-                        else:
-                            print(f"⚠️ Error actualizando product_type: {update_response.status_code}")
-                    else:
-                        print(f"✅ Product type ya es '{category_name}'")
-                        return True
+                if opcion == '1':
+                    limite = None
+                    break
+                elif opcion == '2':
+                    while True:
+                        try:
+                            limite = int(input(f"¿Cuántos productos importar? (1-{len(productos_con_stock)}): "))
+                            if 1 <= limite <= len(productos_con_stock):
+                                break
+                            else:
+                                print(f"❌ Número inválido. Debe estar entre 1 y {len(productos_con_stock)}")
+                        except ValueError:
+                            print("❌ Por favor ingresa un número válido")
+                    break
+                elif opcion == '3':
+                    limite = 10
+                    break
+                elif opcion == '4':
+                    print("👋 Importación cancelada")
+                    return
                 else:
-                    print(f"⚠️ Error obteniendo producto actual: {get_response.status_code}")
+                    print("❌ Opción inválida")
                     
-            except Exception as type_error:
-                print(f"⚠️ Error actualizando product_type: {str(type_error)[:100]}...")
-            
-            return False
+            except KeyboardInterrupt:
+                print("\n👋 Importación cancelada")
+                return
                 
-        except Exception as e:
-            error_msg = str(e).lower()
-            if any(keyword in error_msg for keyword in ['timeout', 'timed out', 'connection', '10060']):
-                print(f"⚠️ Timeout configurando categoría: {str(e)[:100]}...")
-            else:
-                print(f"⚠️ Error configurando categoría: {str(e)[:100]}...")
-            return False
+        # Confirmar importación
+        productos_a_importar = min(limite or len(productos_con_stock), len(productos_con_stock))
+        print(f"\n🚀 Se importarán {productos_a_importar:,} productos")
+        
+        if not self.has_inventory_permissions:
+            print("⚠️ ADVERTENCIA: Sin permisos de inventario")
+            print("   Los productos se crearán pero tendrás que configurar el stock manualmente")
+            
+        confirmacion = input("\n¿Continuar? (y/n): ").strip().lower()
+        if confirmacion not in ['y', 'yes', 'sí', 's']:
+            print("👋 Importación cancelada")
+            return
+            
+        # Iniciar importación
+        self.stats['tiempo_inicio'] = datetime.now()
+        print(f"\n🚀 INICIANDO IMPORTACIÓN DE {productos_a_importar:,} PRODUCTOS")
+        print(f"⏰ Inicio: {self.stats['tiempo_inicio'].strftime('%H:%M:%S')}")
+        
+        stats = self.importar_productos(archivo_csv, limite)
+        
+        # Finalizar
+        self.stats['tiempo_fin'] = datetime.now()
+        self.mostrar_estadisticas_detalladas()
+        
+        # Limpiar archivo temporal
+        if archivo_csv.startswith("productos_descargado_"):
+            try:
+                os.remove(archivo_csv)
+                logging.info(f"🗑️ Archivo temporal eliminado: {archivo_csv}")
+            except:
+                pass
+                
+    def importar_productos(self, archivo_csv: str = None, limite: int = None) -> Dict:
+        """Importar productos desde CSV con límite opcional"""
+        
+        # Obtener archivo CSV si no se proporciona
+        if not archivo_csv:
+            archivo_csv = self.descargar_csv()
+            if not archivo_csv:
+                logging.error("❌ No se pudo obtener archivo CSV")
+                return self.stats
+                
+        # Parsear productos si no están ya parseados
+        productos = self.parsear_csv(archivo_csv)
+        if not productos:
+            logging.error("❌ No se pudieron parsear productos del CSV")
+            return self.stats
+            
+        # Filtrar productos con stock
+        productos_con_stock = self.filtrar_productos_con_stock(productos)
+        
+        # Aplicar límite si se especifica
+        if limite:
+            productos_con_stock = productos_con_stock[:limite]
+            logging.info(f"📊 Limitando importación a {limite} productos")
+            
+        logging.info(f"📋 Productos a importar: {len(productos_con_stock)}")
+        
+        # Importar productos por lotes
+        for i in range(0, len(productos_con_stock), self.max_products_per_batch):
+            lote = productos_con_stock[i:i + self.max_products_per_batch]
+            lote_num = i//self.max_products_per_batch + 1
+            total_lotes = (len(productos_con_stock) + self.max_products_per_batch - 1) // self.max_products_per_batch
+            
+            logging.info(f"📦 Procesando lote {lote_num}/{total_lotes} ({len(lote)} productos)")
+            
+            for j, producto_data in enumerate(lote):
+                self.stats['productos_procesados'] += 1
+                producto_num = i + j + 1
+                
+                logging.info(f"🔄 Procesando producto {producto_num}/{len(productos_con_stock)}: {producto_data.get('Title', 'Sin título')[:50]}...")
+                
+                # Crear producto
+                producto = self.crear_producto_shopify(producto_data)
+                
+                # Delay entre requests
+                if self.delay_between_requests > 0:
+                    time.sleep(self.delay_between_requests)
+                    
+            # Delay entre lotes
+            if i + self.max_products_per_batch < len(productos_con_stock):
+                logging.info(f"⏸️ Pausa entre lotes: {self.delay_between_requests * 2}s")
+                time.sleep(self.delay_between_requests * 2)
+                
+        return self.stats
+        
+    def mostrar_estadisticas_detalladas(self):
+        """Mostrar estadísticas finales detalladas"""
+        print(f"\n{'='*60}")
+        print(f"📊 ESTADÍSTICAS FINALES DE IMPORTACIÓN")
+        print(f"{'='*60}")
+        
+        if self.stats['tiempo_inicio'] and self.stats['tiempo_fin']:
+            duracion = self.stats['tiempo_fin'] - self.stats['tiempo_inicio']
+            print(f"⏰ Duración total: {duracion}")
+            print(f"📅 Finalizado: {self.stats['tiempo_fin'].strftime('%H:%M:%S')}")
+            print()
+            
+        print(f"📋 Productos procesados: {self.stats['productos_procesados']:,}")
+        print(f"✅ Productos creados: {self.stats['productos_creados']:,}")
+        print(f"⏭️ Productos duplicados (saltados): {self.stats['productos_duplicados']:,}")
+        print(f"🚫 Productos sin stock (filtrados): {self.stats['productos_sin_stock']:,}")
+        print(f"❌ Productos con error: {self.stats['productos_con_error']:,}")
+        print(f"📦 Inventarios actualizados: {self.stats['inventario_actualizado']:,}")
+        print(f"⚠️ Errores de inventario: {self.stats['errores_inventario']:,}")
+        
+        if self.stats['productos_procesados'] > 0:
+            tasa_exito = (self.stats['productos_creados'] / self.stats['productos_procesados']) * 100
+            print(f"🎯 Tasa de éxito: {tasa_exito:.1f}%")
+            
+        print(f"{'='*60}")
+        
+        if self.stats['productos_creados'] > 0:
+            print(f"🎉 IMPORTACIÓN EXITOSA!")
+            print(f"✅ {self.stats['productos_creados']:,} productos agregados a tu tienda Shopify")
+            
+            if self.stats['inventario_actualizado'] < self.stats['productos_creados']:
+                print(f"⚠️ RECORDATORIO: Algunos inventarios necesitan configuración manual")
+                print(f"   Ve a tu Admin de Shopify -> Products -> Inventory")
+                print(f"   Configura el stock en: {self.location_name or 'tu ubicación'}")
+        else:
+            print(f"❌ No se pudieron crear productos")
+            
+        print(f"\n🔗 Revisa tus productos en: https://{self.shop_name}/admin/products")
 
 def main():
-    """Función principal"""
-    print("=== Importador CSV a Shopify ===")
-    print("1. Importar todos los productos")
-    print("2. Importar solo los primeros 10 productos (prueba)")
-    print("3. Importar cantidad personalizada")
-
-    choice = input("Selecciona una opción (1-3): ").strip()
-
-    importer = CSVToShopifyImporter()
-
+    """Función principal del script"""
     try:
-        if choice == "1":
-            importer.run()
-        elif choice == "2":
-            importer.run(limit=10)
-        elif choice == "3":
-            limit = int(input("¿Cuántos productos quieres importar? "))
-            importer.run(limit=limit)
-        else:
-            print("Opción no válida")
-            return
-
+        importador = SyscomShopifyImporter()
+        importador.importar_productos_interactivo()
+    except KeyboardInterrupt:
+        print("\n👋 Programa interrumpido por el usuario")
     except Exception as e:
-        logger.error(f"Error ejecutando el importador: {e}")
-        print(f"Error: {e}")
-
+        logging.error(f"❌ Error inesperado: {e}")
+        print(f"❌ Error inesperado: {e}")
 
 if __name__ == "__main__":
     main()

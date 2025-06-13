@@ -1,133 +1,209 @@
-# Importador CSV a Shopify - AnimeShopify
+# SYSCOM to Shopify - Importador de Productos v2.0
 
-Este proyecto permite descargar un CSV de productos desde OcioStock y subirlos automáticamente a tu tienda de Shopify.
+Sistema de importación automatizada de productos desde el catálogo de SYSCOM a Shopify, actualizado para la nueva tienda y formato CSV nativo de Shopify.
 
-## Configuración Inicial
+## ✨ Características
 
-### 1. Configurar Credenciales de Shopify
+- 🔗 **Conexión moderna**: Utiliza Shopify API 2025-04
+- 📦 **Formato nativo**: Lee CSV en formato Shopify directamente
+- 🎯 **Filtrado inteligente**: Solo importa productos con stock disponible
+- 🚫 **Anti-duplicados**: Evita crear productos existentes
+- 📊 **Inventario automático**: Configura stock correctamente
+- 🔧 **Manejo de errores**: Robusto sistema de reintentos
+- 🌐 **Multi-encoding**: Soporte para diferentes codificaciones de texto
 
-Edita el archivo `.env` y completa las siguientes variables:
+## 🏪 Configuración de Tienda
 
-```env
-SHOPIFY_SHOP_NAME=tu-tienda.myshopify.com
-SHOPIFY_ACCESS_TOKEN=tu_access_token_aqui
-```
+- **Tienda**: Sepacsye (9s08ym-uc.myshopify.com)
+- **Moneda**: MXN (Pesos Mexicanos)
+- **Productos**: Catálogo completo de SYSCOM
+- **Stock**: Solo productos con inventario disponible
 
-#### Cómo obtener las credenciales:
+## 📋 Nuevas Columnas CSV (Formato Shopify)
 
-1. **Nombre de la tienda**: Es la parte antes de `.myshopify.com` en tu URL
-2. **Access Token**: 
-   - Ve a tu admin de Shopify
-   - Ve a Apps > Develop apps (o Apps privadas)
-   - Crea una nueva app privada
-   - En la configuración de la app, habilita los siguientes permisos:
-     - `write_products` (para crear productos)
-     - `read_products` (para leer productos)
-     - `write_inventory` (para gestionar inventario)
-   - Genera el Access Token
+El sistema maneja el formato CSV nativo de Shopify con columnas:
 
-### 2. Verificar Conexión
+| Columna | Descripción |
+|---------|-------------|
+| `Handle` | Identificador único del producto |
+| `Title` | Nombre del producto |
+| `Body (HTML)` | Descripción completa en HTML |
+| `Vendor` | Marca/Fabricante |
+| `Variant SKU` | Código SKU |
+| `Variant Price` | Precio en MXN |
+| `Variant Inventory Qty` | Cantidad en stock |
+| `Image Src` | URL de imagen principal |
+| `Status` | Estado (active/draft) |
 
-Antes de importar productos, verifica que la conexión funcione:
+## 🚀 Instalación y Configuración
 
+### 1. Instalar dependencias
 ```bash
-python test_connection.py
+pip install -r requirements.txt
 ```
 
-## Uso
-
-### Importación Básica
-
-Ejecuta el script principal:
-
+### 2. Configurar variables de entorno
+Crear archivo `.env`:
 ```bash
-python csv_to_shopify.py
-```
+# Configuración de Shopify
+SHOPIFY_SHOP_NAME=9s08ym-uc.myshopify.com
+SHOPIFY_ACCESS_TOKEN=tu_access_token
 
-El script te dará opciones:
-1. **Importar todos los productos**: Procesará todo el CSV
-2. **Importar 10 productos de prueba**: Para hacer pruebas
-3. **Cantidad personalizada**: Especifica cuántos productos importar
+# URL del CSV (nuevo formato)
+CSV_URL=http://www.syscom.mx/principal/reporte_art_hora?cadena1=104560616&cadena2=78086a2c10a542b2be92ba11a7d08fba&all=1&set_iva=1&format=shopify&format_shopify=all&tipo_precio=precio_lista&moneda=mxn&incremento=0&sel=22,37,30,26,32,38,27,65811,66523
 
-### Características del Importador
-
-- **Descarga automática**: Descarga el CSV desde la URL configurada
-- **Procesamiento inteligente**: Extrae información de campos XML
-- **Gestión de imágenes**: Procesa múltiples imágenes por producto
-- **Control de inventario**: Configura stock y políticas de inventario
-- **Rate limiting**: Respeta los límites de la API de Shopify
-- **Logging detallado**: Registra todo el proceso
-
-### Datos que se importan:
-
-- ✅ Nombre del producto
-- ✅ Descripción
-- ✅ Precio
-- ✅ SKU (referencia)
-- ✅ Marca (vendor)
-- ✅ Categoría (product_type)
-- ✅ Inventario/Stock
-- ✅ Peso (extraído de XML)
-- ✅ Código de barras (extraído de XML)
-- ✅ Múltiples imágenes
-- ✅ Tags automáticos
-
-## Estructura del Proyecto
-
-```
-animeShopify/
-├── venv/                    # Entorno virtual
-├── .env                     # Configuración (credenciales)
-├── csv_to_shopify.py       # Script principal
-├── test_connection.py      # Verificador de conexión
-├── productos_ociostock.csv # CSV descargado (se genera automáticamente)
-└── README.md              # Esta documentación
-```
-
-## Troubleshooting
-
-### Error: "Faltan variables de entorno"
-- Verifica que el archivo `.env` existe
-- Asegúrate de que las variables están correctamente configuradas
-- No uses espacios alrededor del `=`
-
-### Error: "Error conectando con Shopify"
-- Verifica las credenciales
-- Asegúrate de que el access token tiene los permisos correctos
-- Verifica que el nombre de la tienda es correcto
-
-### Error: "Rate limiting"
-- El script ya incluye delays automáticos
-- Si sigues teniendo problemas, aumenta `DELAY_BETWEEN_REQUESTS` en `.env`
-
-### Productos no se crean
-- Verifica que el CSV se descarga correctamente
-- Revisa los logs para ver errores específicos
-- Algunos productos pueden fallar si faltan datos requeridos
-
-## Configuraciones Avanzadas
-
-En el archivo `.env` puedes configurar:
-
-```env
-# Máximo productos por lote
+# Configuraciones opcionales
 MAX_PRODUCTS_PER_BATCH=10
-
-# Delay entre requests (segundos)
 DELAY_BETWEEN_REQUESTS=1
 ```
 
-## Logs
+## 🧪 Ejecutar Tests
 
-El script genera logs detallados que incluyen:
-- Progreso de descarga del CSV
-- Productos procesados exitosamente
-- Errores específicos por producto
-- Resumen final de la importación
+### Suite completa de tests
+```bash
+python run_tests.py
+```
 
-## Notas Importantes
+### Tests individuales
+```bash
+# Test de conexión a Shopify
+python tests/test_connection.py
 
-- **Productos duplicados**: El script no verifica duplicados. Si ejecutas múltiples veces, creará productos duplicados
-- **Límites de Shopify**: Respeta los límites de la API de Shopify (2 requests por segundo por defecto)
-- **Imágenes**: Las imágenes se enlazan desde las URLs originales (no se suben a Shopify)
-- **Backup**: Siempre haz backup de tu tienda antes de importaciones masivas
+# Test de parseo CSV local
+python tests/test_local.py
+```
+
+## 📦 Importar Productos
+
+### Importación interactiva
+```bash
+python import_productos.py
+```
+
+### Importación programática
+```python
+from csv_to_shopify_v2 import ShopifyCSVImporter
+
+# Crear importador
+importer = ShopifyCSVImporter()
+
+# Importar productos (ejemplo: 50 productos)
+importer.import_products(max_products=50)
+```
+
+## 🔧 Características Técnicas
+
+### Manejo de Errores
+- **Timeouts**: Reintentos automáticos en conexiones lentas
+- **Encoding**: Detección automática de codificación (UTF-8, Latin-1, CP1252)
+- **Duplicados**: Verificación previa de productos existentes
+- **Stock**: Filtrado automático de productos sin inventario
+
+### Configuración de Inventario
+- **Tracking**: Seguimiento automático de stock
+- **Policy**: Política `deny` (no permitir ventas sin stock)
+- **Location**: Configuración automática de ubicación principal
+
+### Limites y Validaciones
+- **Precios**: Validación y conversión de formatos de precio
+- **HTML**: Limpieza y limitación de tamaño para descripciones
+- **Imágenes**: Validación de URLs de imágenes
+- **SEO**: Configuración automática de títulos y descripciones
+
+## 📊 Estadísticas del Catálogo
+
+- **Total productos**: ~23,500
+- **Con stock**: ~13,200
+- **Marcas**: 100+ fabricantes
+- **Categorías**: Seguridad, Automatización, Comunicaciones
+
+## 🛡️ Mejores Prácticas
+
+### Antes de Importar
+1. Ejecutar `python run_tests.py` para verificar configuración
+2. Comenzar con importaciones pequeñas (5-10 productos)
+3. Verificar productos creados en Shopify admin
+4. Revisar configuración de stock e inventario
+
+### Durante la Importación
+- Monitorear la consola para errores
+- Evitar interrumpir el proceso en lotes grandes
+- Verificar límites de API de Shopify
+
+### Después de Importar
+- Revisar productos en Shopify admin
+- Verificar configuración de inventario
+- Comprobar imágenes y descripciones
+- Ajustar categorías si es necesario
+
+## 🔍 Troubleshooting
+
+### Error de Conexión
+```
+❌ Error conectando con Shopify
+```
+**Solución**: Verificar credenciales en `.env` y permisos del access token
+
+### Error de CSV
+```
+❌ Error parseando CSV
+```
+**Solución**: Verificar conectividad o usar archivo CSV local
+
+### Error de Stock
+```
+⚠️ No hay productos con stock disponible
+```
+**Solución**: Normal, filtro de productos sin inventario
+
+### Error de Permisos
+```
+❌ Response(code=403)
+```
+**Solución**: Revisar permisos del access token en Shopify
+
+## 📁 Estructura del Proyecto
+
+```
+syscomShopify/
+├── csv_to_shopify_v2.py      # Importador principal v2.0
+├── import_productos.py       # Script de importación interactivo
+├── run_tests.py             # Suite de tests completa
+├── .env                     # Configuración (crear)
+├── requirements.txt         # Dependencias
+├── README.md               # Esta documentación
+└── tests/
+    ├── test_connection.py   # Test de conexión Shopify
+    ├── test_local.py       # Test de CSV local
+    └── test_v2.py          # Test completo v2
+```
+
+## 🆕 Nuevas Funcionalidades v2.0
+
+- ✅ **Formato Shopify nativo**: Lee CSV en formato estándar de Shopify
+- ✅ **Multi-encoding**: Soporte automático para diferentes codificaciones
+- ✅ **Mejor manejo de errores**: Sistema robusto de fallbacks
+- ✅ **Validación mejorada**: Verificaciones de datos más completas
+- ✅ **Interface interactiva**: Script amigable para el usuario
+- ✅ **Tests automatizados**: Suite completa de verificaciones
+
+## 🔄 Migración desde v1.0
+
+Los cambios principales desde la versión anterior:
+
+1. **Nuevo formato CSV**: Ahora usa formato nativo de Shopify
+2. **Nuevas columnas**: Mapeo directo de campos Shopify
+3. **Nueva tienda**: Configurada para Sepacsye
+4. **Mejor encoding**: Soporte para caracteres especiales
+
+## 🤝 Soporte
+
+Para problemas o sugerencias:
+1. Revisar esta documentación
+2. Ejecutar `python run_tests.py` para diagnóstico
+3. Verificar logs de error en la consola
+4. Comprobar configuración en `.env`
+
+---
+
+*Sistema desarrollado para automatizar la importación del catálogo SYSCOM a Shopify v2.0*
