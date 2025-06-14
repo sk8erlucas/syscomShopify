@@ -340,19 +340,30 @@ class SyscomShopifyImporter:
                     
             # Crear nuevo producto
             producto = shopify.Product()
+              # Datos básicos con corrección de encoding
+            titulo_original = producto_data.get('Title', '')
+            titulo_corregido = self.fix_encoding_issues(titulo_original)
             
-            # Datos básicos
-            producto.title = producto_data.get('Title', '')[:255]  # Limitar título
+            descripcion_original = producto_data.get('Body (HTML)', '')
+            descripcion_corregida = self.fix_encoding_issues(descripcion_original)
+            
+            producto.title = titulo_corregido[:255]  # Limitar título
             producto.handle = handle
-            producto.body_html = producto_data.get('Body (HTML)', '')
-            producto.vendor = producto_data.get('Vendor', '')
-            producto.product_type = producto_data.get('Product Category', 'General')
+            producto.body_html = descripcion_corregida
+            producto.vendor = self.fix_encoding_issues(producto_data.get('Vendor', ''))
+            producto.product_type = self.fix_encoding_issues(producto_data.get('Product Category', 'General'))
             producto.status = 'active'  # Siempre activo si tiene stock
             
-            # Tags
+            # Log si se hicieron correcciones
+            if titulo_original != titulo_corregido:
+                logging.info(f"🔧 Título corregido: '{titulo_original[:50]}...' -> '{titulo_corregido[:50]}...'")
+            if descripcion_original != descripcion_corregida and descripcion_original:
+                logging.info(f"🔧 Descripción corregida para: {handle}")
+              # Tags con corrección de encoding
             tags = producto_data.get('Tags', '')
             if tags:
-                producto.tags = tags
+                tags_corregidas = self.fix_encoding_issues(tags)
+                producto.tags = tags_corregidas
                 
             # Variante principal
             variante = shopify.Variant()
@@ -653,6 +664,55 @@ class SyscomShopifyImporter:
             print(f"❌ No se pudieron crear productos")
             
         print(f"\n🔗 Revisa tus productos en: https://{self.shop_name}/admin/products")
+        
+    def fix_encoding_issues(self, texto: str) -> str:
+        """
+        Corregir problemas comunes de encoding UTF-8 en títulos y descripciones
+        """
+        if not texto:
+            return texto
+            
+        # Tabla de correcciones comunes para problemas UTF-8
+        correcciones = {
+            # Caracteres acentuados minúsculas
+            'Ã¡': 'á', 'Ã ': 'à', 'Ã¢': 'â', 'Ã£': 'ã', 'Ã¤': 'ä',
+            'Ã©': 'é', 'Ã¨': 'è', 'Ãª': 'ê', 'Ã«': 'ë',
+            'Ã­': 'í', 'Ã¬': 'ì', 'Ã®': 'î', 'Ã¯': 'ï',
+            'Ã³': 'ó', 'Ã²': 'ò', 'Ã´': 'ô', 'Ãµ': 'õ', 'Ã¶': 'ö',
+            'Ãº': 'ú', 'Ã¹': 'ù', 'Ã»': 'û', 'Ã¼': 'ü',
+            'Ã±': 'ñ', 'Ã§': 'ç',
+            
+            # Mayúsculas acentuadas
+            'Ã\x81': 'Á', 'Ã\x80': 'À', 'Ã\x82': 'Â', 'Ã\x83': 'Ã', 'Ã\x84': 'Ä',
+            'Ã\x89': 'É', 'Ã\x88': 'È', 'Ã\x8a': 'Ê', 'Ã\x8b': 'Ë',
+            'Ã\x8D': 'Í', 'Ã\x8C': 'Ì', 'Ã\x8e': 'Î', 'Ã\x8f': 'Ï',
+            'Ã\x93': 'Ó', 'Ã\x92': 'Ò', 'Ã\x94': 'Ô', 'Ã\x95': 'Õ', 'Ã\x96': 'Ö',
+            'Ã\x9a': 'Ú', 'Ã\x99': 'Ù', 'Ã\x9b': 'Û', 'Ã\x9c': 'Ü',
+            'Ã\x91': 'Ñ', 'Ã\x87': 'Ç',
+            
+            # Otros caracteres especiales
+            'â€™': "'", 'â€œ': '"', 'â€\x9d': '"', 'â€"': '–', 'â€"': '—',
+            'â€¢': '•', 'â€¦': '…', 'Â°': '°', 'Â®': '®', 'Â©': '©',
+            'â„¢': '™', 'Â±': '±', 'Â´': '´', 'Â¨': '¨', 'Â¸': '¸',
+            
+            # Espacios problemáticos
+            'Â ': ' ', 'Âº': 'º', 'ÂªÂº': 'º',
+            
+            # Correcciones específicas comunes
+            'Ã³n': 'ón', 'Ã±o': 'ño', 'Ã©s': 'és', 'Ã¡s': 'ás'
+        }
+        
+        # Aplicar correcciones
+        texto_corregido = texto
+        for incorrecto, correcto in correcciones.items():
+            texto_corregido = texto_corregido.replace(incorrecto, correcto)
+        
+        # Limpiar caracteres de control y espacios extra
+        import re
+        texto_corregido = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]', '', texto_corregido)
+        texto_corregido = re.sub(r'\s+', ' ', texto_corregido).strip()
+        
+        return texto_corregido
 
 def main():
     """Función principal del script"""

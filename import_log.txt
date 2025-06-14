@@ -1,0 +1,176 @@
+2025-06-13 21:13:41,692 - INFO - ✅ API de Shopify configurada correctamente
+2025-06-13 21:13:41,693 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
+2025-06-13 21:13:42,060 - INFO - --> 200 OK 1560b
+2025-06-13 21:13:42,061 - INFO - ✅ Tienda conectada: Sepacsye
+2025-06-13 21:13:42,063 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
+2025-06-13 21:13:42,427 - INFO - --> 200 OK 18987b
+2025-06-13 21:13:42,437 - INFO - ✅ Permisos de lectura de productos: OK
+2025-06-13 21:13:42,439 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:13:43,216 - INFO - --> 201 Created 1197b
+2025-06-13 21:13:43,218 - INFO - ✅ Permisos de escritura de productos: OK
+2025-06-13 21:13:43,219 - INFO - DELETE https://9s08ym-uc.myshopify.com/admin/api/2025-04/products/8151220682938.json
+2025-06-13 21:13:43,692 - INFO - --> 200 OK 2b
+2025-06-13 21:13:43,693 - INFO - ✅ Producto de prueba eliminado
+2025-06-13 21:13:43,694 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
+2025-06-13 21:13:43,979 - INFO - --> 200 OK 499b
+2025-06-13 21:13:43,980 - INFO - 📍 Ubicaciones disponibles:
+2025-06-13 21:13:43,980 - INFO -    - OTANCAHUI 802 (ID: 77235355834)
+2025-06-13 21:13:43,981 - INFO - ✅ Ubicación OTANCAHUI configurada: OTANCAHUI 802 (ID: 77235355834)
+2025-06-13 21:13:43,981 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels.json?location_ids=77235355834&limit=1
+2025-06-13 21:13:44,254 - WARNING - ⚠️ Sin permisos de inventario: Response(code=403, body="b'{"errors":"[API] This action requires merchant approval for read_inventory scope."}'", headers={'Date': 'Sat, 14 Jun 2025 00:13:44 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'x-sorting-hat-podid': '185', 'x-sorting-hat-shopid': '70036553914', 'vary': 'Accept-Encoding', 'referrer-policy': 'origin-when-cross-origin', 'x-frame-options': 'DENY', 'x-shopid': '70036553914', 'x-shardid': '185', 'x-stats-userid': '', 'x-stats-apiclientid': '258248638465', 'x-stats-apipermissionid': '557019922618', 'x-shopify-api-version': '2025-04', 'x-shopify-shop-api-call-limit': '2/40', 'strict-transport-security': 'max-age=7889238', 'x-request-id': 'b0f76ce9-40ea-4979-949d-2b48b68ffa1a-1749860024', 'server-timing': 'processing;dur=26', 'content-security-policy': "default-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval' https://* shopify-pos://*; block-all-mixed-content; child-src 'self' https://* shopify-pos://*; connect-src 'self' wss://* https://*; frame-ancestors 'none'; img-src 'self' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/75a428d/card_fields.js https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com 'self' 'unsafe-inline' 'unsafe-eval'; upgrade-insecure-requests; report-uri /csp-report?source%5Baction%5D=index&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Finventory_levels&source%5Bsection%5D=admin_api&source%5Buuid%5D=b0f76ce9-40ea-4979-949d-2b48b68ffa1a-1749860024; report-to shopify-csp", 'x-content-type-options': 'nosniff', 'x-download-options': 'noopen', 'x-permitted-cross-domain-policies': 'none', 'x-xss-protection': '1; mode=block', 'reporting-endpoints': 'shopify-csp="/csp-report?source%5Baction%5D=index&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Finventory_levels&source%5Bsection%5D=admin_api&source%5Buuid%5D=b0f76ce9-40ea-4979-949d-2b48b68ffa1a-1749860024"', 'x-dc': 'gcp-us-east1,gcp-us-east1,gcp-us-east1', 'Alt-Svc': 'h3=":443"; ma=86400', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=8qN3TTj4UYqNIaId8fh005MRFjoGcwxJcEaymm%2BKPMdpyZWmwqBO3ZwPV72jlTKl3gI0OYZVBUhE5hi601N74ValGQ3tdpUAiXA7WKIV30C%2BZnNtX8Pr9MulUGhUGNCjO8EbQ9GTmdE3Ckj8OpXvBM0gXHWc"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}', 'Shopify-Edge-Ip': '2620:127:f00f:e::', 'Server-Timing': 'processing;dur=26', 'Server': 'cloudflare', 'CF-RAY': '94f59f9f6cd49b1d-EZE'}, msg="Forbidden")
+2025-06-13 21:13:44,255 - INFO - 🔗 Descargando CSV desde: http://www.syscom.mx/principal/reporte_art_hora?cadena1=104560616&cadena2=78086a2c10a542b2be92ba11a7d08fba&all=1&set_iva=1&format=shopify&format_shopify=all&tipo_precio=precio_lista&moneda=mxn&incremento=0&sel=22,37,30,26,32,38,27,65811,66523 (Intento 1/3)
+2025-06-13 21:15:08,564 - WARNING - ⚠️ Error descargando CSV (intento 1): HTTPSConnectionPool(host='www.syscom.mx', port=443): Read timed out.
+2025-06-13 21:15:08,564 - INFO - ⏳ Esperando 0.3s antes del siguiente intento...
+2025-06-13 21:15:08,865 - INFO - 🔗 Descargando CSV desde: http://www.syscom.mx/principal/reporte_art_hora?cadena1=104560616&cadena2=78086a2c10a542b2be92ba11a7d08fba&all=1&set_iva=1&format=shopify&format_shopify=all&tipo_precio=precio_lista&moneda=mxn&incremento=0&sel=22,37,30,26,32,38,27,65811,66523 (Intento 2/3)
+2025-06-13 21:15:10,976 - WARNING - ⚠️ El contenido descargado no es un CSV válido (Content-Type: text/html; charset=UTF-8)
+2025-06-13 21:15:10,976 - INFO - 💡 La URL devuelve HTML, probablemente hay un problema de autenticación
+2025-06-13 21:15:10,977 - INFO - 📁 Usando archivo local: productos_ociostock.csv
+2025-06-13 21:15:10,977 - INFO - 🔄 Intentando encoding: utf-8
+2025-06-13 21:15:11,088 - INFO - 🔄 Intentando encoding: latin-1
+2025-06-13 21:15:12,874 - INFO - ✅ CSV parseado con encoding latin-1
+2025-06-13 21:15:12,875 - INFO - 📋 Productos encontrados: 23504
+2025-06-13 21:15:12,875 - INFO - 📝 Columnas: 50
+2025-06-13 21:15:12,886 - INFO - 📦 Productos con stock > 0: 13211 de 23504
+2025-06-13 21:15:12,886 - INFO - 🚫 Productos sin stock (filtrados): 10293
+2025-06-13 21:15:27,783 - INFO - ✅ API de Shopify configurada correctamente
+2025-06-13 21:15:27,785 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
+2025-06-13 21:15:28,150 - INFO - --> 200 OK 1560b
+2025-06-13 21:15:28,150 - INFO - ✅ Tienda conectada: Sepacsye
+2025-06-13 21:15:28,151 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
+2025-06-13 21:15:28,462 - INFO - --> 200 OK 18987b
+2025-06-13 21:15:28,465 - INFO - ✅ Permisos de lectura de productos: OK
+2025-06-13 21:15:28,466 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:15:29,057 - INFO - --> 201 Created 1197b
+2025-06-13 21:15:29,058 - INFO - ✅ Permisos de escritura de productos: OK
+2025-06-13 21:15:29,059 - INFO - DELETE https://9s08ym-uc.myshopify.com/admin/api/2025-04/products/8151227039930.json
+2025-06-13 21:15:29,514 - INFO - --> 200 OK 2b
+2025-06-13 21:15:29,515 - INFO - ✅ Producto de prueba eliminado
+2025-06-13 21:15:29,515 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
+2025-06-13 21:15:29,804 - INFO - --> 200 OK 499b
+2025-06-13 21:15:29,805 - INFO - 📍 Ubicaciones disponibles:
+2025-06-13 21:15:29,806 - INFO -    - OTANCAHUI 802 (ID: 77235355834)
+2025-06-13 21:15:29,807 - INFO - ✅ Ubicación OTANCAHUI configurada: OTANCAHUI 802 (ID: 77235355834)
+2025-06-13 21:15:29,808 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels.json?location_ids=77235355834&limit=1
+2025-06-13 21:15:30,130 - INFO - --> 200 OK 244b
+2025-06-13 21:15:30,131 - INFO - ✅ Permisos de inventario: OK
+2025-06-13 21:15:30,132 - INFO - 🔗 Descargando CSV desde: http://www.syscom.mx/principal/reporte_art_hora?cadena1=104560616&cadena2=78086a2c10a542b2be92ba11a7d08fba&all=1&set_iva=1&format=shopify&format_shopify=all&tipo_precio=precio_lista&moneda=mxn&incremento=0&sel=22,37,30,26,32,38,27,65811,66523 (Intento 1/3)
+2025-06-13 21:15:31,613 - WARNING - ⚠️ El contenido descargado no es un CSV válido (Content-Type: text/html; charset=UTF-8)
+2025-06-13 21:15:31,614 - INFO - 💡 La URL devuelve HTML, probablemente hay un problema de autenticación
+2025-06-13 21:15:31,616 - INFO - 📁 Usando archivo local: productos_ociostock.csv
+2025-06-13 21:15:31,618 - INFO - 🔄 Intentando encoding: utf-8
+2025-06-13 21:15:31,756 - INFO - 🔄 Intentando encoding: latin-1
+2025-06-13 21:15:33,958 - INFO - ✅ CSV parseado con encoding latin-1
+2025-06-13 21:15:33,959 - INFO - 📋 Productos encontrados: 23504
+2025-06-13 21:15:33,959 - INFO - 📝 Columnas: 50
+2025-06-13 21:15:33,971 - INFO - 📦 Productos con stock > 0: 13211 de 23504
+2025-06-13 21:15:33,971 - INFO - 🚫 Productos sin stock (filtrados): 10293
+2025-06-13 21:15:42,467 - INFO - 🔄 Intentando encoding: utf-8
+2025-06-13 21:15:42,560 - INFO - 🔄 Intentando encoding: latin-1
+2025-06-13 21:15:44,128 - INFO - ✅ CSV parseado con encoding latin-1
+2025-06-13 21:15:44,128 - INFO - 📋 Productos encontrados: 23504
+2025-06-13 21:15:44,129 - INFO - 📝 Columnas: 50
+2025-06-13 21:15:44,138 - INFO - 📦 Productos con stock > 0: 13211 de 23504
+2025-06-13 21:15:44,138 - INFO - 🚫 Productos sin stock (filtrados): 10293
+2025-06-13 21:15:44,139 - INFO - 📊 Limitando importación a 10 productos
+2025-06-13 21:15:44,139 - INFO - 📋 Productos a importar: 10
+2025-06-13 21:15:44,140 - INFO - 📦 Procesando lote 1/1 (10 productos)
+2025-06-13 21:15:44,140 - INFO - 🔄 Procesando producto 1/10: Kit para automatizaciÃ³n / Compatible con cualquie...
+2025-06-13 21:15:44,141 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AUFIT-SMART-Z-WAVE
+2025-06-13 21:15:44,571 - INFO - --> 200 OK 7355b
+2025-06-13 21:15:44,572 - INFO - ⏭️ Producto duplicado saltado: AUFIT-SMART-Z-WAVE
+2025-06-13 21:15:45,573 - INFO - 🔄 Procesando producto 2/10: Servicio de Automatizacion por 1 AÃO para control...
+2025-06-13 21:15:45,573 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=VOUCHERAUT
+2025-06-13 21:15:45,913 - INFO - --> 200 OK 4667b
+2025-06-13 21:15:45,918 - INFO - ⏭️ Producto duplicado saltado: VOUCHERAUT
+2025-06-13 21:15:46,921 - INFO - 🔄 Procesando producto 3/10: (AX PRO) Contacto MagnÃ©tico InalÃ¡mbrico Slim / U...
+2025-06-13 21:15:46,921 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDMCS-EG2-WB%28B%29
+2025-06-13 21:15:47,265 - INFO - --> 200 OK 15b
+2025-06-13 21:15:47,267 - INFO - 🔧 Título corregido: '(AX PRO) Contacto MagnÃ©tico InalÃ¡mbrico Slim / U...' -> '(AX PRO) Contacto Magnético Inalámbrico Slim / Uso...'
+2025-06-13 21:15:47,267 - INFO - 🔧 Descripción corregida para: DS-PDMCS-EG2-WB(B)
+2025-06-13 21:15:47,268 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:15:49,509 - INFO - --> 201 Created 19038b
+2025-06-13 21:15:49,513 - INFO - ✅ Producto creado: (AX PRO) Contacto Magnético Inalámbrico Slim / Uso en Interior / LED Indicador / Tamper (ID: 8151228219578) - Stock: 3.0
+2025-06-13 21:15:49,514 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924709208250.json
+2025-06-13 21:15:49,860 - INFO - --> 200 OK 667b
+2025-06-13 21:15:49,862 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 21:15:50,199 - INFO - --> 200 OK 241b
+2025-06-13 21:15:50,200 - INFO - 📦 Inventario actualizado: 3 unidades en OTANCAHUI 802
+2025-06-13 21:15:51,202 - INFO - 🔄 Procesando producto 4/10: (AX PRO) Control Remoto para Armado y Desarmado / ...
+2025-06-13 21:15:51,205 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PKF1-WB%28B%29
+2025-06-13 21:15:51,494 - INFO - --> 200 OK 15b
+2025-06-13 21:15:51,496 - INFO - 🔧 Descripción corregida para: DS-PKF1-WB(B)
+2025-06-13 21:15:51,496 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:15:53,383 - INFO - --> 201 Created 14203b
+2025-06-13 21:15:53,384 - INFO - ✅ Producto creado: (AX PRO) Control Remoto para Armado y Desarmado / Teclas con Funciones Programables (ID: 8151228481722) - Stock: 3.0
+2025-06-13 21:15:53,386 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924709699770.json
+2025-06-13 21:15:54,050 - INFO - --> 200 OK 661b
+2025-06-13 21:15:54,050 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 21:15:54,416 - INFO - --> 200 OK 241b
+2025-06-13 21:15:54,417 - INFO - 📦 Inventario actualizado: 3 unidades en OTANCAHUI 802
+2025-06-13 21:15:55,417 - INFO - 🔄 Procesando producto 5/10: Trampa de billete con transmisor inalÃ¡mbrico 5816...
+2025-06-13 21:15:55,417 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=264RF
+2025-06-13 21:15:55,790 - INFO - --> 200 OK 3248b
+2025-06-13 21:15:55,791 - INFO - ⏭️ Producto duplicado saltado: 264RF
+2025-06-13 21:15:56,792 - INFO - 🔄 Procesando producto 6/10: Sensor de Humedad Relativa / Rango 5 a 95% RH / Pr...
+2025-06-13 21:15:56,793 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=HA4
+2025-06-13 21:15:57,092 - INFO - --> 200 OK 15b
+2025-06-13 21:15:57,094 - INFO - 🔧 Título corregido: 'Sensor de Humedad Relativa / Rango 5 a 95% RH / Pr...' -> 'Sensor de Humedad Relativa / Rango 5 a 95% RH / Pr...'
+2025-06-13 21:15:57,095 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:15:59,012 - INFO - --> 201 Created 6534b
+2025-06-13 21:15:59,015 - INFO - ✅ Producto creado: Sensor de Humedad Relativa / Rango 5 a 95% RH / Precisión ±3% / Operación -40 a +140 °F / Montaje Superficial / Compatibilidad EnviroAlert (ID: 8151228842170) - Stock: 15.0
+2025-06-13 21:15:59,016 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924710387898.json
+2025-06-13 21:15:59,402 - INFO - --> 200 OK 653b
+2025-06-13 21:15:59,404 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 21:15:59,758 - INFO - --> 200 OK 242b
+2025-06-13 21:15:59,760 - INFO - 📦 Inventario actualizado: 15 unidades en OTANCAHUI 802
+2025-06-13 21:16:00,761 - INFO - 🔄 Procesando producto 7/10: Radar IP Perimetral / 120 metros de Distancia / 12...
+2025-06-13 21:16:00,763 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-TDSB0G-FK%2F120M%2FPOE
+2025-06-13 21:16:01,057 - INFO - --> 200 OK 15b
+2025-06-13 21:16:01,061 - INFO - 🔧 Título corregido: 'Radar IP Perimetral / 120 metros de Distancia / 12...' -> 'Radar IP Perimetral / 120 metros de Distancia / 12...'
+2025-06-13 21:16:01,063 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:16:03,203 - INFO - --> 201 Created 25249b
+2025-06-13 21:16:03,206 - INFO - ✅ Producto creado: Radar IP Perimetral / 120 metros de Distancia / 120° de Cobertura / IP67 / IK10 / Nema 4X / 32 Objetos de Detección y 16 Zonas / 4 Salidas de Alarma / RS-485 (ID: 8151229137082) - Stock: 50.0
+2025-06-13 21:16:03,207 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924710912186.json
+2025-06-13 21:16:03,544 - INFO - --> 200 OK 676b
+2025-06-13 21:16:03,546 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 21:16:03,895 - INFO - --> 200 OK 242b
+2025-06-13 21:16:03,896 - INFO - 📦 Inventario actualizado: 50 unidades en OTANCAHUI 802
+2025-06-13 21:16:04,898 - INFO - 🔄 Procesando producto 8/10: Detector PIR Tipo Cortina Cableado para Interior /...
+2025-06-13 21:16:04,899 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDC15-EG2%28B%29
+2025-06-13 21:16:05,183 - INFO - --> 200 OK 15b
+2025-06-13 21:16:05,186 - INFO - 🔧 Título corregido: 'Detector PIR Tipo Cortina Cableado para Interior /...' -> 'Detector PIR Tipo Cortina Cableado para Interior /...'
+2025-06-13 21:16:05,187 - INFO - 🔧 Descripción corregida para: DS-PDC15-EG2(B)
+2025-06-13 21:16:05,188 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:16:07,163 - INFO - --> 201 Created 6836b
+2025-06-13 21:16:07,164 - INFO - ✅ Producto creado: Detector PIR Tipo Cortina Cableado para Interior / Rango de Detección de 15 mts / Angulo de 6.3° de Cobertura / Altura de Instalación 2.4 a 3.6 metros (ID: 8151229431994) - Stock: 200.0
+2025-06-13 21:16:07,164 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924711436474.json
+2025-06-13 21:16:07,513 - INFO - --> 200 OK 664b
+2025-06-13 21:16:07,514 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 21:16:07,843 - INFO - --> 200 OK 243b
+2025-06-13 21:16:07,844 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 21:16:08,845 - INFO - 🔄 Procesando producto 9/10: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...
+2025-06-13 21:16:08,846 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-WIFI
+2025-06-13 21:16:09,156 - INFO - --> 200 OK 15b
+2025-06-13 21:16:09,162 - INFO - 🔧 Título corregido: '(AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...' -> '(AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...'
+2025-06-13 21:16:09,163 - INFO - 🔧 Descripción corregida para: AXHOME-KIT-WIFI
+2025-06-13 21:16:09,165 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:16:11,430 - INFO - --> 201 Created 21399b
+2025-06-13 21:16:11,431 - INFO - ✅ Producto creado: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub con batería de respaldo / 1 Llavero / 1 PIR / 2 Contactos Magnéticos / 1 Sirena / Wi-Fi / Compatible con Hik-Connect P2P y Hik-Partner PRO (ID: 8151229694138) - Stock: 200.0
+2025-06-13 21:16:11,431 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924711960762.json
+2025-06-13 21:16:11,824 - INFO - --> 200 OK 667b
+2025-06-13 21:16:11,825 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 21:16:12,151 - INFO - --> 200 OK 243b
+2025-06-13 21:16:12,152 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 21:16:13,153 - INFO - 🔄 Procesando producto 10/10: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...
+2025-06-13 21:16:13,155 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-GSM
+2025-06-13 21:16:13,586 - INFO - --> 200 OK 15b
+2025-06-13 21:16:13,591 - INFO - 🔧 Título corregido: '(AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...' -> '(AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...'
+2025-06-13 21:16:13,592 - INFO - 🔧 Descripción corregida para: AXHOME-KIT-GSM
+2025-06-13 21:16:13,594 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:16:15,989 - INFO - --> 201 Created 22245b
+2025-06-13 21:16:15,990 - INFO - ✅ Producto creado: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub con batería de respaldo / 1 Llavero / 1 PIR / 2 Contactos Magnéticos / 1 Sirena / Wi-Fi / 3G/4G / Compatible con Hik-Connect P2P y Hik-Partner PRO (ID: 8151230021818) - Stock: 200.0
+2025-06-13 21:16:15,990 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924712517818.json
+2025-06-13 21:16:16,380 - INFO - --> 200 OK 666b
+2025-06-13 21:16:16,381 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 21:16:16,759 - INFO - --> 200 OK 243b
+2025-06-13 21:16:16,760 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
