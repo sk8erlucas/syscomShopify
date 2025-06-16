@@ -1,176 +1,748 @@
-2025-06-13 21:13:41,692 - INFO - ✅ API de Shopify configurada correctamente
-2025-06-13 21:13:41,693 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
-2025-06-13 21:13:42,060 - INFO - --> 200 OK 1560b
-2025-06-13 21:13:42,061 - INFO - ✅ Tienda conectada: Sepacsye
-2025-06-13 21:13:42,063 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
-2025-06-13 21:13:42,427 - INFO - --> 200 OK 18987b
-2025-06-13 21:13:42,437 - INFO - ✅ Permisos de lectura de productos: OK
-2025-06-13 21:13:42,439 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:13:43,216 - INFO - --> 201 Created 1197b
-2025-06-13 21:13:43,218 - INFO - ✅ Permisos de escritura de productos: OK
-2025-06-13 21:13:43,219 - INFO - DELETE https://9s08ym-uc.myshopify.com/admin/api/2025-04/products/8151220682938.json
-2025-06-13 21:13:43,692 - INFO - --> 200 OK 2b
-2025-06-13 21:13:43,693 - INFO - ✅ Producto de prueba eliminado
-2025-06-13 21:13:43,694 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
-2025-06-13 21:13:43,979 - INFO - --> 200 OK 499b
-2025-06-13 21:13:43,980 - INFO - 📍 Ubicaciones disponibles:
-2025-06-13 21:13:43,980 - INFO -    - OTANCAHUI 802 (ID: 77235355834)
-2025-06-13 21:13:43,981 - INFO - ✅ Ubicación OTANCAHUI configurada: OTANCAHUI 802 (ID: 77235355834)
-2025-06-13 21:13:43,981 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels.json?location_ids=77235355834&limit=1
-2025-06-13 21:13:44,254 - WARNING - ⚠️ Sin permisos de inventario: Response(code=403, body="b'{"errors":"[API] This action requires merchant approval for read_inventory scope."}'", headers={'Date': 'Sat, 14 Jun 2025 00:13:44 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'x-sorting-hat-podid': '185', 'x-sorting-hat-shopid': '70036553914', 'vary': 'Accept-Encoding', 'referrer-policy': 'origin-when-cross-origin', 'x-frame-options': 'DENY', 'x-shopid': '70036553914', 'x-shardid': '185', 'x-stats-userid': '', 'x-stats-apiclientid': '258248638465', 'x-stats-apipermissionid': '557019922618', 'x-shopify-api-version': '2025-04', 'x-shopify-shop-api-call-limit': '2/40', 'strict-transport-security': 'max-age=7889238', 'x-request-id': 'b0f76ce9-40ea-4979-949d-2b48b68ffa1a-1749860024', 'server-timing': 'processing;dur=26', 'content-security-policy': "default-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval' https://* shopify-pos://*; block-all-mixed-content; child-src 'self' https://* shopify-pos://*; connect-src 'self' wss://* https://*; frame-ancestors 'none'; img-src 'self' data: blob: https:; script-src https://cdn.shopify.com https://cdn.shopifycdn.net https://checkout.pci.shopifyinc.com https://checkout.pci.shopifyinc.com/build/75a428d/card_fields.js https://api.stripe.com https://mpsnare.iesnare.com https://appcenter.intuit.com https://www.paypal.com https://js.braintreegateway.com https://c.paypal.com https://maps.googleapis.com https://www.google-analytics.com https://v.shopify.com 'self' 'unsafe-inline' 'unsafe-eval'; upgrade-insecure-requests; report-uri /csp-report?source%5Baction%5D=index&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Finventory_levels&source%5Bsection%5D=admin_api&source%5Buuid%5D=b0f76ce9-40ea-4979-949d-2b48b68ffa1a-1749860024; report-to shopify-csp", 'x-content-type-options': 'nosniff', 'x-download-options': 'noopen', 'x-permitted-cross-domain-policies': 'none', 'x-xss-protection': '1; mode=block', 'reporting-endpoints': 'shopify-csp="/csp-report?source%5Baction%5D=index&source%5Bapp%5D=Shopify&source%5Bcontroller%5D=admin%2Finventory_levels&source%5Bsection%5D=admin_api&source%5Buuid%5D=b0f76ce9-40ea-4979-949d-2b48b68ffa1a-1749860024"', 'x-dc': 'gcp-us-east1,gcp-us-east1,gcp-us-east1', 'Alt-Svc': 'h3=":443"; ma=86400', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=8qN3TTj4UYqNIaId8fh005MRFjoGcwxJcEaymm%2BKPMdpyZWmwqBO3ZwPV72jlTKl3gI0OYZVBUhE5hi601N74ValGQ3tdpUAiXA7WKIV30C%2BZnNtX8Pr9MulUGhUGNCjO8EbQ9GTmdE3Ckj8OpXvBM0gXHWc"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}', 'Shopify-Edge-Ip': '2620:127:f00f:e::', 'Server-Timing': 'processing;dur=26', 'Server': 'cloudflare', 'CF-RAY': '94f59f9f6cd49b1d-EZE'}, msg="Forbidden")
-2025-06-13 21:13:44,255 - INFO - 🔗 Descargando CSV desde: http://www.syscom.mx/principal/reporte_art_hora?cadena1=104560616&cadena2=78086a2c10a542b2be92ba11a7d08fba&all=1&set_iva=1&format=shopify&format_shopify=all&tipo_precio=precio_lista&moneda=mxn&incremento=0&sel=22,37,30,26,32,38,27,65811,66523 (Intento 1/3)
-2025-06-13 21:15:08,564 - WARNING - ⚠️ Error descargando CSV (intento 1): HTTPSConnectionPool(host='www.syscom.mx', port=443): Read timed out.
-2025-06-13 21:15:08,564 - INFO - ⏳ Esperando 0.3s antes del siguiente intento...
-2025-06-13 21:15:08,865 - INFO - 🔗 Descargando CSV desde: http://www.syscom.mx/principal/reporte_art_hora?cadena1=104560616&cadena2=78086a2c10a542b2be92ba11a7d08fba&all=1&set_iva=1&format=shopify&format_shopify=all&tipo_precio=precio_lista&moneda=mxn&incremento=0&sel=22,37,30,26,32,38,27,65811,66523 (Intento 2/3)
-2025-06-13 21:15:10,976 - WARNING - ⚠️ El contenido descargado no es un CSV válido (Content-Type: text/html; charset=UTF-8)
-2025-06-13 21:15:10,976 - INFO - 💡 La URL devuelve HTML, probablemente hay un problema de autenticación
-2025-06-13 21:15:10,977 - INFO - 📁 Usando archivo local: productos_ociostock.csv
-2025-06-13 21:15:10,977 - INFO - 🔄 Intentando encoding: utf-8
-2025-06-13 21:15:11,088 - INFO - 🔄 Intentando encoding: latin-1
-2025-06-13 21:15:12,874 - INFO - ✅ CSV parseado con encoding latin-1
-2025-06-13 21:15:12,875 - INFO - 📋 Productos encontrados: 23504
-2025-06-13 21:15:12,875 - INFO - 📝 Columnas: 50
-2025-06-13 21:15:12,886 - INFO - 📦 Productos con stock > 0: 13211 de 23504
-2025-06-13 21:15:12,886 - INFO - 🚫 Productos sin stock (filtrados): 10293
-2025-06-13 21:15:27,783 - INFO - ✅ API de Shopify configurada correctamente
-2025-06-13 21:15:27,785 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
-2025-06-13 21:15:28,150 - INFO - --> 200 OK 1560b
-2025-06-13 21:15:28,150 - INFO - ✅ Tienda conectada: Sepacsye
-2025-06-13 21:15:28,151 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
-2025-06-13 21:15:28,462 - INFO - --> 200 OK 18987b
-2025-06-13 21:15:28,465 - INFO - ✅ Permisos de lectura de productos: OK
-2025-06-13 21:15:28,466 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:15:29,057 - INFO - --> 201 Created 1197b
-2025-06-13 21:15:29,058 - INFO - ✅ Permisos de escritura de productos: OK
-2025-06-13 21:15:29,059 - INFO - DELETE https://9s08ym-uc.myshopify.com/admin/api/2025-04/products/8151227039930.json
-2025-06-13 21:15:29,514 - INFO - --> 200 OK 2b
-2025-06-13 21:15:29,515 - INFO - ✅ Producto de prueba eliminado
-2025-06-13 21:15:29,515 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
-2025-06-13 21:15:29,804 - INFO - --> 200 OK 499b
-2025-06-13 21:15:29,805 - INFO - 📍 Ubicaciones disponibles:
-2025-06-13 21:15:29,806 - INFO -    - OTANCAHUI 802 (ID: 77235355834)
-2025-06-13 21:15:29,807 - INFO - ✅ Ubicación OTANCAHUI configurada: OTANCAHUI 802 (ID: 77235355834)
-2025-06-13 21:15:29,808 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels.json?location_ids=77235355834&limit=1
-2025-06-13 21:15:30,130 - INFO - --> 200 OK 244b
-2025-06-13 21:15:30,131 - INFO - ✅ Permisos de inventario: OK
-2025-06-13 21:15:30,132 - INFO - 🔗 Descargando CSV desde: http://www.syscom.mx/principal/reporte_art_hora?cadena1=104560616&cadena2=78086a2c10a542b2be92ba11a7d08fba&all=1&set_iva=1&format=shopify&format_shopify=all&tipo_precio=precio_lista&moneda=mxn&incremento=0&sel=22,37,30,26,32,38,27,65811,66523 (Intento 1/3)
-2025-06-13 21:15:31,613 - WARNING - ⚠️ El contenido descargado no es un CSV válido (Content-Type: text/html; charset=UTF-8)
-2025-06-13 21:15:31,614 - INFO - 💡 La URL devuelve HTML, probablemente hay un problema de autenticación
-2025-06-13 21:15:31,616 - INFO - 📁 Usando archivo local: productos_ociostock.csv
-2025-06-13 21:15:31,618 - INFO - 🔄 Intentando encoding: utf-8
-2025-06-13 21:15:31,756 - INFO - 🔄 Intentando encoding: latin-1
-2025-06-13 21:15:33,958 - INFO - ✅ CSV parseado con encoding latin-1
-2025-06-13 21:15:33,959 - INFO - 📋 Productos encontrados: 23504
-2025-06-13 21:15:33,959 - INFO - 📝 Columnas: 50
-2025-06-13 21:15:33,971 - INFO - 📦 Productos con stock > 0: 13211 de 23504
-2025-06-13 21:15:33,971 - INFO - 🚫 Productos sin stock (filtrados): 10293
-2025-06-13 21:15:42,467 - INFO - 🔄 Intentando encoding: utf-8
-2025-06-13 21:15:42,560 - INFO - 🔄 Intentando encoding: latin-1
-2025-06-13 21:15:44,128 - INFO - ✅ CSV parseado con encoding latin-1
-2025-06-13 21:15:44,128 - INFO - 📋 Productos encontrados: 23504
-2025-06-13 21:15:44,129 - INFO - 📝 Columnas: 50
-2025-06-13 21:15:44,138 - INFO - 📦 Productos con stock > 0: 13211 de 23504
-2025-06-13 21:15:44,138 - INFO - 🚫 Productos sin stock (filtrados): 10293
-2025-06-13 21:15:44,139 - INFO - 📊 Limitando importación a 10 productos
-2025-06-13 21:15:44,139 - INFO - 📋 Productos a importar: 10
-2025-06-13 21:15:44,140 - INFO - 📦 Procesando lote 1/1 (10 productos)
-2025-06-13 21:15:44,140 - INFO - 🔄 Procesando producto 1/10: Kit para automatizaciÃ³n / Compatible con cualquie...
-2025-06-13 21:15:44,141 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AUFIT-SMART-Z-WAVE
-2025-06-13 21:15:44,571 - INFO - --> 200 OK 7355b
-2025-06-13 21:15:44,572 - INFO - ⏭️ Producto duplicado saltado: AUFIT-SMART-Z-WAVE
-2025-06-13 21:15:45,573 - INFO - 🔄 Procesando producto 2/10: Servicio de Automatizacion por 1 AÃO para control...
-2025-06-13 21:15:45,573 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=VOUCHERAUT
-2025-06-13 21:15:45,913 - INFO - --> 200 OK 4667b
-2025-06-13 21:15:45,918 - INFO - ⏭️ Producto duplicado saltado: VOUCHERAUT
-2025-06-13 21:15:46,921 - INFO - 🔄 Procesando producto 3/10: (AX PRO) Contacto MagnÃ©tico InalÃ¡mbrico Slim / U...
-2025-06-13 21:15:46,921 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDMCS-EG2-WB%28B%29
-2025-06-13 21:15:47,265 - INFO - --> 200 OK 15b
-2025-06-13 21:15:47,267 - INFO - 🔧 Título corregido: '(AX PRO) Contacto MagnÃ©tico InalÃ¡mbrico Slim / U...' -> '(AX PRO) Contacto Magnético Inalámbrico Slim / Uso...'
-2025-06-13 21:15:47,267 - INFO - 🔧 Descripción corregida para: DS-PDMCS-EG2-WB(B)
-2025-06-13 21:15:47,268 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:15:49,509 - INFO - --> 201 Created 19038b
-2025-06-13 21:15:49,513 - INFO - ✅ Producto creado: (AX PRO) Contacto Magnético Inalámbrico Slim / Uso en Interior / LED Indicador / Tamper (ID: 8151228219578) - Stock: 3.0
-2025-06-13 21:15:49,514 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924709208250.json
-2025-06-13 21:15:49,860 - INFO - --> 200 OK 667b
-2025-06-13 21:15:49,862 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
-2025-06-13 21:15:50,199 - INFO - --> 200 OK 241b
-2025-06-13 21:15:50,200 - INFO - 📦 Inventario actualizado: 3 unidades en OTANCAHUI 802
-2025-06-13 21:15:51,202 - INFO - 🔄 Procesando producto 4/10: (AX PRO) Control Remoto para Armado y Desarmado / ...
-2025-06-13 21:15:51,205 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PKF1-WB%28B%29
-2025-06-13 21:15:51,494 - INFO - --> 200 OK 15b
-2025-06-13 21:15:51,496 - INFO - 🔧 Descripción corregida para: DS-PKF1-WB(B)
-2025-06-13 21:15:51,496 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:15:53,383 - INFO - --> 201 Created 14203b
-2025-06-13 21:15:53,384 - INFO - ✅ Producto creado: (AX PRO) Control Remoto para Armado y Desarmado / Teclas con Funciones Programables (ID: 8151228481722) - Stock: 3.0
-2025-06-13 21:15:53,386 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924709699770.json
-2025-06-13 21:15:54,050 - INFO - --> 200 OK 661b
-2025-06-13 21:15:54,050 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
-2025-06-13 21:15:54,416 - INFO - --> 200 OK 241b
-2025-06-13 21:15:54,417 - INFO - 📦 Inventario actualizado: 3 unidades en OTANCAHUI 802
-2025-06-13 21:15:55,417 - INFO - 🔄 Procesando producto 5/10: Trampa de billete con transmisor inalÃ¡mbrico 5816...
-2025-06-13 21:15:55,417 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=264RF
-2025-06-13 21:15:55,790 - INFO - --> 200 OK 3248b
-2025-06-13 21:15:55,791 - INFO - ⏭️ Producto duplicado saltado: 264RF
-2025-06-13 21:15:56,792 - INFO - 🔄 Procesando producto 6/10: Sensor de Humedad Relativa / Rango 5 a 95% RH / Pr...
-2025-06-13 21:15:56,793 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=HA4
-2025-06-13 21:15:57,092 - INFO - --> 200 OK 15b
-2025-06-13 21:15:57,094 - INFO - 🔧 Título corregido: 'Sensor de Humedad Relativa / Rango 5 a 95% RH / Pr...' -> 'Sensor de Humedad Relativa / Rango 5 a 95% RH / Pr...'
-2025-06-13 21:15:57,095 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:15:59,012 - INFO - --> 201 Created 6534b
-2025-06-13 21:15:59,015 - INFO - ✅ Producto creado: Sensor de Humedad Relativa / Rango 5 a 95% RH / Precisión ±3% / Operación -40 a +140 °F / Montaje Superficial / Compatibilidad EnviroAlert (ID: 8151228842170) - Stock: 15.0
-2025-06-13 21:15:59,016 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924710387898.json
-2025-06-13 21:15:59,402 - INFO - --> 200 OK 653b
-2025-06-13 21:15:59,404 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
-2025-06-13 21:15:59,758 - INFO - --> 200 OK 242b
-2025-06-13 21:15:59,760 - INFO - 📦 Inventario actualizado: 15 unidades en OTANCAHUI 802
-2025-06-13 21:16:00,761 - INFO - 🔄 Procesando producto 7/10: Radar IP Perimetral / 120 metros de Distancia / 12...
-2025-06-13 21:16:00,763 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-TDSB0G-FK%2F120M%2FPOE
-2025-06-13 21:16:01,057 - INFO - --> 200 OK 15b
-2025-06-13 21:16:01,061 - INFO - 🔧 Título corregido: 'Radar IP Perimetral / 120 metros de Distancia / 12...' -> 'Radar IP Perimetral / 120 metros de Distancia / 12...'
-2025-06-13 21:16:01,063 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:16:03,203 - INFO - --> 201 Created 25249b
-2025-06-13 21:16:03,206 - INFO - ✅ Producto creado: Radar IP Perimetral / 120 metros de Distancia / 120° de Cobertura / IP67 / IK10 / Nema 4X / 32 Objetos de Detección y 16 Zonas / 4 Salidas de Alarma / RS-485 (ID: 8151229137082) - Stock: 50.0
-2025-06-13 21:16:03,207 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924710912186.json
-2025-06-13 21:16:03,544 - INFO - --> 200 OK 676b
-2025-06-13 21:16:03,546 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
-2025-06-13 21:16:03,895 - INFO - --> 200 OK 242b
-2025-06-13 21:16:03,896 - INFO - 📦 Inventario actualizado: 50 unidades en OTANCAHUI 802
-2025-06-13 21:16:04,898 - INFO - 🔄 Procesando producto 8/10: Detector PIR Tipo Cortina Cableado para Interior /...
-2025-06-13 21:16:04,899 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDC15-EG2%28B%29
-2025-06-13 21:16:05,183 - INFO - --> 200 OK 15b
-2025-06-13 21:16:05,186 - INFO - 🔧 Título corregido: 'Detector PIR Tipo Cortina Cableado para Interior /...' -> 'Detector PIR Tipo Cortina Cableado para Interior /...'
-2025-06-13 21:16:05,187 - INFO - 🔧 Descripción corregida para: DS-PDC15-EG2(B)
-2025-06-13 21:16:05,188 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:16:07,163 - INFO - --> 201 Created 6836b
-2025-06-13 21:16:07,164 - INFO - ✅ Producto creado: Detector PIR Tipo Cortina Cableado para Interior / Rango de Detección de 15 mts / Angulo de 6.3° de Cobertura / Altura de Instalación 2.4 a 3.6 metros (ID: 8151229431994) - Stock: 200.0
-2025-06-13 21:16:07,164 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924711436474.json
-2025-06-13 21:16:07,513 - INFO - --> 200 OK 664b
-2025-06-13 21:16:07,514 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
-2025-06-13 21:16:07,843 - INFO - --> 200 OK 243b
-2025-06-13 21:16:07,844 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
-2025-06-13 21:16:08,845 - INFO - 🔄 Procesando producto 9/10: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...
-2025-06-13 21:16:08,846 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-WIFI
-2025-06-13 21:16:09,156 - INFO - --> 200 OK 15b
-2025-06-13 21:16:09,162 - INFO - 🔧 Título corregido: '(AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...' -> '(AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...'
-2025-06-13 21:16:09,163 - INFO - 🔧 Descripción corregida para: AXHOME-KIT-WIFI
-2025-06-13 21:16:09,165 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:16:11,430 - INFO - --> 201 Created 21399b
-2025-06-13 21:16:11,431 - INFO - ✅ Producto creado: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub con batería de respaldo / 1 Llavero / 1 PIR / 2 Contactos Magnéticos / 1 Sirena / Wi-Fi / Compatible con Hik-Connect P2P y Hik-Partner PRO (ID: 8151229694138) - Stock: 200.0
-2025-06-13 21:16:11,431 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924711960762.json
-2025-06-13 21:16:11,824 - INFO - --> 200 OK 667b
-2025-06-13 21:16:11,825 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
-2025-06-13 21:16:12,151 - INFO - --> 200 OK 243b
-2025-06-13 21:16:12,152 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
-2025-06-13 21:16:13,153 - INFO - 🔄 Procesando producto 10/10: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...
-2025-06-13 21:16:13,155 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-GSM
-2025-06-13 21:16:13,586 - INFO - --> 200 OK 15b
-2025-06-13 21:16:13,591 - INFO - 🔧 Título corregido: '(AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...' -> '(AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...'
-2025-06-13 21:16:13,592 - INFO - 🔧 Descripción corregida para: AXHOME-KIT-GSM
-2025-06-13 21:16:13,594 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
-2025-06-13 21:16:15,989 - INFO - --> 201 Created 22245b
-2025-06-13 21:16:15,990 - INFO - ✅ Producto creado: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub con batería de respaldo / 1 Llavero / 1 PIR / 2 Contactos Magnéticos / 1 Sirena / Wi-Fi / 3G/4G / Compatible con Hik-Connect P2P y Hik-Partner PRO (ID: 8151230021818) - Stock: 200.0
-2025-06-13 21:16:15,990 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924712517818.json
-2025-06-13 21:16:16,380 - INFO - --> 200 OK 666b
-2025-06-13 21:16:16,381 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
-2025-06-13 21:16:16,759 - INFO - --> 200 OK 243b
-2025-06-13 21:16:16,760 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 21:57:00,420 - INFO - ✅ API de Shopify configurada correctamente
+2025-06-13 21:57:00,421 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
+2025-06-13 21:57:21,967 - INFO - --> 200 OK 1560b
+2025-06-13 21:57:21,969 - INFO - ✅ Tienda conectada: Sepacsye
+2025-06-13 21:57:21,971 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
+2025-06-13 21:57:43,320 - INFO - --> 200 OK 22252b
+2025-06-13 21:57:43,330 - INFO - ✅ Permisos de lectura de productos: OK
+2025-06-13 21:57:43,333 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 21:58:05,078 - INFO - --> 201 Created 1197b
+2025-06-13 21:58:05,084 - INFO - ✅ Permisos de escritura de productos: OK
+2025-06-13 21:58:05,088 - INFO - DELETE https://9s08ym-uc.myshopify.com/admin/api/2025-04/products/8151281991866.json
+2025-06-13 21:58:26,557 - INFO - --> 200 OK 2b
+2025-06-13 21:58:26,557 - INFO - ✅ Producto de prueba eliminado
+2025-06-13 21:58:26,558 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
+2025-06-13 21:58:47,883 - INFO - --> 200 OK 499b
+2025-06-13 21:58:47,883 - INFO - 📍 Ubicaciones disponibles:
+2025-06-13 21:58:47,884 - INFO -    - OTANCAHUI 802 (ID: 77235355834)
+2025-06-13 21:58:47,884 - INFO - ✅ Ubicación OTANCAHUI configurada: OTANCAHUI 802 (ID: 77235355834)
+2025-06-13 21:58:47,885 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels.json?location_ids=77235355834&limit=1
+2025-06-13 21:59:09,259 - INFO - --> 200 OK 245b
+2025-06-13 21:59:09,259 - INFO - ✅ Permisos de inventario: OK
+2025-06-13 21:59:09,259 - INFO - 🔗 Descargando CSV desde: http://www.syscom.mx/principal/reporte_art_hora?cadena1=104560616&cadena2=78086a2c10a542b2be92ba11a7d08fba&all=1&set_iva=1&format=shopify&format_shopify=all&tipo_precio=precio_lista&moneda=mxn&incremento=0&sel=22,37,30,26,32,38,27,65811,66523 (Intento 1/3)
+2025-06-13 21:59:41,386 - WARNING - ⚠️ El contenido descargado no es un CSV válido (Content-Type: text/html; charset=UTF-8)
+2025-06-13 21:59:41,386 - INFO - 💡 La URL devuelve HTML, probablemente hay un problema de autenticación
+2025-06-13 21:59:41,387 - INFO - 📁 Usando archivo local: productos_ociostock.csv
+2025-06-13 21:59:41,387 - INFO - 🔄 Intentando encoding: utf-8
+2025-06-13 21:59:41,480 - INFO - 🔄 Intentando encoding: latin-1
+2025-06-13 21:59:43,085 - INFO - ✅ CSV parseado con encoding latin-1
+2025-06-13 21:59:43,086 - INFO - 📋 Productos encontrados: 23504
+2025-06-13 21:59:43,086 - INFO - 📝 Columnas: 50
+2025-06-13 21:59:43,096 - INFO - 📦 Productos con stock > 0: 13211 de 23504
+2025-06-13 21:59:43,097 - INFO - 🚫 Productos sin stock (filtrados): 10293
+2025-06-13 22:07:29,761 - INFO - 🔄 Intentando encoding: utf-8
+2025-06-13 22:07:29,853 - INFO - 🔄 Intentando encoding: latin-1
+2025-06-13 22:07:31,412 - INFO - ✅ CSV parseado con encoding latin-1
+2025-06-13 22:07:31,413 - INFO - 📋 Productos encontrados: 23504
+2025-06-13 22:07:31,413 - INFO - 📝 Columnas: 50
+2025-06-13 22:07:31,423 - INFO - 📦 Productos con stock > 0: 13211 de 23504
+2025-06-13 22:07:31,424 - INFO - 🚫 Productos sin stock (filtrados): 10293
+2025-06-13 22:07:31,424 - INFO - 📋 Productos a importar: 13211
+2025-06-13 22:07:31,424 - INFO - 📦 Procesando lote 1/1322 (10 productos)
+2025-06-13 22:07:31,425 - INFO - 🔄 Procesando producto 1/13211: Kit para automatizaciÃ³n / Compatible con cualquie...
+2025-06-13 22:07:31,425 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AUFIT-SMART-Z-WAVE
+2025-06-13 22:07:52,892 - INFO - --> 200 OK 7338b
+2025-06-13 22:07:52,895 - INFO - ⏭️ Producto duplicado saltado: AUFIT-SMART-Z-WAVE
+2025-06-13 22:07:53,897 - INFO - 🔄 Procesando producto 2/13211: Servicio de Automatizacion por 1 AÃO para control...
+2025-06-13 22:07:53,898 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=VOUCHERAUT
+2025-06-13 22:08:15,272 - INFO - --> 200 OK 4665b
+2025-06-13 22:08:15,274 - INFO - ⏭️ Producto duplicado saltado: VOUCHERAUT
+2025-06-13 22:08:16,275 - INFO - 🔄 Procesando producto 3/13211: (AX PRO) Contacto MagnÃ©tico InalÃ¡mbrico Slim / U...
+2025-06-13 22:08:16,276 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDMCS-EG2-WB%28B%29
+2025-06-13 22:08:31,635 - INFO - --> 200 OK 15b
+2025-06-13 22:08:31,641 - INFO - 🔧 Título corregido: '(AX PRO) Contacto MagnÃ©tico InalÃ¡mbrico Slim / U...' -> '(AX PRO) Contacto Magnético Inalámbrico Slim / Uso...'
+2025-06-13 22:08:31,643 - INFO - 🔧 Descripción corregida para: DS-PDMCS-EG2-WB(B)
+2025-06-13 22:08:31,645 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:08:33,649 - INFO - --> 201 Created 19038b
+2025-06-13 22:08:33,652 - INFO - ✅ Producto creado: (AX PRO) Contacto Magnético Inalámbrico Slim / Uso en Interior / LED Indicador / Tamper (ID: 8151285301434) - Stock: 3.0
+2025-06-13 22:08:33,654 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924832874682.json
+2025-06-13 22:08:34,013 - INFO - --> 200 OK 667b
+2025-06-13 22:08:34,014 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:08:34,346 - INFO - --> 200 OK 241b
+2025-06-13 22:08:34,347 - INFO - 📦 Inventario actualizado: 3 unidades en OTANCAHUI 802
+2025-06-13 22:08:35,348 - INFO - 🔄 Procesando producto 4/13211: (AX PRO) Control Remoto para Armado y Desarmado / ...
+2025-06-13 22:08:35,350 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PKF1-WB%28B%29
+2025-06-13 22:08:35,656 - INFO - --> 200 OK 15b
+2025-06-13 22:08:35,660 - INFO - 🔧 Descripción corregida para: DS-PKF1-WB(B)
+2025-06-13 22:08:35,661 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:08:37,730 - INFO - --> 201 Created 14203b
+2025-06-13 22:08:37,731 - INFO - ✅ Producto creado: (AX PRO) Control Remoto para Armado y Desarmado / Teclas con Funciones Programables (ID: 8151285334202) - Stock: 3.0
+2025-06-13 22:08:37,731 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924832907450.json
+2025-06-13 22:08:38,068 - INFO - --> 200 OK 661b
+2025-06-13 22:08:38,069 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:08:38,413 - INFO - --> 200 OK 241b
+2025-06-13 22:08:38,414 - INFO - 📦 Inventario actualizado: 3 unidades en OTANCAHUI 802
+2025-06-13 22:08:39,416 - INFO - 🔄 Procesando producto 5/13211: Trampa de billete con transmisor inalÃ¡mbrico 5816...
+2025-06-13 22:08:39,417 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=264RF
+2025-06-13 22:08:39,758 - INFO - --> 200 OK 3242b
+2025-06-13 22:08:39,761 - INFO - ⏭️ Producto duplicado saltado: 264RF
+2025-06-13 22:08:40,762 - INFO - 🔄 Procesando producto 6/13211: Sensor de Humedad Relativa / Rango 5 a 95% RH / Pr...
+2025-06-13 22:08:40,763 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=HA4
+2025-06-13 22:08:48,097 - INFO - --> 200 OK 6539b
+2025-06-13 22:08:48,100 - INFO - ⏭️ Producto duplicado saltado: HA4
+2025-06-13 22:08:49,101 - INFO - 🔄 Procesando producto 7/13211: Radar IP Perimetral / 120 metros de Distancia / 12...
+2025-06-13 22:08:49,101 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-TDSB0G-FK%2F120M%2FPOE
+2025-06-13 22:08:49,401 - INFO - --> 200 OK 15b
+2025-06-13 22:08:49,405 - INFO - 🔧 Título corregido: 'Radar IP Perimetral / 120 metros de Distancia / 12...' -> 'Radar IP Perimetral / 120 metros de Distancia / 12...'
+2025-06-13 22:08:49,407 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:08:51,455 - INFO - --> 201 Created 25325b
+2025-06-13 22:08:51,459 - INFO - ✅ Producto creado: Radar IP Perimetral / 120 metros de Distancia / 120° de Cobertura / IP67 / IK10 / Nema 4X / 32 Objetos de Detección y 16 Zonas / 4 Salidas de Alarma / RS-485 (ID: 8151285399738) - Stock: 50.0
+2025-06-13 22:08:51,460 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924832972986.json
+2025-06-13 22:08:51,807 - INFO - --> 200 OK 676b
+2025-06-13 22:08:51,808 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:08:52,144 - INFO - --> 200 OK 242b
+2025-06-13 22:08:52,145 - INFO - 📦 Inventario actualizado: 50 unidades en OTANCAHUI 802
+2025-06-13 22:08:53,146 - INFO - 🔄 Procesando producto 8/13211: Detector PIR Tipo Cortina Cableado para Interior /...
+2025-06-13 22:08:53,147 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDC15-EG2%28B%29
+2025-06-13 22:08:53,439 - INFO - --> 200 OK 15b
+2025-06-13 22:08:53,442 - INFO - 🔧 Título corregido: 'Detector PIR Tipo Cortina Cableado para Interior /...' -> 'Detector PIR Tipo Cortina Cableado para Interior /...'
+2025-06-13 22:08:53,443 - INFO - 🔧 Descripción corregida para: DS-PDC15-EG2(B)
+2025-06-13 22:08:53,444 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:10,649 - INFO - --> 201 Created 6912b
+2025-06-13 22:09:10,652 - INFO - ✅ Producto creado: Detector PIR Tipo Cortina Cableado para Interior / Rango de Detección de 15 mts / Angulo de 6.3° de Cobertura / Altura de Instalación 2.4 a 3.6 metros (ID: 8151285530810) - Stock: 200.0
+2025-06-13 22:09:10,653 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924833104058.json
+2025-06-13 22:09:12,234 - INFO - --> 200 OK 664b
+2025-06-13 22:09:12,235 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:09:12,604 - INFO - --> 200 OK 243b
+2025-06-13 22:09:12,605 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 22:09:13,606 - INFO - 🔄 Procesando producto 9/13211: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...
+2025-06-13 22:09:13,607 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-WIFI
+2025-06-13 22:09:13,918 - INFO - --> 200 OK 21406b
+2025-06-13 22:09:13,919 - INFO - ⏭️ Producto duplicado saltado: AXHOME-KIT-WIFI
+2025-06-13 22:09:14,920 - INFO - 🔄 Procesando producto 10/13211: (AX HOME) KIT de Alarma AX HOME / Incluye: 1 Hub c...
+2025-06-13 22:09:14,920 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-GSM
+2025-06-13 22:09:15,227 - INFO - --> 200 OK 22252b
+2025-06-13 22:09:15,230 - INFO - ⏭️ Producto duplicado saltado: AXHOME-KIT-GSM
+2025-06-13 22:09:16,231 - INFO - ⏸️ Pausa entre lotes: 2.0s
+2025-06-13 22:09:18,232 - INFO - 📦 Procesando lote 2/1322 (10 productos)
+2025-06-13 22:09:18,233 - INFO - 🔄 Procesando producto 11/13211: (RadioRa3) Riel 30 metros Cinta LED de color blanc...
+2025-06-13 22:09:18,234 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT30SW
+2025-06-13 22:09:18,523 - INFO - --> 200 OK 15b
+2025-06-13 22:09:18,524 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:18,887 - ERROR - ❌ Error creando producto LUT30SW: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON RADIORA 3/LUT30SW/portada_0S2000.PNG']
+2025-06-13 22:09:19,888 - INFO - 🔄 Procesando producto 12/13211: Mounting Clips for Tape Light (20-pack)...
+2025-06-13 22:09:19,889 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUMK1
+2025-06-13 22:09:20,221 - INFO - --> 200 OK 1459b
+2025-06-13 22:09:20,223 - INFO - ⏭️ Producto duplicado saltado: LUMK1
+2025-06-13 22:09:21,224 - INFO - 🔄 Procesando producto 13/13211: Barrel to Terminal Adapters (3-pack)...
+2025-06-13 22:09:21,226 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUBP1
+2025-06-13 22:09:28,614 - INFO - --> 200 OK 1453b
+2025-06-13 22:09:28,616 - INFO - ⏭️ Producto duplicado saltado: LUBP1
+2025-06-13 22:09:29,618 - INFO - 🔄 Procesando producto 14/13211: 50 ft (15.2 m) 3-Conductor Cable...
+2025-06-13 22:09:29,619 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUWK1TW
+2025-06-13 22:09:29,925 - INFO - --> 200 OK 1449b
+2025-06-13 22:09:29,926 - INFO - ⏭️ Producto duplicado saltado: LUWK1TW
+2025-06-13 22:09:30,926 - INFO - 🔄 Procesando producto 15/13211: 3-Pin Wire/Tape Connectors (10-pack)...
+2025-06-13 22:09:30,927 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUCK1TW
+2025-06-13 22:09:31,256 - INFO - --> 200 OK 1458b
+2025-06-13 22:09:31,257 - INFO - ⏭️ Producto duplicado saltado: LUCK1TW
+2025-06-13 22:09:32,258 - INFO - 🔄 Procesando producto 16/13211: (RadioRa3) Interfaz de alimentaciÃ³n cableada para...
+2025-06-13 22:09:32,263 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUPH3A
+2025-06-13 22:09:32,588 - INFO - --> 200 OK 15b
+2025-06-13 22:09:32,589 - INFO - 🔧 Título corregido: '(RadioRa3) Interfaz de alimentaciÃ³n cableada para...' -> '(RadioRa3) Interfaz de alimentación cableada para ...'
+2025-06-13 22:09:32,591 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:32,919 - ERROR - ❌ Error creando producto LUPH3A: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON RADIORA 3/LUPH3A/portada_0S2000.PNG']
+2025-06-13 22:09:33,920 - INFO - 🔄 Procesando producto 17/13211: (RadioRa3) Riel 30 metros Cinta LED de color blanc...
+2025-06-13 22:09:33,921 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT30DL
+2025-06-13 22:09:34,230 - INFO - --> 200 OK 15b
+2025-06-13 22:09:34,232 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:34,557 - ERROR - ❌ Error creando producto LUT30DL: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON RADIORA 3/LUT30DL/portada_0S2000.PNG']
+2025-06-13 22:09:35,559 - INFO - 🔄 Procesando producto 18/13211: (RadioRa3) Riel 5 metros Cinta LED de color blanco...
+2025-06-13 22:09:35,560 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT05DL
+2025-06-13 22:09:35,891 - INFO - --> 200 OK 15b
+2025-06-13 22:09:35,893 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:36,209 - ERROR - ❌ Error creando producto LUT05DL: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON RADIORA 3/LUT05DL/portada_0S2000.PNG']
+2025-06-13 22:09:37,211 - INFO - 🔄 Procesando producto 19/13211: (RadioRa3) Riel 5 metros Cinta LED de color blanco...
+2025-06-13 22:09:37,212 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT05SW
+2025-06-13 22:09:46,280 - INFO - --> 200 OK 15b
+2025-06-13 22:09:46,281 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:46,600 - ERROR - ❌ Error creando producto LUT05SW: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON RADIORA 3/LUT05SW/portada_0S2000.PNG']
+2025-06-13 22:09:47,602 - INFO - 🔄 Procesando producto 20/13211: (RadioRA3) Tunable White Wireless Controller...
+2025-06-13 22:09:47,603 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTWCLWH
+2025-06-13 22:09:47,919 - INFO - --> 200 OK 1466b
+2025-06-13 22:09:47,921 - INFO - ⏭️ Producto duplicado saltado: RRLTWCLWH
+2025-06-13 22:09:48,922 - INFO - ⏸️ Pausa entre lotes: 2.0s
+2025-06-13 22:09:50,923 - INFO - 📦 Procesando lote 3/1322 (10 productos)
+2025-06-13 22:09:50,924 - INFO - 🔄 Procesando producto 21/13211: (RadioRA3) Tunable White Wireless Controller with ...
+2025-06-13 22:09:50,924 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTWCWH
+2025-06-13 22:09:51,238 - INFO - --> 200 OK 15b
+2025-06-13 22:09:51,240 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:51,563 - ERROR - ❌ Error creando producto RRLTWCWH: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON RADIORA 3/RRLTWCWH/portada_0S2000.PNG']
+2025-06-13 22:09:52,564 - INFO - 🔄 Procesando producto 22/13211: (RadioRA3) Tira LED 1800K - 3000K inteligente inte...
+2025-06-13 22:09:52,565 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTLKSW
+2025-06-13 22:09:52,865 - INFO - --> 200 OK 15b
+2025-06-13 22:09:52,866 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:53,200 - ERROR - ❌ Error creando producto RRLTLKSW: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON RADIORA 3/RRLTLKSW/portada_0S2000.PNG']
+2025-06-13 22:09:54,201 - INFO - 🔄 Procesando producto 23/13211: (RadioRA2) Switch on/off de pared, compaÃ±ero de s...
+2025-06-13 22:09:54,201 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RDRSSW
+2025-06-13 22:09:54,576 - INFO - --> 200 OK 5497b
+2025-06-13 22:09:54,579 - INFO - ⏭️ Producto duplicado saltado: RDRSSW
+2025-06-13 22:09:55,580 - INFO - 🔄 Procesando producto 24/13211: Atenuador DIVA 153...
+2025-06-13 22:09:55,581 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DVSCCL153PMN
+2025-06-13 22:09:55,891 - INFO - --> 200 OK 15b
+2025-06-13 22:09:55,892 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:56,215 - ERROR - ❌ Error creando producto DVSCCL153PMN: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON ELECTRONICS/DVSCCL153PMN/portada_0S2000.PNG']
+2025-06-13 22:09:57,216 - INFO - 🔄 Procesando producto 25/13211: Atenuador DIVA 153...
+2025-06-13 22:09:57,217 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DVSCCL153PSW
+2025-06-13 22:09:57,515 - INFO - --> 200 OK 15b
+2025-06-13 22:09:57,517 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:09:57,841 - ERROR - ❌ Error creando producto DVSCCL153PSW: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/LUTRON ELECTRONICS/DVSCCL153PSW/portada_0S2000.PNG']
+2025-06-13 22:09:58,843 - INFO - 🔄 Procesando producto 26/13211: (Wifi) KIT 4 apagadores inteligentes Wifi compatib...
+2025-06-13 22:09:58,844 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH411W4K
+2025-06-13 22:09:59,191 - INFO - --> 200 OK 5421b
+2025-06-13 22:09:59,194 - INFO - ⏭️ Producto duplicado saltado: SH411W4K
+2025-06-13 22:10:00,195 - INFO - 🔄 Procesando producto 27/13211: (Wifi) KIT 3 apagadores inteligentes ZigBee y 1 Pa...
+2025-06-13 22:10:00,197 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH3S1DK
+2025-06-13 22:10:00,499 - INFO - --> 200 OK 5420b
+2025-06-13 22:10:00,503 - INFO - ⏭️ Producto duplicado saltado: SH3S1DK
+2025-06-13 22:10:01,504 - INFO - 🔄 Procesando producto 28/13211: (Wifi) KIT 1 camara Wifi y 1 apagador inteligente ...
+2025-06-13 22:10:01,505 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH1CAM1SK
+2025-06-13 22:10:01,839 - INFO - --> 200 OK 5405b
+2025-06-13 22:10:01,840 - INFO - ⏭️ Producto duplicado saltado: SH1CAM1SK
+2025-06-13 22:10:02,841 - INFO - 🔄 Procesando producto 29/13211: (Wifi) KIT 2 camaras Wifi y 2 apagadores inteligen...
+2025-06-13 22:10:02,842 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH2CAM2SK
+2025-06-13 22:10:03,208 - INFO - --> 200 OK 5409b
+2025-06-13 22:10:03,212 - INFO - ⏭️ Producto duplicado saltado: SH2CAM2SK
+2025-06-13 22:10:04,213 - INFO - 🔄 Procesando producto 30/13211: (Wifi) KIT 1 camara Wifi y 2 apagadores inteligent...
+2025-06-13 22:10:04,215 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH1CAM2SK
+2025-06-13 22:10:04,565 - INFO - --> 200 OK 5408b
+2025-06-13 22:10:04,569 - INFO - ⏭️ Producto duplicado saltado: SH1CAM2SK
+2025-06-13 22:10:05,571 - INFO - ⏸️ Pausa entre lotes: 2.0s
+2025-06-13 22:10:07,572 - INFO - 📦 Procesando lote 4/1322 (10 productos)
+2025-06-13 22:10:07,573 - INFO - 🔄 Procesando producto 31/13211: Marco metÃ¡lico para puerta de emergencia derecha ...
+2025-06-13 22:10:07,574 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MX9043
+2025-06-13 22:10:07,907 - INFO - --> 200 OK 15b
+2025-06-13 22:10:07,909 - INFO - 🔧 Título corregido: 'Marco metÃ¡lico para puerta de emergencia derecha ...' -> 'Marco metálico para puerta de emergencia derecha p...'
+2025-06-13 22:10:07,911 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:10:08,225 - ERROR - ❌ Error creando producto MX9043: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/ASSA ABLOY/MX9043/portada_0S2000.PNG']
+2025-06-13 22:10:09,226 - INFO - 🔄 Procesando producto 32/13211: MaletÃ­n Funcional Demo Sistema de Intercomunicaci...
+2025-06-13 22:10:09,228 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=NX0600
+2025-06-13 22:10:09,560 - INFO - --> 200 OK 2723b
+2025-06-13 22:10:09,563 - INFO - ⏭️ Producto duplicado saltado: NX0600
+2025-06-13 22:10:10,564 - INFO - 🔄 Procesando producto 33/13211: KIT MN01LTEM + HUB / Ideal para Visualizar Camaras...
+2025-06-13 22:10:10,566 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=M2M-KIT-HUB-MN01
+2025-06-13 22:10:10,992 - INFO - --> 200 OK 9184b
+2025-06-13 22:10:10,996 - INFO - ⏭️ Producto duplicado saltado: M2M-KIT-HUB-MN01
+2025-06-13 22:10:11,998 - INFO - 🔄 Procesando producto 34/13211: (AX PRO) CÃMARA InalÃ¡mbrica + PIR / 6 AÃ±os de B...
+2025-06-13 22:10:11,999 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDPC12P-EG2-WB%28B%29
+2025-06-13 22:10:20,802 - INFO - --> 200 OK 15b
+2025-06-13 22:10:20,807 - INFO - 🔧 Título corregido: '(AX PRO) CÃMARA InalÃ¡mbrica + PIR / 6 AÃ±os de B...' -> '(AX PRO) CÁMARA Inalámbrica + PIR / 6 Años de Bate...'
+2025-06-13 22:10:20,808 - INFO - 🔧 Descripción corregida para: DS-PDPC12P-EG2-WB(B)
+2025-06-13 22:10:20,810 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:10:22,915 - INFO - --> 201 Created 18149b
+2025-06-13 22:10:22,919 - INFO - ✅ Producto creado: (AX PRO) CÁMARA Inalámbrica + PIR / 6 Años de Batería / Inmunidad a Mascotas / Rango de Detección de 12 mts / Angulo de 85.9° de Cobertura / Uso Interior (ID: 8151286677690) - Stock: 200.0
+2025-06-13 22:10:22,920 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924836544698.json
+2025-06-13 22:10:23,291 - INFO - --> 200 OK 671b
+2025-06-13 22:10:23,292 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:10:23,636 - INFO - --> 200 OK 243b
+2025-06-13 22:10:23,637 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 22:10:24,638 - INFO - 🔄 Procesando producto 35/13211: M42 Receptora de alarmas solo para M2M/ALULA, para...
+2025-06-13 22:10:24,639 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=EXTRIUMM42
+2025-06-13 22:10:24,935 - INFO - --> 200 OK 15b
+2025-06-13 22:10:24,937 - INFO - 🔧 Título corregido: 'M42 Receptora de alarmas solo para M2M/ALULA, para...' -> 'M42 Receptora de alarmas solo para M2M/ALULA, para...'
+2025-06-13 22:10:24,939 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:10:25,281 - ERROR - ❌ Error creando producto EXTRIUMM42: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/MCDI SECURITY PRODUCTS, INC/EXTRIUMM42/portada_0S2000.PNG']
+2025-06-13 22:10:26,282 - INFO - 🔄 Procesando producto 36/13211: Control remoto PICO 3 botones encender/apagar, sub...
+2025-06-13 22:10:26,283 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PJ23BRLGIVL01
+2025-06-13 22:10:26,650 - INFO - --> 200 OK 2637b
+2025-06-13 22:10:26,651 - INFO - ⏭️ Producto duplicado saltado: PJ23BRLGIVL01
+2025-06-13 22:10:27,652 - INFO - 🔄 Procesando producto 37/13211: (Caseta Wireless) PlugIn Interruptor On/Off para u...
+2025-06-13 22:10:27,653 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RR15OUTBL
+2025-06-13 22:10:28,054 - INFO - --> 200 OK 6095b
+2025-06-13 22:10:28,057 - INFO - ⏭️ Producto duplicado saltado: RR15OUTBL
+2025-06-13 22:10:29,058 - INFO - 🔄 Procesando producto 38/13211: Marco metÃ¡lico para puerta de emergencia sentido ...
+2025-06-13 22:10:29,059 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MX9044
+2025-06-13 22:10:37,305 - INFO - --> 200 OK 15b
+2025-06-13 22:10:37,309 - INFO - 🔧 Título corregido: 'Marco metÃ¡lico para puerta de emergencia sentido ...' -> 'Marco metálico para puerta de emergencia sentido i...'
+2025-06-13 22:10:37,310 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:10:37,696 - ERROR - ❌ Error creando producto MX9044: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/ASSA ABLOY/MX9044/portada_0S2000.PNG']
+2025-06-13 22:10:38,698 - INFO - 🔄 Procesando producto 39/13211: Relevador inalÃ¡mbrico inteligente 16A, 110-230 V,...
+2025-06-13 22:10:38,699 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SHELLY1GEN3
+2025-06-13 22:10:38,986 - INFO - --> 200 OK 15b
+2025-06-13 22:10:38,988 - INFO - 🔧 Título corregido: 'Relevador inalÃ¡mbrico inteligente 16A, 110-230 V,...' -> 'Relevador inalámbrico inteligente 16A, 110-230 V, ...'
+2025-06-13 22:10:38,989 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:10:41,598 - INFO - --> 201 Created 5582b
+2025-06-13 22:10:41,602 - INFO - ✅ Producto creado: Relevador inalámbrico inteligente 16A, 110-230 V, 1 salida de contacto seco, compatible con asistente de voz Alexa, Google Home (ID: 8151287070906) - Stock: 200.0
+2025-06-13 22:10:41,603 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924837986490.json
+2025-06-13 22:10:41,940 - INFO - --> 200 OK 659b
+2025-06-13 22:10:41,941 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:10:42,307 - INFO - --> 200 OK 243b
+2025-06-13 22:10:42,308 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 22:10:43,309 - INFO - 🔄 Procesando producto 40/13211: Relevador inalÃ¡mbrico inteligente 16A, 110-230 V,...
+2025-06-13 22:10:43,311 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SHELLY1PMGEN3
+2025-06-13 22:10:43,599 - INFO - --> 200 OK 15b
+2025-06-13 22:10:43,601 - INFO - 🔧 Título corregido: 'Relevador inalÃ¡mbrico inteligente 16A, 110-230 V,...' -> 'Relevador inalámbrico inteligente 16A, 110-230 V, ...'
+2025-06-13 22:10:43,603 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:10:46,098 - INFO - --> 201 Created 6834b
+2025-06-13 22:10:46,101 - INFO - ✅ Producto creado: Relevador inalámbrico inteligente 16A, 110-230 V, medición de consumo, compatible con asistente de voz Alexa, Google Home (ID: 8151287169210) - Stock: 200.0
+2025-06-13 22:10:46,102 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924838183098.json
+2025-06-13 22:10:47,318 - INFO - --> 200 OK 661b
+2025-06-13 22:10:47,320 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:10:47,670 - INFO - --> 200 OK 243b
+2025-06-13 22:10:47,671 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 22:10:48,672 - INFO - ⏸️ Pausa entre lotes: 2.0s
+2025-06-13 22:10:50,673 - INFO - 📦 Procesando lote 5/1322 (10 productos)
+2025-06-13 22:10:50,674 - INFO - 🔄 Procesando producto 41/13211: Mini Interruptor inteligente con Wi-Fi, contacto s...
+2025-06-13 22:10:50,675 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SHELLY1MINIGEN3
+2025-06-13 22:10:51,055 - INFO - --> 200 OK 15b
+2025-06-13 22:10:51,057 - INFO - 🔧 Descripción corregida para: SHELLY1MINIGEN3
+2025-06-13 22:10:51,059 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:10:53,697 - INFO - --> 201 Created 6163b
+2025-06-13 22:10:53,701 - INFO - ✅ Producto creado: Mini Interruptor inteligente con Wi-Fi, contacto seco, 1 canal 8A, compatible con asistentes de voz Alexa y GoogleHome (ID: 8151287365818) - Stock: 200.0
+2025-06-13 22:10:53,702 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924838740154.json
+2025-06-13 22:10:54,084 - INFO - --> 200 OK 663b
+2025-06-13 22:10:54,086 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:10:54,413 - INFO - --> 200 OK 243b
+2025-06-13 22:10:54,414 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 22:10:55,415 - INFO - 🔄 Procesando producto 42/13211: Modulo PROTAKEOVER compatible con Panel ProSeries ...
+2025-06-13 22:10:55,416 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PROTAKEOVR1
+2025-06-13 22:11:14,750 - ERROR - ❌ Error inesperado creando producto: [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder
+2025-06-13 22:11:15,751 - INFO - 🔄 Procesando producto 43/13211: (AX PRO) CÃMARA InalÃ¡mbrica + PIR / 6 AÃ±os de B...
+2025-06-13 22:11:15,752 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDPC12P-EG2-WB%28B%29%2FUB
+2025-06-13 22:11:37,143 - INFO - --> 200 OK 15b
+2025-06-13 22:11:37,148 - INFO - 🔧 Título corregido: '(AX PRO) CÃMARA InalÃ¡mbrica + PIR / 6 AÃ±os de B...' -> '(AX PRO) CÁMARA Inalámbrica + PIR / 6 Años de Bate...'
+2025-06-13 22:11:37,148 - INFO - 🔧 Descripción corregida para: DS-PDPC12P-EG2-WB(B)/UB
+2025-06-13 22:11:37,149 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:12:00,414 - INFO - --> 201 Created 34874b
+2025-06-13 22:12:00,418 - INFO - ✅ Producto creado: (AX PRO) CÁMARA Inalámbrica + PIR / 6 Años de Batería / Inmunidad a Mascotas / Rango de Detección de 12 mts / Angulo de 85.9° de Cobertura + Montaje Universal (ID: 8151287824570) - Stock: 200.0
+2025-06-13 22:12:00,419 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924842868922.json
+2025-06-13 22:12:21,869 - INFO - --> 200 OK 675b
+2025-06-13 22:12:21,871 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:12:43,293 - INFO - --> 200 OK 243b
+2025-06-13 22:12:43,294 - INFO - 📦 Inventario actualizado: 200 unidades en OTANCAHUI 802
+2025-06-13 22:12:44,295 - INFO - 🔄 Procesando producto 44/13211: Control inalambrico para control de apagadores y a...
+2025-06-13 22:12:44,297 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PJ22BTMNP01
+2025-06-13 22:12:44,585 - INFO - --> 200 OK 15b
+2025-06-13 22:12:44,586 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:12:45,535 - INFO - --> 201 Created 1531b
+2025-06-13 22:12:45,537 - INFO - ✅ Producto creado: Control inalambrico para control de apagadores y atenuadores Lutron (ID: 8151288283322) - Stock: 3.0
+2025-06-13 22:12:45,537 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924843688122.json
+2025-06-13 22:12:52,896 - INFO - --> 200 OK 661b
+2025-06-13 22:12:52,897 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:12:53,259 - INFO - --> 200 OK 241b
+2025-06-13 22:12:53,259 - INFO - 📦 Inventario actualizado: 3 unidades en OTANCAHUI 802
+2025-06-13 22:12:54,260 - INFO - 🔄 Procesando producto 45/13211: (AX PRO) Sirena InalÃ¡mbrica Interior / 110 dB / E...
+2025-06-13 22:12:54,261 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PS1-I-WB%28B%29
+2025-06-13 22:12:54,583 - INFO - --> 200 OK 15b
+2025-06-13 22:12:54,584 - INFO - 🔧 Título corregido: '(AX PRO) Sirena InalÃ¡mbrica Interior / 110 dB / E...' -> '(AX PRO) Sirena Inalámbrica Interior / 110 dB / Es...'
+2025-06-13 22:12:54,585 - INFO - 🔧 Descripción corregida para: DS-PS1-I-WB(B)
+2025-06-13 22:12:54,585 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:12:57,030 - INFO - --> 201 Created 13279b
+2025-06-13 22:12:57,034 - INFO - ✅ Producto creado: (AX PRO) Sirena Inalámbrica Interior / 110 dB / Estrobo Color Azul (ID: 8151288479930) - Stock: 1.0
+2025-06-13 22:12:57,035 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/variants/44924843884730.json
+2025-06-13 22:12:57,394 - INFO - --> 200 OK 664b
+2025-06-13 22:12:57,395 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/inventory_levels/set.json
+2025-06-13 22:12:57,752 - INFO - --> 200 OK 241b
+2025-06-13 22:12:57,753 - INFO - 📦 Inventario actualizado: 1 unidades en OTANCAHUI 802
+2025-06-13 22:12:58,754 - INFO - 🔄 Procesando producto 46/13211: Termostato FocusPro P200 Programable, 1H/1C Honeyw...
+2025-06-13 22:12:58,756 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=TH2110U4004%2FU
+2025-06-13 22:12:59,045 - INFO - --> 200 OK 15b
+2025-06-13 22:12:59,048 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:12:59,380 - ERROR - ❌ Error creando producto TH2110U4004/U: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/HONEYWELL HOME RESIDEO/TH2110U4004/U/portada_0S2000.PNG']
+2025-06-13 22:13:00,381 - INFO - 🔄 Procesando producto 47/13211: Termostato FocusPro S200 Programable, 1H/1C Honeyw...
+2025-06-13 22:13:00,383 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=TH2110WF4008%2FU
+2025-06-13 22:13:00,665 - INFO - --> 200 OK 15b
+2025-06-13 22:13:00,666 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:13:01,058 - ERROR - ❌ Error creando producto TH2110WF4008/U: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/HONEYWELL HOME RESIDEO/TH2110WF4008/U/portada_0S2000.PNG']
+2025-06-13 22:13:02,059 - INFO - 🔄 Procesando producto 48/13211: Termostato FocusPro N100 No-Programable, 1H/1C Hon...
+2025-06-13 22:13:02,060 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=TH1110U4000%2FU
+2025-06-13 22:13:02,379 - INFO - --> 200 OK 15b
+2025-06-13 22:13:02,381 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:13:02,982 - ERROR - ❌ Error creando producto TH1110U4000/U: ['1 total image source values are invalid for variants: http://ftp3.syscom.mx/usuarios/fotos/BancoFotografiasSyscom/HONEYWELL HOME RESIDEO/TH1110U4000/U/portada_0S2000.PNG']
+2025-06-13 22:13:03,983 - INFO - 🔄 Procesando producto 49/13211: Detector PIR Cableado para Interior / Inmunidad a ...
+2025-06-13 22:13:03,985 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDP18-EG2%28B%29
+2025-06-13 22:13:04,266 - INFO - --> 200 OK 15b
+2025-06-13 22:13:04,269 - INFO - 🔧 Título corregido: 'Detector PIR Cableado para Interior / Inmunidad a ...' -> 'Detector PIR Cableado para Interior / Inmunidad a ...'
+2025-06-13 22:13:04,270 - INFO - 🔧 Descripción corregida para: DS-PDP18-EG2(B)
+2025-06-13 22:13:04,271 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:27:02,388 - INFO - ✅ API de Shopify configurada correctamente
+2025-06-13 22:27:02,389 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
+2025-06-13 22:27:23,836 - INFO - --> 200 OK 1560b
+2025-06-13 22:27:23,838 - INFO - ✅ Tienda conectada: Sepacsye
+2025-06-13 22:27:23,839 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
+2025-06-13 22:27:45,208 - INFO - --> 200 OK 22252b
+2025-06-13 22:27:45,211 - INFO - ✅ Permisos de productos: OK
+2025-06-13 22:27:45,211 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
+2025-06-13 22:27:58,491 - INFO - ✅ API de Shopify configurada correctamente
+2025-06-13 22:27:58,491 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
+2025-06-13 22:28:06,553 - INFO - --> 200 OK 499b
+2025-06-13 22:28:06,554 - INFO - ✅ Ubicación configurada: OTANCAHUI 802 (ID: 77235355834)
+2025-06-13 22:28:06,555 - INFO - 🔗 Descargando CSV desde URL...
+2025-06-13 22:28:13,913 - INFO - --> 200 OK 1560b
+2025-06-13 22:28:13,914 - INFO - ✅ Tienda conectada: Sepacsye
+2025-06-13 22:28:13,916 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
+2025-06-13 22:28:14,242 - INFO - --> 200 OK 22252b
+2025-06-13 22:28:14,258 - INFO - ✅ Permisos de productos: OK
+2025-06-13 22:28:14,259 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
+2025-06-13 22:28:14,543 - INFO - --> 200 OK 499b
+2025-06-13 22:28:14,544 - INFO - ✅ Ubicación configurada: OTANCAHUI 802 (ID: 77235355834)
+2025-06-13 22:28:14,544 - INFO - 🔗 Descargando CSV desde URL...
+2025-06-13 22:28:16,062 - INFO - 📁 Usando archivo local: productos_ociostock.csv
+2025-06-13 22:28:17,978 - INFO - ✅ CSV parseado con latin-1: 23504 productos
+2025-06-13 22:28:17,989 - INFO - 📦 Productos con stock: 13211 de 23504
+2025-06-13 22:28:17,992 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AUFIT-SMART-Z-WAVE
+2025-06-13 22:28:18,289 - INFO - --> 200 OK 7338b
+2025-06-13 22:28:18,293 - INFO - ⏭️ Duplicado saltado: AUFIT-SMART-Z-WAVE
+2025-06-13 22:28:19,296 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=VOUCHERAUT
+2025-06-13 22:28:19,638 - INFO - --> 200 OK 4665b
+2025-06-13 22:28:19,640 - INFO - ⏭️ Duplicado saltado: VOUCHERAUT
+2025-06-13 22:28:20,641 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDMCS-EG2-WB%28B%29
+2025-06-13 22:28:21,192 - INFO - --> 200 OK 15b
+2025-06-13 22:28:21,196 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:28:23,341 - INFO - --> 201 Created 19035b
+2025-06-13 22:28:23,343 - INFO - ✅ Creado: (AX PRO) Contacto Magnético Inalámbrico Slim / Uso - Stock: 3.0
+2025-06-13 22:28:24,344 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PKF1-WB%28B%29
+2025-06-13 22:28:24,621 - INFO - --> 200 OK 15b
+2025-06-13 22:28:24,625 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:28:26,558 - INFO - --> 201 Created 14201b
+2025-06-13 22:28:26,562 - INFO - ✅ Creado: (AX PRO) Control Remoto para Armado y Desarmado /  - Stock: 3.0
+2025-06-13 22:28:27,563 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=264RF
+2025-06-13 22:28:27,884 - INFO - --> 200 OK 3242b
+2025-06-13 22:28:27,887 - INFO - ⏭️ Duplicado saltado: 264RF
+2025-06-13 22:28:28,889 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=HA4
+2025-06-13 22:28:29,209 - INFO - --> 200 OK 6539b
+2025-06-13 22:28:29,210 - INFO - ⏭️ Duplicado saltado: HA4
+2025-06-13 22:28:30,211 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-TDSB0G-FK%2F120M%2FPOE
+2025-06-13 22:28:37,535 - INFO - --> 200 OK 15b
+2025-06-13 22:28:37,540 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:28:39,806 - INFO - --> 201 Created 25322b
+2025-06-13 22:28:39,809 - INFO - ✅ Creado: Radar IP Perimetral / 120 metros de Distancia / 12 - Stock: 50.0
+2025-06-13 22:28:40,811 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDC15-EG2%28B%29
+2025-06-13 22:28:41,101 - INFO - --> 200 OK 15b
+2025-06-13 22:28:41,104 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:28:43,108 - INFO - --> 201 Created 6911b
+2025-06-13 22:28:43,111 - INFO - ✅ Creado: Detector PIR Tipo Cortina Cableado para Interior / - Stock: 200.0
+2025-06-13 22:28:44,113 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-WIFI
+2025-06-13 22:28:44,430 - INFO - --> 200 OK 21406b
+2025-06-13 22:28:44,433 - INFO - ⏭️ Duplicado saltado: AXHOME-KIT-WIFI
+2025-06-13 22:28:45,437 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-GSM
+2025-06-13 22:28:45,751 - INFO - --> 200 OK 22252b
+2025-06-13 22:28:45,754 - INFO - ⏭️ Duplicado saltado: AXHOME-KIT-GSM
+2025-06-13 22:28:48,758 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT30SW
+2025-06-13 22:28:56,068 - INFO - --> 200 OK 15b
+2025-06-13 22:28:56,070 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:28:58,036 - INFO - --> 201 Created 2343b
+2025-06-13 22:28:58,039 - INFO - ✅ Creado: (RadioRa3) Riel 30 metros Cinta LED de color blanc - Stock: 3.0
+2025-06-13 22:28:59,049 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUMK1
+2025-06-13 22:29:06,408 - INFO - --> 200 OK 1459b
+2025-06-13 22:29:06,411 - INFO - ⏭️ Duplicado saltado: LUMK1
+2025-06-13 22:29:07,414 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUBP1
+2025-06-13 22:29:07,863 - INFO - --> 200 OK 1453b
+2025-06-13 22:29:07,864 - INFO - ⏭️ Duplicado saltado: LUBP1
+2025-06-13 22:29:08,865 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUWK1TW
+2025-06-13 22:29:09,169 - INFO - --> 200 OK 1449b
+2025-06-13 22:29:09,171 - INFO - ⏭️ Duplicado saltado: LUWK1TW
+2025-06-13 22:29:10,173 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUCK1TW
+2025-06-13 22:29:11,453 - INFO - --> 200 OK 1458b
+2025-06-13 22:29:11,454 - INFO - ⏭️ Duplicado saltado: LUCK1TW
+2025-06-13 22:29:12,456 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUPH3A
+2025-06-13 22:29:12,779 - INFO - --> 200 OK 15b
+2025-06-13 22:29:12,781 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:29:15,208 - INFO - --> 201 Created 2378b
+2025-06-13 22:29:15,210 - INFO - ✅ Creado: (RadioRa3) Interfaz de alimentación cableada para  - Stock: 9.0
+2025-06-13 22:29:16,212 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT30DL
+2025-06-13 22:29:16,496 - INFO - --> 200 OK 15b
+2025-06-13 22:29:16,498 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:29:18,983 - INFO - --> 201 Created 2343b
+2025-06-13 22:29:18,985 - INFO - ✅ Creado: (RadioRa3) Riel 30 metros Cinta LED de color blanc - Stock: 3.0
+2025-06-13 22:29:19,986 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT05DL
+2025-06-13 22:29:21,351 - INFO - --> 200 OK 15b
+2025-06-13 22:29:21,351 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:29:23,415 - INFO - --> 201 Created 2340b
+2025-06-13 22:29:23,418 - INFO - ✅ Creado: (RadioRa3) Riel 5 metros Cinta LED de color blanco - Stock: 10.0
+2025-06-13 22:29:24,420 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT05SW
+2025-06-13 22:29:24,713 - INFO - --> 200 OK 15b
+2025-06-13 22:29:24,714 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:29:27,419 - INFO - --> 201 Created 2340b
+2025-06-13 22:29:27,424 - INFO - ✅ Creado: (RadioRa3) Riel 5 metros Cinta LED de color blanco - Stock: 15.0
+2025-06-13 22:29:28,427 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTWCLWH
+2025-06-13 22:29:28,735 - INFO - --> 200 OK 1466b
+2025-06-13 22:29:28,737 - INFO - ⏭️ Duplicado saltado: RRLTWCLWH
+2025-06-13 22:29:31,739 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTWCWH
+2025-06-13 22:29:32,056 - INFO - --> 200 OK 15b
+2025-06-13 22:29:32,058 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:29:34,001 - INFO - --> 201 Created 2324b
+2025-06-13 22:29:34,005 - INFO - ✅ Creado: (RadioRA3) Tunable White Wireless Controller with  - Stock: 14.0
+2025-06-13 22:29:35,006 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTLKSW
+2025-06-13 22:29:35,293 - INFO - --> 200 OK 15b
+2025-06-13 22:29:35,295 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:29:37,351 - INFO - --> 201 Created 2328b
+2025-06-13 22:29:37,356 - INFO - ✅ Creado: (RadioRA3) Tira LED 1800K - 3000K inteligente inte - Stock: 29.0
+2025-06-13 22:29:38,358 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RDRSSW
+2025-06-13 22:29:38,687 - INFO - --> 200 OK 5497b
+2025-06-13 22:29:38,689 - INFO - ⏭️ Duplicado saltado: RDRSSW
+2025-06-13 22:29:39,691 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DVSCCL153PMN
+2025-06-13 22:29:47,198 - INFO - --> 200 OK 15b
+2025-06-13 22:29:47,199 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:29:49,892 - INFO - --> 201 Created 2253b
+2025-06-13 22:29:49,895 - INFO - ✅ Creado: Atenuador DIVA 153 - Stock: 11.0
+2025-06-13 22:29:50,900 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DVSCCL153PSW
+2025-06-13 22:29:51,186 - INFO - --> 200 OK 15b
+2025-06-13 22:29:51,188 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:29:53,764 - INFO - --> 201 Created 2253b
+2025-06-13 22:29:53,766 - INFO - ✅ Creado: Atenuador DIVA 153 - Stock: 81.0
+2025-06-13 22:29:54,767 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH411W4K
+2025-06-13 22:29:55,103 - INFO - --> 200 OK 5421b
+2025-06-13 22:29:55,106 - INFO - ⏭️ Duplicado saltado: SH411W4K
+2025-06-13 22:29:56,108 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH3S1DK
+2025-06-13 22:29:56,443 - INFO - --> 200 OK 5420b
+2025-06-13 22:29:56,447 - INFO - ⏭️ Duplicado saltado: SH3S1DK
+2025-06-13 22:29:57,449 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH1CAM1SK
+2025-06-13 22:29:57,734 - INFO - --> 200 OK 5405b
+2025-06-13 22:29:57,736 - INFO - ⏭️ Duplicado saltado: SH1CAM1SK
+2025-06-13 22:29:58,738 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH2CAM2SK
+2025-06-13 22:29:59,088 - INFO - --> 200 OK 5409b
+2025-06-13 22:29:59,095 - INFO - ⏭️ Duplicado saltado: SH2CAM2SK
+2025-06-13 22:30:00,097 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH1CAM2SK
+2025-06-13 22:30:00,389 - INFO - --> 200 OK 5408b
+2025-06-13 22:30:00,393 - INFO - ⏭️ Duplicado saltado: SH1CAM2SK
+2025-06-13 22:30:03,396 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MX9043
+2025-06-13 22:30:03,722 - INFO - --> 200 OK 15b
+2025-06-13 22:30:03,723 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:05,909 - INFO - --> 201 Created 5578b
+2025-06-13 22:30:05,912 - INFO - ✅ Creado: Marco metálico para puerta de emergencia derecha p - Stock: 31.0
+2025-06-13 22:30:06,915 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=NX0600
+2025-06-13 22:30:11,891 - INFO - --> 200 OK 2723b
+2025-06-13 22:30:11,892 - INFO - ⏭️ Duplicado saltado: NX0600
+2025-06-13 22:30:12,893 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=M2M-KIT-HUB-MN01
+2025-06-13 22:30:13,215 - INFO - --> 200 OK 9184b
+2025-06-13 22:30:13,217 - INFO - ⏭️ Duplicado saltado: M2M-KIT-HUB-MN01
+2025-06-13 22:30:14,218 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDPC12P-EG2-WB%28B%29
+2025-06-13 22:30:14,502 - INFO - --> 200 OK 15b
+2025-06-13 22:30:14,507 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:16,533 - INFO - --> 201 Created 18147b
+2025-06-13 22:30:16,537 - INFO - ✅ Creado: (AX PRO) CÃMARA Inalámbrica + PIR / 6 Años de Bate - Stock: 200.0
+2025-06-13 22:30:17,538 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=EXTRIUMM42
+2025-06-13 22:30:17,843 - INFO - --> 200 OK 15b
+2025-06-13 22:30:17,845 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:20,665 - INFO - --> 201 Created 5848b
+2025-06-13 22:30:20,669 - INFO - ✅ Creado: M42 Receptora de alarmas solo para M2M/ALULA, para - Stock: 1.0
+2025-06-13 22:30:21,670 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PJ23BRLGIVL01
+2025-06-13 22:30:21,976 - INFO - --> 200 OK 2637b
+2025-06-13 22:30:21,979 - INFO - ⏭️ Duplicado saltado: PJ23BRLGIVL01
+2025-06-13 22:30:22,981 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RR15OUTBL
+2025-06-13 22:30:23,257 - INFO - --> 200 OK 6095b
+2025-06-13 22:30:23,259 - INFO - ⏭️ Duplicado saltado: RR15OUTBL
+2025-06-13 22:30:24,260 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MX9044
+2025-06-13 22:30:24,550 - INFO - --> 200 OK 15b
+2025-06-13 22:30:24,554 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:26,771 - INFO - --> 201 Created 14417b
+2025-06-13 22:30:26,774 - INFO - ✅ Creado: Marco metálico para puerta de emergencia sentido i - Stock: 4.0
+2025-06-13 22:30:27,775 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SHELLY1GEN3
+2025-06-13 22:30:28,097 - INFO - --> 200 OK 5589b
+2025-06-13 22:30:28,098 - INFO - ⏭️ Duplicado saltado: SHELLY1GEN3
+2025-06-13 22:30:29,099 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SHELLY1PMGEN3
+2025-06-13 22:30:29,467 - INFO - --> 200 OK 6841b
+2025-06-13 22:30:29,470 - INFO - ⏭️ Duplicado saltado: SHELLY1PMGEN3
+2025-06-13 22:30:32,474 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SHELLY1MINIGEN3
+2025-06-13 22:30:39,870 - INFO - --> 200 OK 6170b
+2025-06-13 22:30:39,873 - INFO - ⏭️ Duplicado saltado: SHELLY1MINIGEN3
+2025-06-13 22:30:40,876 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PROTAKEOVR1
+2025-06-13 22:30:41,174 - INFO - --> 200 OK 15b
+2025-06-13 22:30:41,174 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:41,671 - INFO - ✅ CSV descargado: productos_descargado_20250613_223040.csv
+2025-06-13 22:30:43,506 - INFO - --> 201 Created 5844b
+2025-06-13 22:30:43,507 - INFO - ✅ Creado: Modulo PROTAKEOVER compatible con Panel ProSeries  - Stock: 17.0
+2025-06-13 22:30:43,522 - INFO - ✅ CSV parseado con utf-8: 23501 productos
+2025-06-13 22:30:43,534 - INFO - 📦 Productos con stock: 13206 de 23501
+2025-06-13 22:30:43,536 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AUFIT-SMART-Z-WAVE
+2025-06-13 22:30:43,860 - INFO - --> 200 OK 7338b
+2025-06-13 22:30:43,863 - INFO - ⏭️ Duplicado saltado: AUFIT-SMART-Z-WAVE
+2025-06-13 22:30:44,509 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDPC12P-EG2-WB%28B%29%2FUB
+2025-06-13 22:30:44,789 - INFO - --> 200 OK 15b
+2025-06-13 22:30:44,797 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:44,866 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=VOUCHERAUT
+2025-06-13 22:30:45,160 - INFO - --> 200 OK 4665b
+2025-06-13 22:30:45,164 - INFO - ⏭️ Duplicado saltado: VOUCHERAUT
+2025-06-13 22:30:46,166 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDMCS-EG2-WB%28B%29
+2025-06-13 22:30:46,468 - INFO - --> 200 OK 15b
+2025-06-13 22:30:46,470 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:46,783 - INFO - --> 201 Created 34948b
+2025-06-13 22:30:46,787 - INFO - ✅ Creado: (AX PRO) CÃMARA Inalámbrica + PIR / 6 Años de Bate - Stock: 200.0
+2025-06-13 22:30:47,788 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PJ22BTMNP01
+2025-06-13 22:30:48,125 - INFO - --> 200 OK 1534b
+2025-06-13 22:30:48,127 - INFO - ⏭️ Duplicado saltado: PJ22BTMNP01
+2025-06-13 22:30:48,454 - INFO - --> 201 Created 19033b
+2025-06-13 22:30:48,458 - INFO - ✅ Creado: (AX PRO) Contacto Magnético Inalámbrico Slim / Uso - Stock: 3.0
+2025-06-13 22:30:49,129 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PS1-I-WB%28B%29
+2025-06-13 22:30:49,421 - INFO - --> 200 OK 15b
+2025-06-13 22:30:49,425 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:49,460 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PKF1-WB%28B%29
+2025-06-13 22:30:49,792 - INFO - --> 200 OK 15b
+2025-06-13 22:30:49,796 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:51,769 - INFO - --> 201 Created 13352b
+2025-06-13 22:30:51,772 - INFO - --> 201 Created 14198b
+2025-06-13 22:30:51,773 - INFO - ✅ Creado: (AX PRO) Sirena Inalámbrica Interior / 110 dB / Es - Stock: 1.0
+2025-06-13 22:30:51,775 - INFO - ✅ Creado: (AX PRO) Control Remoto para Armado y Desarmado /  - Stock: 3.0
+2025-06-13 22:30:52,775 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=TH2110U4004%2FU
+2025-06-13 22:30:52,777 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=264RF
+2025-06-13 22:30:53,084 - INFO - --> 200 OK 3242b
+2025-06-13 22:30:53,085 - INFO - --> 200 OK 15b
+2025-06-13 22:30:53,088 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:30:54,089 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=HA4
+2025-06-13 22:30:54,389 - INFO - --> 200 OK 6539b
+2025-06-13 22:30:54,392 - INFO - ⏭️ Duplicado saltado: HA4
+2025-06-13 22:30:55,394 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-TDSB0G-FK%2F120M%2FPOE
+2025-06-13 22:30:55,808 - INFO - --> 201 Created 5811b
+2025-06-13 22:30:55,811 - INFO - ✅ Creado: Termostato FocusPro P200 Programable, 1H/1C Honeyw - Stock: 11.0
+2025-06-13 22:30:56,813 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=TH2110WF4008%2FU
+2025-06-13 22:31:16,741 - INFO - --> 200 OK 15b
+2025-06-13 22:31:16,743 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:31:18,148 - INFO - --> 200 OK 15b
+2025-06-13 22:31:18,150 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:31:39,996 - INFO - --> 201 Created 25320b
+2025-06-13 22:31:39,999 - INFO - ✅ Creado: Radar IP Perimetral / 120 metros de Distancia / 12 - Stock: 50.0
+2025-06-13 22:31:41,001 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDC15-EG2%28B%29
+2025-06-13 22:31:41,689 - INFO - --> 201 Created 5366b
+2025-06-13 22:31:41,692 - INFO - ✅ Creado: Termostato FocusPro S200 Programable, 1H/1C Honeyw - Stock: 11.0
+2025-06-13 22:31:42,695 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=TH1110U4000%2FU
+2025-06-13 22:32:02,357 - INFO - --> 200 OK 15b
+2025-06-13 22:32:02,359 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:04,102 - INFO - --> 200 OK 15b
+2025-06-13 22:32:04,103 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:06,984 - INFO - --> 201 Created 6907b
+2025-06-13 22:32:06,987 - INFO - ✅ Creado: Detector PIR Tipo Cortina Cableado para Interior / - Stock: 200.0
+2025-06-13 22:32:07,189 - INFO - --> 201 Created 5422b
+2025-06-13 22:32:07,194 - INFO - ✅ Creado: Termostato FocusPro N100 No-Programable, 1H/1C Hon - Stock: 8.0
+2025-06-13 22:32:07,989 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-WIFI
+2025-06-13 22:32:08,197 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDP18-EG2%28B%29
+2025-06-13 22:32:08,323 - INFO - --> 200 OK 21406b
+2025-06-13 22:32:08,326 - INFO - ⏭️ Duplicado saltado: AXHOME-KIT-WIFI
+2025-06-13 22:32:08,512 - INFO - --> 200 OK 15b
+2025-06-13 22:32:08,514 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:09,327 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AXHOME-KIT-GSM
+2025-06-13 22:32:09,650 - INFO - --> 200 OK 22252b
+2025-06-13 22:32:09,653 - INFO - ⏭️ Duplicado saltado: AXHOME-KIT-GSM
+2025-06-13 22:32:10,569 - INFO - --> 201 Created 6885b
+2025-06-13 22:32:10,570 - INFO - ✅ Creado: Detector PIR Cableado para Interior / Inmunidad a  - Stock: 200.0
+2025-06-13 22:32:11,571 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PS-12260-B
+2025-06-13 22:32:11,873 - INFO - --> 200 OK 15b
+2025-06-13 22:32:11,875 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:12,654 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT30SW
+2025-06-13 22:32:12,999 - INFO - --> 200 OK 2346b
+2025-06-13 22:32:13,001 - INFO - ⏭️ Duplicado saltado: LUT30SW
+2025-06-13 22:32:14,002 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUMK1
+2025-06-13 22:32:14,344 - INFO - --> 200 OK 1459b
+2025-06-13 22:32:14,345 - INFO - ⏭️ Duplicado saltado: LUMK1
+2025-06-13 22:32:14,823 - INFO - --> 201 Created 27769b
+2025-06-13 22:32:14,824 - INFO - ✅ Creado: Batería 12V, 26AH, Para Respaldo, Tecnologías AGM/ - Stock: 21.0
+2025-06-13 22:32:15,346 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUBP1
+2025-06-13 22:32:15,675 - INFO - --> 200 OK 1453b
+2025-06-13 22:32:15,676 - INFO - ⏭️ Duplicado saltado: LUBP1
+2025-06-13 22:32:16,677 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUWK1TW
+2025-06-13 22:32:16,993 - INFO - --> 200 OK 1449b
+2025-06-13 22:32:16,994 - INFO - ⏭️ Duplicado saltado: LUWK1TW
+2025-06-13 22:32:17,826 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PS52V2D1US
+2025-06-13 22:32:17,995 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUCK1TW
+2025-06-13 22:32:18,123 - INFO - --> 200 OK 15b
+2025-06-13 22:32:18,123 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:18,304 - INFO - --> 200 OK 1458b
+2025-06-13 22:32:18,305 - INFO - ⏭️ Duplicado saltado: LUCK1TW
+2025-06-13 22:32:19,306 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUPH3A
+2025-06-13 22:32:19,687 - INFO - --> 200 OK 2381b
+2025-06-13 22:32:19,688 - INFO - ⏭️ Duplicado saltado: LUPH3A
+2025-06-13 22:32:20,464 - INFO - --> 201 Created 10506b
+2025-06-13 22:32:20,465 - INFO - ✅ Creado: Pantalla táctil Hub controlador integrable con sis - Stock: 95.0
+2025-06-13 22:32:20,689 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT30DL
+2025-06-13 22:32:21,038 - INFO - --> 200 OK 2346b
+2025-06-13 22:32:21,039 - INFO - ⏭️ Duplicado saltado: LUT30DL
+2025-06-13 22:32:21,466 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RT61D1US
+2025-06-13 22:32:21,748 - INFO - --> 200 OK 15b
+2025-06-13 22:32:21,749 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:22,040 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT05DL
+2025-06-13 22:32:23,726 - INFO - --> 200 OK 2343b
+2025-06-13 22:32:23,727 - INFO - ⏭️ Duplicado saltado: LUT05DL
+2025-06-13 22:32:24,728 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LUT05SW
+2025-06-13 22:32:25,112 - INFO - --> 200 OK 2343b
+2025-06-13 22:32:25,113 - INFO - ⏭️ Duplicado saltado: LUT05SW
+2025-06-13 22:32:25,697 - INFO - --> 201 Created 11510b
+2025-06-13 22:32:25,698 - INFO - ✅ Creado: Mini pantalla táctil Hub controlador integrable co - Stock: 66.0
+2025-06-13 22:32:26,114 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTWCLWH
+2025-06-13 22:32:26,463 - INFO - --> 200 OK 1466b
+2025-06-13 22:32:26,464 - INFO - ⏭️ Duplicado saltado: RRLTWCLWH
+2025-06-13 22:32:26,699 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=2121-1101%2F1000
+2025-06-13 22:32:26,977 - INFO - --> 200 OK 15b
+2025-06-13 22:32:26,977 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:29,465 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTWCWH
+2025-06-13 22:32:29,566 - INFO - --> 201 Created 4866b
+2025-06-13 22:32:29,567 - INFO - ✅ Creado: Bobina de 305 Metros de Cable / 2 x 16 AWG / Riser - Stock: 4.0
+2025-06-13 22:32:29,823 - INFO - --> 200 OK 2327b
+2025-06-13 22:32:29,824 - INFO - ⏭️ Duplicado saltado: RRLTWCWH
+2025-06-13 22:32:30,568 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PS-12350-M6
+2025-06-13 22:32:30,825 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRLTLKSW
+2025-06-13 22:32:30,839 - INFO - --> 200 OK 15b
+2025-06-13 22:32:30,841 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:31,202 - INFO - --> 200 OK 2331b
+2025-06-13 22:32:31,203 - INFO - ⏭️ Duplicado saltado: RRLTLKSW
+2025-06-13 22:32:32,205 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RDRSSW
+2025-06-13 22:32:33,128 - INFO - --> 200 OK 5497b
+2025-06-13 22:32:33,129 - INFO - ⏭️ Duplicado saltado: RDRSSW
+2025-06-13 22:32:33,293 - INFO - --> 201 Created 27591b
+2025-06-13 22:32:33,294 - INFO - ✅ Creado: Batería 12V, 35AH, Para Respaldo, Tecnologías AGM/ - Stock: 31.0
+2025-06-13 22:32:34,130 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DVSCCL153PMN
+2025-06-13 22:32:34,295 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LR6EGL%2F4B
+2025-06-13 22:32:34,464 - INFO - --> 200 OK 2256b
+2025-06-13 22:32:34,465 - INFO - ⏭️ Duplicado saltado: DVSCCL153PMN
+2025-06-13 22:32:34,615 - INFO - --> 200 OK 15b
+2025-06-13 22:32:34,615 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:35,467 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DVSCCL153PSW
+2025-06-13 22:32:35,910 - INFO - --> 200 OK 2256b
+2025-06-13 22:32:35,911 - INFO - ⏭️ Duplicado saltado: DVSCCL153PSW
+2025-06-13 22:32:36,668 - INFO - --> 201 Created 3318b
+2025-06-13 22:32:36,669 - INFO - ✅ Creado: Batería Alcalina AA 1.5V EVOLTA / No recargable /  - Stock: 200.0
+2025-06-13 22:32:36,912 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH411W4K
+2025-06-13 22:32:37,314 - INFO - --> 200 OK 5421b
+2025-06-13 22:32:37,315 - INFO - ⏭️ Duplicado saltado: SH411W4K
+2025-06-13 22:32:37,670 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=KEYFOB-HS
+2025-06-13 22:32:37,971 - INFO - --> 200 OK 15b
+2025-06-13 22:32:37,972 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:38,316 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH3S1DK
+2025-06-13 22:32:38,652 - INFO - --> 200 OK 5420b
+2025-06-13 22:32:38,653 - INFO - ⏭️ Duplicado saltado: SH3S1DK
+2025-06-13 22:32:39,654 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH1CAM1SK
+2025-06-13 22:32:39,963 - INFO - --> 200 OK 5405b
+2025-06-13 22:32:39,964 - INFO - ⏭️ Duplicado saltado: SH1CAM1SK
+2025-06-13 22:32:40,217 - INFO - --> 201 Created 2781b
+2025-06-13 22:32:40,218 - INFO - ✅ Creado: Llavero adicional para SYSNGHS - Stock: 7.0
+2025-06-13 22:32:40,965 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH2CAM2SK
+2025-06-13 22:32:41,219 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDMCK-EG2-WB%28B%29
+2025-06-13 22:32:41,297 - INFO - --> 200 OK 5409b
+2025-06-13 22:32:41,298 - INFO - ⏭️ Duplicado saltado: SH2CAM2SK
+2025-06-13 22:32:41,927 - INFO - --> 200 OK 15b
+2025-06-13 22:32:41,928 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:42,300 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SH1CAM2SK
+2025-06-13 22:32:42,621 - INFO - --> 200 OK 5408b
+2025-06-13 22:32:42,622 - INFO - ⏭️ Duplicado saltado: SH1CAM2SK
+2025-06-13 22:32:44,334 - INFO - --> 201 Created 15016b
+2025-06-13 22:32:44,335 - INFO - ✅ Creado: (AX PRO) Detector de Impacto + Magnético Inalámbri - Stock: 200.0
+2025-06-13 22:32:45,336 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PROA7MWIFI
+2025-06-13 22:32:45,624 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MX9043
+2025-06-13 22:32:45,647 - INFO - --> 200 OK 15b
+2025-06-13 22:32:45,650 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:45,987 - INFO - --> 200 OK 5581b
+2025-06-13 22:32:45,988 - INFO - ⏭️ Duplicado saltado: MX9043
+2025-06-13 22:32:46,989 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=NX0600
+2025-06-13 22:32:47,323 - INFO - --> 200 OK 2723b
+2025-06-13 22:32:47,324 - INFO - ⏭️ Duplicado saltado: NX0600
+2025-06-13 22:32:48,234 - INFO - --> 201 Created 42506b
+2025-06-13 22:32:48,235 - INFO - ✅ Creado: Sistema de Alarma con Pantalla Touch de 7" Compati - Stock: 38.0
+2025-06-13 22:32:48,325 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=M2M-KIT-HUB-MN01
+2025-06-13 22:32:48,655 - INFO - --> 200 OK 9184b
+2025-06-13 22:32:48,656 - INFO - ⏭️ Duplicado saltado: M2M-KIT-HUB-MN01
+2025-06-13 22:32:49,236 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PHA64-LP%28B%29
+2025-06-13 22:32:49,528 - INFO - --> 200 OK 15b
+2025-06-13 22:32:49,529 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-13 22:32:49,657 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDPC12P-EG2-WB%28B%29
+2025-06-13 22:32:49,943 - INFO - --> 200 OK 15b
+2025-06-13 22:32:49,945 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-15 22:56:05,250 - INFO - ✅ API de Shopify configurada correctamente
+2025-06-15 22:56:05,251 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
+2025-06-15 22:56:26,847 - INFO - --> 200 OK 1560b
+2025-06-15 22:56:26,848 - INFO - ✅ Tienda conectada: Sepacsye
+2025-06-15 22:56:26,850 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
+2025-06-15 22:56:48,335 - INFO - --> 200 OK 22252b
+2025-06-15 22:56:48,351 - INFO - ✅ Permisos de productos: OK
+2025-06-15 22:56:48,351 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
+2025-06-15 22:56:48,627 - INFO - --> 200 OK 499b
+2025-06-15 22:56:48,627 - INFO - ✅ Ubicación configurada: OTANCAHUI 802 (ID: 77235355834)
+2025-06-15 22:56:48,627 - INFO - 🔗 Descargando CSV desde URL...
