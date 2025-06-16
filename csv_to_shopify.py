@@ -322,12 +322,20 @@ class SyscomShopifyImporterRobusto:
                             producto.images = [imagen]
                     except Exception:
                         pass  # Continuar sin imagen
-                
-                # Guardar con timeout implícito
+                  # Guardar con timeout implícito
                 if producto.save():
                     logging.info(f"✅ Creado: {titulo_corregido[:50]} - Stock: {stock}")
                     self.stats['productos_creados'] += 1
                     self.stats['errores_consecutivos'] = 0
+                    
+                    # Actualizar inventario después de crear el producto
+                    try:
+                        stock_int = int(stock)
+                        if stock_int > 0:
+                            self.actualizar_inventario_producto(producto, stock_int)
+                    except (ValueError, TypeError):
+                        logging.warning(f"⚠️ No se pudo convertir stock a entero: {stock}")
+                    
                     return producto
                 else:
                     # Manejar errores específicos
@@ -360,6 +368,67 @@ class SyscomShopifyImporterRobusto:
         self.stats['productos_con_error'] += 1
         self.stats['errores_consecutivos'] += 1
         return None
+
+    def actualizar_inventario_producto(self, producto: shopify.Product, cantidad: int) -> bool:
+        """Actualizar inventario del producto después de crearlo"""
+        try:
+            if not self.location_id:
+                logging.warning("⚠️ No hay ubicación configurada para actualizar inventario")
+                return False
+            
+            # Obtener la primera variante del producto
+            if not producto.variants or len(producto.variants) == 0:
+                logging.warning(f"⚠️ Producto {producto.id} no tiene variantes")
+                return False
+            
+            variante = producto.variants[0]
+            variant_id = variante.id
+            
+            # Actualizar inventario usando la API REST directamente
+            headers = {
+                'X-Shopify-Access-Token': self.access_token,
+                'Content-Type': 'application/json'
+            }
+              # Primero, obtener el inventory_item_id
+            url_variant = f"https://{self.shop_name}/admin/api/2025-04/variants/{variant_id}.json"
+            response = self.session.get(url_variant, headers=headers, timeout=self.timeout)
+            
+            if response.status_code != 200:
+                logging.error(f"❌ Error obteniendo variante: {response.status_code}")
+                return False
+            
+            variant_data = response.json()
+            inventory_item_id = variant_data['variant']['inventory_item_id']
+            
+            # Pausa entre requests para evitar rate limiting
+            time.sleep(0.5)
+            
+            # Ahora actualizar el nivel de inventario
+            url_inventory = f"https://{self.shop_name}/admin/api/2025-04/inventory_levels/set.json"
+            
+            payload = {
+                "location_id": self.location_id,
+                "inventory_item_id": inventory_item_id,
+                "available": cantidad
+            }
+            
+            response = self.session.post(url_inventory, headers=headers, json=payload, timeout=self.timeout)
+            
+            if response.status_code in [200, 201]:
+                logging.info(f"✅ Inventario actualizado: {cantidad} unidades")
+                self.stats['inventario_actualizado'] += 1
+                # Pausa después de actualizar inventario exitosamente
+                time.sleep(0.3)
+                return True
+            else:
+                logging.error(f"❌ Error actualizando inventario: {response.status_code} - {response.text}")
+                self.stats['errores_inventario'] += 1
+                return False
+                
+        except Exception as e:
+            logging.error(f"❌ Error actualizando inventario: {e}")
+            self.stats['errores_inventario'] += 1
+            return False
 
     def importar_productos_automatico(self):
         """Importar todos los productos automáticamente"""
@@ -464,9 +533,11 @@ class SyscomShopifyImporterRobusto:
         if self.stats['tiempo_inicio'] and self.stats['tiempo_fin']:
             duracion = self.stats['tiempo_fin'] - self.stats['tiempo_inicio']
             print(f"⏰ Duración: {duracion}")
-        
+
         print(f"📋 Procesados: {self.stats['productos_procesados']:,}")
         print(f"✅ Creados: {self.stats['productos_creados']:,}")
+        print(f"📦 Inventario actualizado: {self.stats['inventario_actualizado']:,}")
+        print(f"❌ Errores inventario: {self.stats['errores_inventario']:,}")
         print(f"⏭️ Duplicados: {self.stats['productos_duplicados']:,}")
         print(f"❌ Errores: {self.stats['productos_con_error']:,}")
         print(f"⏰ Timeouts: {self.stats['errores_timeout']:,}")
