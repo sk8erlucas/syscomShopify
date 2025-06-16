@@ -1055,3 +1055,5 @@
 2025-06-15 23:46:45,657 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDMCS-EG2-WB%28B%29
 2025-06-15 23:46:45,940 - INFO - --> 200 OK 15b
 2025-06-15 23:46:45,950 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-15 23:46:48,081 - INFO - --> 201 Created 19033b
+2025-06-15 23:46:48,082 - INFO - ✅ Creado: (AX PRO) Contacto Magnético Inalámbrico Slim / Uso - Stock: 3.0
