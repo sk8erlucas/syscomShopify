@@ -1044,3 +1044,14 @@
 2025-06-15 23:46:39,415 - INFO - ✅ Ubicación configurada: OTANCAHUI 802 (ID: 77235355834)
 2025-06-15 23:46:39,416 - INFO - 🔗 Descargando CSV desde URL...
 2025-06-15 23:46:40,922 - INFO - 📁 Usando archivo local: ProductosHora.csv
+2025-06-15 23:46:43,028 - INFO - ✅ CSV parseado con latin-1: 23488 productos
+2025-06-15 23:46:43,042 - INFO - 📦 Productos con stock: 13233 de 23488
+2025-06-15 23:46:43,048 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AUFIT-SMART-Z-WAVE
+2025-06-15 23:46:43,359 - INFO - --> 200 OK 7338b
+2025-06-15 23:46:43,360 - INFO - ⏭️ Duplicado saltado: AUFIT-SMART-Z-WAVE
+2025-06-15 23:46:44,361 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=VOUCHERAUT
+2025-06-15 23:46:44,651 - INFO - --> 200 OK 4665b
+2025-06-15 23:46:44,655 - INFO - ⏭️ Duplicado saltado: VOUCHERAUT
+2025-06-15 23:46:45,657 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PDMCS-EG2-WB%28B%29
+2025-06-15 23:46:45,940 - INFO - --> 200 OK 15b
+2025-06-15 23:46:45,950 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
