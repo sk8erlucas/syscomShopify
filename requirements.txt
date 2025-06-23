@@ -3,3 +3,4 @@ pandas==2.3.0
 shopifyapi==12.7.0
 python-dotenv==1.1.0
 pytest==8.4.0
+pyinstaller==6.3.0

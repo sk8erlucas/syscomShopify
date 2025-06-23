@@ -443,8 +443,7 @@ class SyscomShopifyImporterRobusto:
         if not permisos.get('products_write', False):
             print("❌ Sin permisos para crear productos")
             return
-        
-        # Obtener y procesar CSV
+          # Obtener y procesar CSV
         archivo_csv = self.descargar_csv()
         if not archivo_csv:
             print("❌ No se pudo obtener CSV")
@@ -460,6 +459,10 @@ class SyscomShopifyImporterRobusto:
             print("❌ No hay productos con stock")
             return
         
+        # Randomizar el orden de los productos para evitar patrones predecibles
+        random.shuffle(productos_con_stock)
+        print(f"🎲 Orden de productos randomizado")
+
         # Mostrar estadísticas e iniciar
         print(f"\n📊 ESTADÍSTICAS")
         print(f"   📋 Total productos: {len(productos):,}")
