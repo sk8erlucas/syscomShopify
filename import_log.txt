@@ -1888,3 +1888,476 @@
 2025-06-16 21:11:22,594 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=EL560KITSYS134
 2025-06-16 21:11:22,930 - INFO - --> 200 OK 15b
 2025-06-16 21:11:22,934 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:20:23,504 - INFO - ✅ API de Shopify configurada correctamente
+2025-06-23 16:20:23,505 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
+2025-06-23 16:20:23,968 - INFO - --> 200 OK 1560b
+2025-06-23 16:20:23,970 - INFO - ✅ Tienda conectada: Sepacsye
+2025-06-23 16:20:23,971 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
+2025-06-23 16:20:24,272 - INFO - --> 200 OK 15b
+2025-06-23 16:20:24,273 - INFO - ✅ Permisos de productos: OK
+2025-06-23 16:20:24,274 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
+2025-06-23 16:20:24,571 - INFO - --> 200 OK 499b
+2025-06-23 16:20:24,572 - INFO - ✅ Ubicación configurada: OTANCAHUI 802 (ID: 77235355834)
+2025-06-23 16:20:24,573 - INFO - 🔗 Descargando CSV desde URL...
+2025-06-23 16:20:51,787 - WARNING - ⚠️ Error descargando CSV: HTTPSConnectionPool(host='www.syscom.mx', port=443): Read timed out.
+2025-06-23 16:20:51,788 - INFO - 📁 Usando archivo local: ProductosHora.csv
+2025-06-23 16:20:53,678 - INFO - ✅ CSV parseado con latin-1: 23488 productos
+2025-06-23 16:20:53,688 - INFO - 📦 Productos con stock: 13233 de 23488
+2025-06-23 16:20:53,702 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=ENGAGE-40-MONO-UC
+2025-06-23 16:21:15,071 - INFO - --> 200 OK 15b
+2025-06-23 16:21:15,073 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:21:38,630 - INFO - --> 201 Created 12192b
+2025-06-23 16:21:38,653 - INFO - ✅ Creado: Jabra Engage 40 Mono UC profesional digital con co - Stock: 100.0
+2025-06-23 16:21:49,883 - INFO - ✅ Inventario actualizado: 100 unidades
+2025-06-23 16:21:50,184 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:22:01,186 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=JALP-AC-C01
+2025-06-23 16:22:02,787 - INFO - --> 200 OK 15b
+2025-06-23 16:22:02,787 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:22:05,514 - INFO - --> 201 Created 4439b
+2025-06-23 16:22:05,516 - INFO - ✅ Creado: Brazo de Aluminio para Luminario Publico / Para in - Stock: 200.0
+2025-06-23 16:22:06,594 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:22:06,894 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:22:17,899 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=EFD-350EB
+2025-06-23 16:22:18,261 - INFO - --> 200 OK 15b
+2025-06-23 16:22:18,264 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:22:20,849 - INFO - --> 201 Created 20189b
+2025-06-23 16:22:20,851 - INFO - ✅ Creado: Batería de Litio LFP Inteligente de 2048Wh para Au - Stock: 8.0
+2025-06-23 16:22:21,883 - INFO - ✅ Inventario actualizado: 8 unidades
+2025-06-23 16:22:22,183 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:22:33,185 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=WIMC101G
+2025-06-23 16:22:33,527 - INFO - --> 200 OK 15b
+2025-06-23 16:22:33,529 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:22:35,874 - INFO - --> 201 Created 6170b
+2025-06-23 16:22:35,875 - INFO - ✅ Creado: Convertidor de medios / Hasta 25 Km / 1 puerto SC/ - Stock: 200.0
+2025-06-23 16:22:36,939 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:22:37,240 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:22:48,241 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DHP487SYX2
+2025-06-23 16:22:57,471 - INFO - --> 200 OK 15b
+2025-06-23 16:22:57,472 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:23:00,126 - INFO - --> 201 Created 4603b
+2025-06-23 16:23:00,128 - INFO - ✅ Creado: Rotomartillo/Taladro Inalámbrico SIN CARBONES, Bro - Stock: 62.0
+2025-06-23 16:23:01,267 - INFO - ✅ Inventario actualizado: 62 unidades
+2025-06-23 16:23:01,575 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:23:11,576 - INFO - 🕐 Pausa de 1 minuto después de 5 productos creados...
+2025-06-23 16:24:12,616 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LP-PSLIM-5WH
+2025-06-23 16:24:12,932 - INFO - --> 200 OK 15b
+2025-06-23 16:24:12,933 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:24:15,355 - INFO - --> 201 Created 4553b
+2025-06-23 16:24:15,360 - INFO - ✅ Creado: Mini Patch Cord Cat6 Ultra Slim 5 m Blanco â Ahorr - Stock: 200.0
+2025-06-23 16:24:16,493 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:24:16,794 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:24:27,796 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AC-ELOCK
+2025-06-23 16:24:29,875 - INFO - --> 200 OK 15b
+2025-06-23 16:24:29,882 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:24:30,746 - INFO - --> 201 Created 1498b
+2025-06-23 16:24:30,747 - INFO - ✅ Creado: Tarjeta de refaccion / para cerradura / motores de - Stock: 200.0
+2025-06-23 16:24:31,834 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:24:32,136 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:24:43,234 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=1603-165
+2025-06-23 16:24:43,568 - INFO - --> 200 OK 15b
+2025-06-23 16:24:43,569 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:24:47,098 - INFO - --> 201 Created 3054b
+2025-06-23 16:24:47,102 - INFO - ✅ Creado: Picos poncha llantas para barrera DKS 1603-180 / S - Stock: 28.0
+2025-06-23 16:24:48,174 - INFO - ✅ Inventario actualizado: 28 unidades
+2025-06-23 16:24:48,475 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:24:59,477 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=KVM-210-08M
+2025-06-23 16:25:06,939 - INFO - --> 200 OK 15b
+2025-06-23 16:25:06,940 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:25:10,227 - INFO - --> 201 Created 21890b
+2025-06-23 16:25:10,228 - INFO - ✅ Creado: Switch KVM con Monitor de 17"con Teclado y Trackpa - Stock: 15.0
+2025-06-23 16:25:11,295 - INFO - ✅ Inventario actualizado: 15 unidades
+2025-06-23 16:25:11,595 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:25:22,597 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SP96
+2025-06-23 16:25:22,879 - INFO - --> 200 OK 15b
+2025-06-23 16:25:22,880 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:25:25,585 - INFO - --> 201 Created 10273b
+2025-06-23 16:25:25,586 - INFO - ✅ Creado: Barra de luces de 48", 96 LED, ámbar, ideal para e - Stock: 27.0
+2025-06-23 16:25:26,682 - INFO - ✅ Inventario actualizado: 27 unidades
+2025-06-23 16:25:26,984 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:25:36,985 - INFO - 🕐 Pausa de 1 minuto después de 10 productos creados...
+2025-06-23 16:26:39,988 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MHS513
+2025-06-23 16:26:40,744 - INFO - --> 200 OK 15b
+2025-06-23 16:26:40,745 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:26:43,627 - INFO - --> 201 Created 4942b
+2025-06-23 16:26:43,628 - INFO - ✅ Creado: (ZWAVE) Interruptor On/Off panel táctil touch inal - Stock: 109.0
+2025-06-23 16:26:44,746 - INFO - ✅ Inventario actualizado: 109 unidades
+2025-06-23 16:26:45,047 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:26:56,052 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=XBS-R06
+2025-06-23 16:26:56,380 - INFO - --> 200 OK 15b
+2025-06-23 16:26:56,380 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:26:58,440 - INFO - --> 201 Created 3064b
+2025-06-23 16:26:58,441 - INFO - ✅ Creado: Cremallera de Acero Para Puertas Corredizas / Modu - Stock: 200.0
+2025-06-23 16:26:59,561 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:26:59,861 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:27:10,863 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=IDS-7208HUHI-M1%2FA%2FXT
+2025-06-23 16:27:11,153 - INFO - --> 200 OK 15b
+2025-06-23 16:27:11,154 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:27:13,846 - INFO - --> 201 Created 14628b
+2025-06-23 16:27:13,847 - INFO - ✅ Creado: DVR 8 Canales TURBOHD + 8 Canales IP / 8 Megapixel - Stock: 200.0
+2025-06-23 16:27:14,980 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:27:15,280 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:27:26,282 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRSTHN4BSW
+2025-06-23 16:27:26,603 - INFO - --> 200 OK 15b
+2025-06-23 16:27:26,607 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:27:29,129 - INFO - --> 201 Created 3099b
+2025-06-23 16:27:29,132 - INFO - ✅ Creado: (RadioRa3) Botonera Sunnata Blanco 3 escenas y 2 b - Stock: 21.0
+2025-06-23 16:27:30,227 - INFO - ✅ Inventario actualizado: 21 unidades
+2025-06-23 16:27:30,528 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:27:41,533 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MC110CS
+2025-06-23 16:27:41,934 - INFO - --> 200 OK 15b
+2025-06-23 16:27:41,935 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:27:44,369 - INFO - --> 201 Created 5988b
+2025-06-23 16:27:44,370 - INFO - ✅ Creado: Convertidor Fibra Ãptica Monomodo / 1 Puerto RJ45  - Stock: 200.0
+2025-06-23 16:27:45,628 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:27:45,928 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:27:55,929 - INFO - 🕐 Pausa de 1 minuto después de 15 productos creados...
+2025-06-23 16:28:56,932 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=314-445
+2025-06-23 16:29:00,230 - INFO - --> 200 OK 15b
+2025-06-23 16:29:00,231 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:29:02,568 - INFO - --> 201 Created 3724b
+2025-06-23 16:29:02,571 - INFO - ✅ Creado: Antena Direccional de Banda Ancha de Alto Desempeñ - Stock: 7.0
+2025-06-23 16:29:03,694 - INFO - ✅ Inventario actualizado: 7 unidades
+2025-06-23 16:29:03,995 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:29:14,996 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=TEK-100-EI
+2025-06-23 16:29:22,316 - INFO - --> 200 OK 15b
+2025-06-23 16:29:22,317 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:29:24,551 - INFO - --> 201 Created 10850b
+2025-06-23 16:29:24,552 - INFO - ✅ Creado: Esquinero interior en color blanco de PVC auto ext - Stock: 87.0
+2025-06-23 16:29:25,661 - INFO - ✅ Inventario actualizado: 87 unidades
+2025-06-23 16:29:25,962 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:29:36,963 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=H7725B2006
+2025-06-23 16:29:37,277 - INFO - --> 200 OK 15b
+2025-06-23 16:29:37,278 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:29:39,776 - INFO - --> 201 Created 4770b
+2025-06-23 16:29:39,778 - INFO - ✅ Creado: Detector de humedad y temperatura para ductos , te - Stock: 3.0
+2025-06-23 16:29:40,815 - INFO - ✅ Inventario actualizado: 3 unidades
+2025-06-23 16:29:41,116 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:29:52,135 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=KTZ-45G-027
+2025-06-23 16:29:52,432 - INFO - --> 200 OK 15b
+2025-06-23 16:29:52,434 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:29:54,496 - INFO - --> 201 Created 44085b
+2025-06-23 16:29:54,497 - INFO - ✅ Creado: Kit de Torre Arriostrada de Piso de 27 m Altura co - Stock: 7.1667
+2025-06-23 16:29:55,521 - INFO - ✅ Inventario actualizado: 7 unidades
+2025-06-23 16:29:55,824 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:30:06,825 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=X7950-A
+2025-06-23 16:30:14,151 - INFO - --> 200 OK 15b
+2025-06-23 16:30:14,152 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:30:16,947 - INFO - --> 201 Created 3566b
+2025-06-23 16:30:16,950 - INFO - ✅ Creado: Burbuja Ultra Brillante Serie X79 color Ãmbar - Stock: 57.0
+2025-06-23 16:30:18,022 - INFO - ✅ Inventario actualizado: 57 unidades
+2025-06-23 16:30:18,334 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:30:28,335 - INFO - 🕐 Pausa de 1 minuto después de 20 productos creados...
+2025-06-23 16:31:31,337 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MG-51-102EZ
+2025-06-23 16:31:31,642 - INFO - --> 200 OK 15b
+2025-06-23 16:31:31,643 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:31:33,504 - INFO - --> 201 Created 2960b
+2025-06-23 16:31:33,509 - INFO - ✅ Creado: Araña de fijación de cuatro usos, con acabado Elec - Stock: 200.0
+2025-06-23 16:31:34,597 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:31:34,898 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:31:45,899 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=950-5080-254
+2025-06-23 16:31:47,229 - INFO - --> 200 OK 15b
+2025-06-23 16:31:47,230 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:31:49,759 - INFO - --> 201 Created 2963b
+2025-06-23 16:31:49,761 - INFO - ✅ Creado: 1 Tornillo Allen Milimétrico de Acero Inoxidable M - Stock: 200.0
+2025-06-23 16:31:50,896 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:31:51,197 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:32:02,199 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LP-SCJ-2X815
+2025-06-23 16:32:05,560 - INFO - --> 200 OK 15b
+2025-06-23 16:32:05,561 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:32:08,138 - INFO - --> 201 Created 4914b
+2025-06-23 16:32:08,139 - INFO - ✅ Creado: Herraje de Suspensión Tipo J 2X 8-15 mm - Stock: 200.0
+2025-06-23 16:32:09,225 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:32:09,549 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:32:20,554 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=998-022-003
+2025-06-23 16:32:20,839 - INFO - --> 200 OK 15b
+2025-06-23 16:32:20,844 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:32:23,267 - INFO - --> 201 Created 2518b
+2025-06-23 16:32:23,270 - INFO - ✅ Creado: Cilindro Para Calibración De Hidrogeno H2/Air, Bal - Stock: 10.0
+2025-06-23 16:32:24,328 - INFO - ✅ Inventario actualizado: 10 unidades
+2025-06-23 16:32:24,629 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:32:35,631 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SYS-PM-634
+2025-06-23 16:32:35,963 - INFO - --> 200 OK 15b
+2025-06-23 16:32:35,964 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:32:38,292 - INFO - --> 201 Created 3951b
+2025-06-23 16:32:38,296 - INFO - ✅ Creado: Tornillo - Pija Multiusos fosfatizada #6 x 3/4" /  - Stock: 200.0
+2025-06-23 16:32:39,464 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:32:39,765 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:32:49,766 - INFO - 🕐 Pausa de 1 minuto después de 25 productos creados...
+2025-06-23 16:33:50,767 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=ATR-14
+2025-06-23 16:33:51,182 - INFO - --> 200 OK 15b
+2025-06-23 16:33:51,183 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:33:53,218 - INFO - --> 201 Created 3024b
+2025-06-23 16:33:53,220 - INFO - ✅ Creado: Tarjeta de proximidad estándar, perforada (gruesa) - Stock: 200.0
+2025-06-23 16:33:54,281 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:33:54,582 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:34:05,584 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=CMC-PS-PS-L-3M
+2025-06-23 16:34:12,948 - INFO - --> 200 OK 15b
+2025-06-23 16:34:12,950 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:34:15,551 - INFO - --> 201 Created 7856b
+2025-06-23 16:34:15,553 - INFO - ✅ Creado: Cable de Audio | Plug 1/4 in a Plug 1/4 in Stereo  - Stock: 200.0
+2025-06-23 16:34:16,606 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:34:16,906 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:34:27,909 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=MSGK
+2025-06-23 16:34:29,215 - INFO - --> 200 OK 15b
+2025-06-23 16:34:29,216 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:34:31,654 - INFO - --> 201 Created 4067b
+2025-06-23 16:34:31,654 - INFO - ✅ Creado: Kit de Conexión a Tierra, Para Uso con Gabinetes M - Stock: 9.0
+2025-06-23 16:34:33,016 - INFO - ✅ Inventario actualizado: 9 unidades
+2025-06-23 16:34:33,317 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:34:44,318 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=WI-MC-111GP
+2025-06-23 16:34:46,651 - INFO - --> 200 OK 15b
+2025-06-23 16:34:46,652 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:37:36,936 - INFO - ✅ API de Shopify configurada correctamente
+2025-06-23 16:37:36,938 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/shop.json
+2025-06-23 16:37:37,307 - INFO - --> 200 OK 1560b
+2025-06-23 16:37:37,307 - INFO - ✅ Tienda conectada: Sepacsye
+2025-06-23 16:37:37,308 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?limit=1
+2025-06-23 16:37:37,669 - INFO - --> 200 OK 3104b
+2025-06-23 16:37:37,675 - INFO - ✅ Permisos de productos: OK
+2025-06-23 16:37:37,675 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/locations.json
+2025-06-23 16:37:38,029 - INFO - --> 200 OK 499b
+2025-06-23 16:37:38,030 - INFO - ✅ Ubicación configurada: OTANCAHUI 802 (ID: 77235355834)
+2025-06-23 16:37:38,030 - INFO - 🔗 Descargando CSV desde URL...
+2025-06-23 16:37:40,176 - INFO - 📁 Usando archivo local: ProductosHora.csv
+2025-06-23 16:37:42,209 - INFO - ✅ CSV parseado con latin-1: 23488 productos
+2025-06-23 16:37:42,222 - INFO - 📦 Productos con stock: 13233 de 23488
+2025-06-23 16:37:42,233 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=HUB-2923RT
+2025-06-23 16:37:42,506 - INFO - --> 200 OK 15b
+2025-06-23 16:37:42,507 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:37:44,966 - INFO - --> 201 Created 6424b
+2025-06-23 16:37:44,967 - INFO - ✅ Creado: Cople Compresión Hermético de Acero Galvanizado pa - Stock: 72.0
+2025-06-23 16:37:46,073 - INFO - ✅ Inventario actualizado: 72 unidades
+2025-06-23 16:37:46,374 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:37:57,376 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=HUB-837
+2025-06-23 16:37:57,667 - INFO - --> 200 OK 15b
+2025-06-23 16:37:57,670 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:38:00,249 - INFO - --> 201 Created 7200b
+2025-06-23 16:38:00,253 - INFO - ✅ Creado: Sobretapa Cuadrada Galvanizada de 4 11-16", realce - Stock: 168.0
+2025-06-23 16:38:01,291 - INFO - ✅ Inventario actualizado: 168 unidades
+2025-06-23 16:38:01,592 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:38:12,597 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=IDS-8116HQHI-M8%2FS%28S%29
+2025-06-23 16:38:12,926 - INFO - --> 200 OK 15b
+2025-06-23 16:38:12,928 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:38:15,243 - INFO - --> 201 Created 21041b
+2025-06-23 16:38:15,245 - INFO - ✅ Creado: DVR 16 Canales TurboHD + 8 Canales IP / 3K / 5 Meg - Stock: 7.0
+2025-06-23 16:38:16,322 - INFO - ✅ Inventario actualizado: 7 unidades
+2025-06-23 16:38:16,623 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:38:27,624 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=CH-TCH-7-63
+2025-06-23 16:38:42,969 - INFO - --> 200 OK 15b
+2025-06-23 16:38:42,970 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:38:44,772 - INFO - --> 201 Created 2317b
+2025-06-23 16:38:44,774 - INFO - ✅ Creado: Tornillo cabeza hexagonal de 5/16" x 2 1/2" - Stock: 96.0
+2025-06-23 16:38:45,833 - INFO - ✅ Inventario actualizado: 96 unidades
+2025-06-23 16:38:46,134 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:38:57,139 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=ED3704-RB
+2025-06-23 16:38:57,419 - INFO - --> 200 OK 15b
+2025-06-23 16:38:57,420 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:38:59,937 - INFO - --> 201 Created 6099b
+2025-06-23 16:38:59,938 - INFO - ✅ Creado: Luz perimetral, 4 LEDs Ultra Brillantes, color Roj - Stock: 31.0
+2025-06-23 16:39:01,002 - INFO - ✅ Inventario actualizado: 31 unidades
+2025-06-23 16:39:01,305 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:39:11,306 - INFO - 🕐 Pausa de 1 minuto después de 5 productos creados...
+2025-06-23 16:40:12,307 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=9A6L4-A5
+2025-06-23 16:40:12,610 - INFO - --> 200 OK 15b
+2025-06-23 16:40:12,611 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:40:15,102 - INFO - --> 201 Created 10038b
+2025-06-23 16:40:15,103 - INFO - ✅ Creado: Bobina de Cable Blindado F/UTP de 4 Pares, Z-MAX,  - Stock: 200.0
+2025-06-23 16:40:16,169 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:40:16,471 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:40:27,473 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=KTZ-30G-021P
+2025-06-23 16:40:48,822 - INFO - --> 200 OK 15b
+2025-06-23 16:40:48,825 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:41:12,564 - INFO - --> 201 Created 47382b
+2025-06-23 16:41:12,566 - INFO - ✅ Creado: Kit de Torre Arriostrada de Techo de 21 m con Tram - Stock: 6.9444
+2025-06-23 16:41:22,580 - ERROR - ❌ Error actualizando inventario: HTTPSConnectionPool(host='9s08ym-uc.myshopify.com', port=443): Read timed out. (read timeout=10)
+2025-06-23 16:41:22,582 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:41:33,593 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=XP2MDPB
+2025-06-23 16:41:33,976 - INFO - --> 200 OK 15b
+2025-06-23 16:41:33,979 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:41:37,008 - INFO - --> 201 Created 61493b
+2025-06-23 16:41:37,009 - INFO - ✅ Creado: Controlador de una puerta de uso en exterior, Con  - Stock: 81.0
+2025-06-23 16:41:38,188 - INFO - ✅ Inventario actualizado: 81 unidades
+2025-06-23 16:41:38,489 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:41:49,491 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=KIT-MASTER-45AB-V2
+2025-06-23 16:41:49,837 - INFO - --> 200 OK 15b
+2025-06-23 16:41:49,841 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:41:52,620 - INFO - --> 201 Created 26848b
+2025-06-23 16:41:52,623 - INFO - ✅ Creado: Kit de tierra física modelo TG45AB con Electrodo M - Stock: 123.5
+2025-06-23 16:41:53,701 - INFO - ✅ Inventario actualizado: 123 unidades
+2025-06-23 16:41:54,002 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:42:05,005 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SP5AW
+2025-06-23 16:42:05,355 - INFO - --> 200 OK 15b
+2025-06-23 16:42:05,356 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:42:09,002 - INFO - --> 201 Created 6294b
+2025-06-23 16:42:09,022 - INFO - ✅ Creado: Mini barra de 42 LED, ámbar/blanco, 15 Pulgadas, S - Stock: 8.0
+2025-06-23 16:42:10,095 - INFO - ✅ Inventario actualizado: 8 unidades
+2025-06-23 16:42:10,396 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:42:20,397 - INFO - 🕐 Pausa de 1 minuto después de 10 productos creados...
+2025-06-23 16:43:23,398 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PD3PCLWH
+2025-06-23 16:43:23,708 - INFO - --> 200 OK 15b
+2025-06-23 16:43:23,709 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:43:25,437 - INFO - --> 201 Created 3951b
+2025-06-23 16:43:25,438 - INFO - ✅ Creado: (Caseta Wireless) Adaptador inteligente para tomac - Stock: 1.0
+2025-06-23 16:43:26,483 - INFO - ✅ Inventario actualizado: 1 unidades
+2025-06-23 16:43:26,785 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:43:37,788 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SFABRAZADERA1P
+2025-06-23 16:43:38,128 - INFO - --> 200 OK 15b
+2025-06-23 16:43:38,142 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:43:40,716 - INFO - --> 201 Created 3434b
+2025-06-23 16:43:40,717 - INFO - ✅ Creado: Aislador de paso o esquina con abrazadera incluida - Stock: 200.0
+2025-06-23 16:43:41,767 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:43:42,068 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:43:53,069 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=SYS-122-269
+2025-06-23 16:43:53,342 - INFO - --> 200 OK 15b
+2025-06-23 16:43:53,345 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:43:55,836 - INFO - --> 201 Created 38199b
+2025-06-23 16:43:55,837 - INFO - ✅ Creado: Odómetro Manual 10,000 m / Doble Rueda de 6". - Stock: 11.0
+2025-06-23 16:43:56,912 - INFO - ✅ Inventario actualizado: 11 unidades
+2025-06-23 16:43:57,212 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:44:08,214 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-2CD2343G2-LI2U
+2025-06-23 16:44:08,490 - INFO - --> 200 OK 15b
+2025-06-23 16:44:08,491 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:44:10,799 - INFO - --> 201 Created 19797b
+2025-06-23 16:44:10,800 - INFO - ✅ Creado: [Dual Light + 2 Micrófonos Integrados] Turret IP 4 - Stock: 200.0
+2025-06-23 16:44:11,864 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:44:12,166 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:44:23,168 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PA1594
+2025-06-23 16:44:23,527 - INFO - --> 200 OK 15b
+2025-06-23 16:44:23,528 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:44:25,795 - INFO - --> 201 Created 7627b
+2025-06-23 16:44:25,797 - INFO - ✅ Creado: Tester Profesional para mapeo de cables de red/coa - Stock: 27.0
+2025-06-23 16:44:27,055 - INFO - ✅ Inventario actualizado: 27 unidades
+2025-06-23 16:44:27,355 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:44:37,356 - INFO - 🕐 Pausa de 1 minuto después de 15 productos creados...
+2025-06-23 16:45:38,359 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=OC-ADSS-12C-S100%2F4KM
+2025-06-23 16:45:38,764 - INFO - --> 200 OK 15b
+2025-06-23 16:45:38,766 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:45:42,197 - INFO - --> 201 Created 10452b
+2025-06-23 16:45:42,198 - INFO - ✅ Creado: Carrete de 4 km de Fibra Ãptica Aérea (ADSS) G.652 - Stock: 200.0
+2025-06-23 16:45:43,373 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:45:43,674 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:45:54,675 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AP-CORE-HD
+2025-06-23 16:45:55,036 - INFO - --> 200 OK 15b
+2025-06-23 16:45:55,042 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:45:55,807 - INFO - --> 201 Created 1737b
+2025-06-23 16:45:55,808 - INFO - ✅ Creado: Mecanismo central para torniquetes AccessPRO serie - Stock: 7.0
+2025-06-23 16:45:56,827 - INFO - ✅ Inventario actualizado: 7 unidades
+2025-06-23 16:45:57,128 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:46:08,129 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=WMPFSE
+2025-06-23 16:46:29,471 - INFO - --> 200 OK 15b
+2025-06-23 16:46:29,484 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:46:32,693 - INFO - --> 201 Created 4780b
+2025-06-23 16:46:32,694 - INFO - ✅ Creado: Organizador de Cables Horizontal PatchLink, Sencil - Stock: 200.0
+2025-06-23 16:46:33,734 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:46:34,035 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:46:45,059 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=EWMW242430
+2025-06-23 16:46:45,342 - INFO - --> 200 OK 15b
+2025-06-23 16:46:45,343 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:46:47,986 - INFO - --> 201 Created 10437b
+2025-06-23 16:46:47,990 - INFO - ✅ Creado: Gabinete AccessPlus de Montaje en Pared de 19in, R - Stock: 1.0
+2025-06-23 16:46:49,065 - INFO - ✅ Inventario actualizado: 1 unidades
+2025-06-23 16:46:49,366 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:47:00,367 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=UTP28X12BU
+2025-06-23 16:47:00,690 - INFO - --> 200 OK 15b
+2025-06-23 16:47:00,691 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:47:03,062 - INFO - --> 201 Created 4430b
+2025-06-23 16:47:03,064 - INFO - ✅ Creado: Cable de Parcheo UTP Cat6A, CM/LSZH, Diámetro Redu - Stock: 5.0
+2025-06-23 16:47:04,170 - INFO - ✅ Inventario actualizado: 5 unidades
+2025-06-23 16:47:04,474 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:47:14,476 - INFO - 🕐 Pausa de 1 minuto después de 20 productos creados...
+2025-06-23 16:48:17,478 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=40363
+2025-06-23 16:48:32,808 - INFO - --> 200 OK 15b
+2025-06-23 16:48:32,809 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:48:35,175 - INFO - --> 201 Created 3262b
+2025-06-23 16:48:35,177 - INFO - ✅ Creado: Convertidor DisplayPort a HDMI 4K| 3D | HDR | Blin - Stock: 200.0
+2025-06-23 16:48:36,343 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:48:36,644 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:48:47,676 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=TL-SG1048
+2025-06-23 16:48:47,989 - INFO - --> 200 OK 15b
+2025-06-23 16:48:47,992 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:48:50,226 - INFO - --> 201 Created 5847b
+2025-06-23 16:48:50,230 - INFO - ✅ Creado: Switch Gigabit no administrable de 48 puertos 10/1 - Stock: 198.0
+2025-06-23 16:48:51,288 - INFO - ✅ Inventario actualizado: 198 unidades
+2025-06-23 16:48:51,589 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:49:02,594 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=OLB-0306C
+2025-06-23 16:49:02,932 - INFO - --> 200 OK 15b
+2025-06-23 16:49:02,933 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:49:05,189 - INFO - --> 201 Created 14910b
+2025-06-23 16:49:05,193 - INFO - ✅ Creado: Caja oval roscada tipo LB de 2" (50.8 mm) Incluye  - Stock: 24.0
+2025-06-23 16:49:06,263 - INFO - ✅ Inventario actualizado: 24 unidades
+2025-06-23 16:49:06,564 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:49:17,567 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=DS-PWA48-FULL-K%28R%29
+2025-06-23 16:49:17,944 - INFO - --> 200 OK 15b
+2025-06-23 16:49:17,947 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:49:20,583 - INFO - --> 201 Created 43791b
+2025-06-23 16:49:20,587 - INFO - ✅ Creado: (AX PRO) KIT de Alarma AX PRO / Incluye: 1 Hub / 2 - Stock: 200.0
+2025-06-23 16:49:21,667 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:49:21,968 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:49:32,971 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=A58-T633L
+2025-06-23 16:49:33,282 - INFO - --> 200 OK 15b
+2025-06-23 16:49:33,283 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:49:35,963 - INFO - --> 201 Created 2534b
+2025-06-23 16:49:35,966 - INFO - ✅ Creado: Micrófono Compatible Con Equipos GPS T633L y T399L - Stock: 198.0
+2025-06-23 16:49:37,059 - INFO - ✅ Inventario actualizado: 198 unidades
+2025-06-23 16:49:37,359 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:49:47,366 - INFO - 🕐 Pausa de 1 minuto después de 25 productos creados...
+2025-06-23 16:50:48,369 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=RRD8ANSWH
+2025-06-23 16:50:48,656 - INFO - --> 200 OK 15b
+2025-06-23 16:50:48,656 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:50:50,860 - INFO - --> 201 Created 6404b
+2025-06-23 16:50:50,864 - INFO - ✅ Creado: (RadioRA2) Interruptor Inteligente On/Off, requier - Stock: 139.0
+2025-06-23 16:50:51,980 - INFO - ✅ Inventario actualizado: 139 unidades
+2025-06-23 16:50:52,281 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:51:03,284 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=AE-IFC00
+2025-06-23 16:51:03,588 - INFO - --> 200 OK 15b
+2025-06-23 16:51:03,590 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:51:06,116 - INFO - --> 201 Created 4458b
+2025-06-23 16:51:06,119 - INFO - ✅ Creado: Botón de Alarma Compatible con Dashcam AE-DI5042-G - Stock: 7.0
+2025-06-23 16:51:07,155 - INFO - ✅ Inventario actualizado: 7 unidades
+2025-06-23 16:51:07,456 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:51:18,459 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=PZICE
+2025-06-23 16:51:18,819 - INFO - --> 200 OK 15b
+2025-06-23 16:51:18,820 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:51:21,101 - INFO - --> 201 Created 4571b
+2025-06-23 16:51:21,104 - INFO - ✅ Creado: Gabinete PanZone Premium, de Montaje en Techo, Con - Stock: 19.0
+2025-06-23 16:51:22,344 - INFO - ✅ Inventario actualizado: 19 unidades
+2025-06-23 16:51:22,646 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:51:33,648 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=LP-FO-SCU-SCA-01
+2025-06-23 16:51:33,973 - INFO - --> 200 OK 15b
+2025-06-23 16:51:33,974 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:51:36,665 - INFO - --> 201 Created 3395b
+2025-06-23 16:51:36,669 - INFO - ✅ Creado: Jumper de Fibra Ãptica Monomodo SC/UPC SC/APC Simp - Stock: 200.0
+2025-06-23 16:51:37,825 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:51:38,126 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:51:49,129 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=USW-24-POE
+2025-06-23 16:51:49,450 - INFO - --> 200 OK 15b
+2025-06-23 16:51:49,454 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:51:51,855 - INFO - --> 201 Created 15892b
+2025-06-23 16:51:51,859 - INFO - ✅ Creado: UniFi Switch USW-24-POE Gen2, Capa 2 de 24 puertos - Stock: 200.0
+2025-06-23 16:51:52,959 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:51:53,260 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:52:03,262 - INFO - 🕐 Pausa de 1 minuto después de 30 productos creados...
+2025-06-23 16:53:06,265 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=CFPWR4CIG
+2025-06-23 16:53:06,611 - INFO - --> 200 OK 15b
+2025-06-23 16:53:06,613 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:53:09,365 - INFO - --> 201 Created 3254b
+2025-06-23 16:53:09,367 - INFO - ✅ Creado: Placa de Pared Vertical, Resistente al Agua con Pr - Stock: 200.0
+2025-06-23 16:53:10,444 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:53:10,745 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:53:21,748 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=ABP-I042
+2025-06-23 16:53:22,084 - INFO - --> 200 OK 15b
+2025-06-23 16:53:22,086 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:53:24,565 - INFO - --> 201 Created 5401b
+2025-06-23 16:53:24,569 - INFO - ✅ Creado: Abrazadera tipo Uña Para Conduit de 1 1/4" (31.75  - Stock: 200.0
+2025-06-23 16:53:25,670 - INFO - ✅ Inventario actualizado: 200 unidades
+2025-06-23 16:53:25,971 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:53:36,974 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=M3RTK
+2025-06-23 16:53:37,376 - INFO - --> 200 OK 15b
+2025-06-23 16:53:37,379 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json
+2025-06-23 16:53:40,013 - INFO - --> 201 Created 5745b
+2025-06-23 16:53:40,016 - INFO - ✅ Creado: Módulo RTK Para DJI MAVIC3 ENTERPRISE - Stock: 10.0
+2025-06-23 16:53:41,092 - INFO - ✅ Inventario actualizado: 10 unidades
+2025-06-23 16:53:41,393 - INFO - 😴 Pausa de 10s después de publicar producto...
+2025-06-23 16:53:52,395 - INFO - GET https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json?handle=FMC125
+2025-06-23 16:53:52,707 - INFO - --> 200 OK 15b
+2025-06-23 16:53:52,715 - INFO - POST https://9s08ym-uc.myshopify.com/admin/api/2025-04/products.json

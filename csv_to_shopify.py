@@ -310,8 +310,7 @@ class SyscomShopifyImporterRobusto:
                 variante.inventory_policy = "deny"
                 
                 producto.variants = [variante]
-                
-                # Imagen (opcional, puede fallar sin detener el proceso)
+                  # Imagen (opcional, puede fallar sin detener el proceso)
                 imagen_url = producto_data.get('Image Src', '')
                 if imagen_url and imagen_url.startswith('http'):
                     try:
@@ -322,19 +321,23 @@ class SyscomShopifyImporterRobusto:
                             producto.images = [imagen]
                     except Exception:
                         pass  # Continuar sin imagen
-                  # Guardar con timeout implícito
+                
+                # Guardar con timeout implícito
                 if producto.save():
                     logging.info(f"✅ Creado: {titulo_corregido[:50]} - Stock: {stock}")
                     self.stats['productos_creados'] += 1
                     self.stats['errores_consecutivos'] = 0
-                    
-                    # Actualizar inventario después de crear el producto
+                      # Actualizar inventario después de crear el producto
                     try:
                         stock_int = int(stock)
                         if stock_int > 0:
                             self.actualizar_inventario_producto(producto, stock_int)
                     except (ValueError, TypeError):
                         logging.warning(f"⚠️ No se pudo convertir stock a entero: {stock}")
+                    
+                    # Pausa de 10 segundos después de publicar cada producto
+                    logging.info("😴 Pausa de 10s después de publicar producto...")
+                    time.sleep(10)
                     
                     return producto
                 else:
@@ -383,13 +386,13 @@ class SyscomShopifyImporterRobusto:
             
             variante = producto.variants[0]
             variant_id = variante.id
-            
-            # Actualizar inventario usando la API REST directamente
+              # Actualizar inventario usando la API REST directamente
             headers = {
                 'X-Shopify-Access-Token': self.access_token,
                 'Content-Type': 'application/json'
             }
-              # Primero, obtener el inventory_item_id
+            
+            # Primero, obtener el inventory_item_id
             url_variant = f"https://{self.shop_name}/admin/api/2025-04/variants/{variant_id}.json"
             response = self.session.get(url_variant, headers=headers, timeout=self.timeout)
             
@@ -435,15 +438,15 @@ class SyscomShopifyImporterRobusto:
         print("\n" + "="*60)
         print("🛒 SYSCOM TO SHOPIFY - IMPORTADOR AUTOMÁTICO v2.3")
         print("="*60)
-        
-        # Verificar permisos
+          # Verificar permisos
         print("\n🔍 Verificando configuración...")
         permisos = self.verificar_permisos_shopify()
         
         if not permisos.get('products_write', False):
             print("❌ Sin permisos para crear productos")
             return
-          # Obtener y procesar CSV
+        
+        # Obtener y procesar CSV
         archivo_csv = self.descargar_csv()
         if not archivo_csv:
             print("❌ No se pudo obtener CSV")
@@ -483,7 +486,6 @@ class SyscomShopifyImporterRobusto:
             total_lotes = (len(productos_con_stock) + self.max_products_per_batch - 1) // self.max_products_per_batch
             
             print(f"\n📦 Lote {lote_num}/{total_lotes}")
-            
             for j, producto_data in enumerate(lote):
                 # Manejar errores consecutivos
                 self.manejar_errores_consecutivos()
@@ -498,6 +500,13 @@ class SyscomShopifyImporterRobusto:
                     producto = self.crear_producto_shopify_ultra_robusto(producto_data)
                     if producto:
                         self.stats['errores_consecutivos'] = 0
+                        
+                        # Pausa de 1 minuto cada 5 productos creados exitosamente
+                        if self.stats['productos_creados'] % 5 == 0:
+                            print(f"🕐 Pausa de 1 minuto después de {self.stats['productos_creados']} productos creados...")
+                            logging.info(f"🕐 Pausa de 1 minuto después de {self.stats['productos_creados']} productos creados...")
+                            time.sleep(60)  # 1 minuto
+                            
                 except Exception as e:
                     logging.error(f"❌ Error crítico: {e}")
                     self.stats['productos_con_error'] += 1
