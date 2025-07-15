@@ -1,0 +1,30 @@
+2025-07-07 19:59:58,344 - INFO - 📁 Directorio creado: csv_shopify_split
+2025-07-07 19:59:58,345 - INFO - 🔗 Descargando CSV desde URL (intento 1)...
+2025-07-07 20:00:00,454 - INFO - ✅ CSV descargado: productos_original_20250707_200000.csv
+2025-07-07 20:00:00,457 - INFO - 📋 Columnas detectadas: ['<!DOCTYPE html>']...
+2025-07-07 20:00:00,461 - WARNING - ⚠️ No parece formato Shopify con utf-8
+2025-07-07 20:00:00,465 - INFO - 📋 Columnas detectadas: ['<!DOCTYPE html>']...
+2025-07-07 20:00:00,466 - WARNING - ⚠️ No parece formato Shopify con latin-1
+2025-07-07 20:00:00,468 - INFO - 📋 Columnas detectadas: ['<!DOCTYPE html>']...
+2025-07-07 20:00:00,473 - WARNING - ⚠️ No parece formato Shopify con cp1252
+2025-07-07 20:00:00,474 - INFO - 📋 Columnas detectadas: ['<!DOCTYPE html>']...
+2025-07-07 20:00:00,474 - WARNING - ⚠️ No parece formato Shopify con iso-8859-1
+2025-07-07 20:00:00,475 - ERROR - ❌ No se pudo parsear el CSV con ningún encoding
+2025-07-07 20:06:18,298 - INFO - 📁 Directorio creado: csv_shopify_split
+2025-07-07 20:06:18,300 - INFO - 🔗 Descargando CSV desde URL (intento 1)...
+2025-07-07 20:06:20,534 - WARNING - ⚠️ Servidor devolvió HTML en lugar de CSV (restricción de descarga)
+2025-07-07 20:06:20,535 - INFO - 📋 Parece que hay límite de 1 descarga por hora
+2025-07-07 20:06:20,536 - INFO - 📁 Usando archivo local: ProductosHora.csv
+2025-07-07 20:06:20,537 - INFO - 💡 Usando ProductosHora.csv - si necesitas datos actualizados, espera 1 hora para nueva descarga
+2025-07-07 20:06:20,541 - INFO - 📋 Columnas detectadas (utf-8): ['Handle', 'Title', 'Body (HTML)', 'Vendor', 'Product Category']...
+2025-07-07 20:06:20,684 - INFO - 📋 Columnas detectadas (latin-1): ['Handle', 'Title', 'Body (HTML)', 'Vendor', 'Product Category']...
+2025-07-07 20:06:22,292 - INFO - ✅ CSV Shopify parseado con latin-1: 23488 productos
+2025-07-07 20:06:22,321 - INFO - 📦 Productos filtrados - Con stock: 13233, Sin stock: 10255
+2025-07-07 20:06:23,164 - INFO - ✅ Archivo 1/7: shopify_productos_parte_001_de_007.csv (2000 productos)
+2025-07-07 20:06:23,873 - INFO - ✅ Archivo 2/7: shopify_productos_parte_002_de_007.csv (2000 productos)
+2025-07-07 20:06:24,707 - INFO - ✅ Archivo 3/7: shopify_productos_parte_003_de_007.csv (2000 productos)
+2025-07-07 20:06:25,915 - INFO - ✅ Archivo 4/7: shopify_productos_parte_004_de_007.csv (2000 productos)
+2025-07-07 20:06:27,206 - INFO - ✅ Archivo 5/7: shopify_productos_parte_005_de_007.csv (2000 productos)
+2025-07-07 20:06:28,338 - INFO - ✅ Archivo 6/7: shopify_productos_parte_006_de_007.csv (2000 productos)
+2025-07-07 20:06:29,060 - INFO - ✅ Archivo 7/7: shopify_productos_parte_007_de_007.csv (1233 productos)
+2025-07-07 20:06:29,062 - INFO - 📋 Instrucciones creadas: csv_shopify_split\INSTRUCCIONES_IMPORTACION.txt
