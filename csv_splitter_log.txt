@@ -1,0 +1,31 @@
+2025-07-15 15:54:06,239 - INFO - 🔗 Descargando CSV desde URL (intento 1)...
+2025-07-15 15:57:19,828 - INFO - 📁 Backup creado: ProductosHora_backup_20250715_155719.csv
+2025-07-15 15:57:20,593 - INFO - ✅ CSV descargado y actualizado: ProductosHora.csv
+2025-07-15 15:57:20,643 - INFO - 📋 Columnas detectadas (utf-8): ['Handle', 'Title', 'Body (HTML)', 'Vendor', 'Product Category']...
+2025-07-15 15:57:22,946 - INFO - ✅ CSV Shopify parseado con utf-8: 23602 productos
+2025-07-15 15:57:22,983 - INFO - 📦 Productos filtrados - Con stock: 13092, Sin stock: 10510
+2025-07-15 15:57:24,103 - INFO - ✅ Archivo 1/7: shopify_productos_parte_001_de_007.csv (2000 productos)
+2025-07-15 15:57:24,966 - INFO - ✅ Archivo 2/7: shopify_productos_parte_002_de_007.csv (2000 productos)
+2025-07-15 15:57:26,293 - INFO - ✅ Archivo 3/7: shopify_productos_parte_003_de_007.csv (2000 productos)
+2025-07-15 15:57:27,987 - INFO - ✅ Archivo 4/7: shopify_productos_parte_004_de_007.csv (2000 productos)
+2025-07-15 15:57:29,685 - INFO - ✅ Archivo 5/7: shopify_productos_parte_005_de_007.csv (2000 productos)
+2025-07-15 15:57:31,263 - INFO - ✅ Archivo 6/7: shopify_productos_parte_006_de_007.csv (2000 productos)
+2025-07-15 15:57:32,326 - INFO - ✅ Archivo 7/7: shopify_productos_parte_007_de_007.csv (1092 productos)
+2025-07-15 15:57:32,327 - INFO - 📋 Instrucciones creadas: csv_shopify_split\INSTRUCCIONES_IMPORTACION.txt
+2025-07-15 15:59:38,329 - INFO - 🔗 Descargando CSV desde URL (intento 1)...
+2025-07-15 15:59:40,388 - WARNING - ⚠️ Servidor devolvió HTML en lugar de CSV (restricción de descarga)
+2025-07-15 15:59:40,389 - INFO - 📋 Parece que hay límite de 1 descarga por hora
+2025-07-15 15:59:40,392 - INFO - 📁 Usando archivo local: ProductosHora.csv
+2025-07-15 15:59:40,393 - INFO - 💡 Usando ProductosHora.csv - si necesitas datos actualizados, espera 1 hora para nueva descarga
+2025-07-15 15:59:40,398 - INFO - 📋 Columnas detectadas (utf-8): ['Handle', 'Title', 'Body (HTML)', 'Vendor', 'Product Category']...
+2025-07-15 15:59:42,290 - INFO - 🔄 Verificando y convirtiendo categorías en formato Shopify...
+2025-07-15 15:59:43,137 - INFO - ✅ CSV Shopify parseado con utf-8: 23602 productos
+2025-07-15 15:59:43,158 - INFO - 📦 Productos filtrados - Con stock: 13092, Sin stock: 10510
+2025-07-15 15:59:44,161 - INFO - ✅ Archivo 1/7: shopify_productos_parte_001_de_007.csv (2000 productos)
+2025-07-15 15:59:45,258 - INFO - ✅ Archivo 2/7: shopify_productos_parte_002_de_007.csv (2000 productos)
+2025-07-15 15:59:46,296 - INFO - ✅ Archivo 3/7: shopify_productos_parte_003_de_007.csv (2000 productos)
+2025-07-15 15:59:47,700 - INFO - ✅ Archivo 4/7: shopify_productos_parte_004_de_007.csv (2000 productos)
+2025-07-15 15:59:49,067 - INFO - ✅ Archivo 5/7: shopify_productos_parte_005_de_007.csv (2000 productos)
+2025-07-15 15:59:50,278 - INFO - ✅ Archivo 6/7: shopify_productos_parte_006_de_007.csv (2000 productos)
+2025-07-15 15:59:50,940 - INFO - ✅ Archivo 7/7: shopify_productos_parte_007_de_007.csv (1092 productos)
+2025-07-15 15:59:50,941 - INFO - 📋 Instrucciones creadas: csv_shopify_split\INSTRUCCIONES_IMPORTACION.txt

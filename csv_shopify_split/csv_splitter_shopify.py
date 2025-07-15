@@ -13,6 +13,13 @@ from datetime import datetime
 from typing import List, Dict, Optional
 from dotenv import load_dotenv
 import re
+import sys
+import shutil
+import time
+
+# Agregar el directorio padre al path para importar category_mapping
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from category_mapping import convertir_categoria
 
 # Configurar logging
 logging.basicConfig(
@@ -47,6 +54,11 @@ class CSVSplitterShopify:
             'tiempo_inicio': None,
             'tiempo_fin': None
         }
+        
+        # Estadísticas de mapeo de categorías
+        self.categorias_convertidas = 0
+        self.categorias_sin_mapeo = 0
+        self.ejemplos_conversion = {}
         
         # Crear directorio de salida
         if not os.path.exists(self.directorio_salida):
@@ -223,6 +235,8 @@ class CSVSplitterShopify:
                         
                         if es_shopify:
                             productos = list(reader)
+                            # Verificar y convertir categorías incluso en archivos Shopify
+                            productos = self.convertir_categorias_shopify(productos)
                             logging.info(f"✅ CSV Shopify parseado con {encoding}: {len(productos)} productos")
                             return productos
                         elif es_convertible:
@@ -265,6 +279,10 @@ class CSVSplitterShopify:
             'Brand': 'Vendor',
             'Categoria': 'Product Category',
             'Category': 'Product Category',
+            'Categorias': 'Product Category',
+            'Categories': 'Product Category',
+            'Categoria_Syscom': 'Product Category',
+            'Categoria_Principal': 'Product Category',
             'Imagen': 'Image Src',
             'Image': 'Image Src',
             'URL_Imagen': 'Image Src',
@@ -280,6 +298,22 @@ class CSVSplitterShopify:
                 if campo_original in producto_raw and producto_raw[campo_original]:
                     valor = str(producto_raw[campo_original]).strip()
                     if valor:
+                        # Aplicar mapeo especial para categorías
+                        if campo_shopify == 'Product Category':
+                            categoria_original = valor
+                            valor = convertir_categoria(valor)
+                            
+                            # Registrar estadísticas de mapeo
+                            if valor != categoria_original:
+                                self.categorias_convertidas += 1
+                                # Guardar ejemplos de conversión (máximo 10)
+                                if len(self.ejemplos_conversion) < 10:
+                                    self.ejemplos_conversion[categoria_original] = valor
+                                logging.debug(f"Categoría convertida: {categoria_original} → {valor}")
+                            else:
+                                self.categorias_sin_mapeo += 1
+                                logging.debug(f"Categoría sin mapeo: {categoria_original}")
+                        
                         producto_shopify[campo_shopify] = valor
             
             # Generar campos obligatorios si no existen
@@ -316,6 +350,29 @@ class CSVSplitterShopify:
             productos_shopify.append(producto_shopify)
         
         return productos_shopify
+    
+    def convertir_categorias_shopify(self, productos: List[Dict]) -> List[Dict]:
+        """Convertir categorías en archivos que ya están en formato Shopify"""
+        logging.info("🔄 Verificando y convirtiendo categorías en formato Shopify...")
+        
+        for producto in productos:
+            if 'Product Category' in producto and producto['Product Category']:
+                categoria_original = producto['Product Category']
+                categoria_convertida = convertir_categoria(categoria_original)
+                
+                # Registrar estadísticas de mapeo
+                if categoria_convertida != categoria_original:
+                    self.categorias_convertidas += 1
+                    # Guardar ejemplos de conversión (máximo 10)
+                    if len(self.ejemplos_conversion) < 10:
+                        self.ejemplos_conversion[categoria_original] = categoria_convertida
+                    logging.debug(f"Categoría convertida: {categoria_original} → {categoria_convertida}")
+                    producto['Product Category'] = categoria_convertida
+                else:
+                    self.categorias_sin_mapeo += 1
+                    logging.debug(f"Categoría sin mapeo: {categoria_original}")
+        
+        return productos
     
     def filtrar_productos_con_stock(self, productos: List[Dict]) -> List[Dict]:
         """Filtrar productos que tienen stock disponible"""
@@ -675,6 +732,17 @@ Líneas por archivo: {self.lineas_por_archivo:,}
         print(f"📁 Archivos generados: {self.stats['archivos_generados']}")
         print(f"📄 Líneas por archivo: {self.lineas_por_archivo:,}")
         
+        # Estadísticas adicionales de mapeo de categorías
+        if hasattr(self, 'categorias_convertidas'):
+            print(f"\n🗂️ MAPEO DE CATEGORÍAS:")
+            print(f"   ✅ Categorías convertidas: {self.categorias_convertidas}")
+            print(f"   ⚠️ Categorías sin mapeo: {self.categorias_sin_mapeo}")
+            if hasattr(self, 'ejemplos_conversion') and self.ejemplos_conversion:
+                print(f"   📝 Ejemplos de conversión:")
+                for original, convertida in list(self.ejemplos_conversion.items())[:3]:
+                    print(f"      {original[:50]}...")
+                    print(f"      → {convertida}")
+        
         if archivos_generados:
             print(f"\n📂 ARCHIVOS CREADOS EN: {self.directorio_salida}/")
             for i, archivo in enumerate(archivos_generados[:5], 1):  # Mostrar primeros 5
@@ -686,6 +754,7 @@ Líneas por archivo: {self.lineas_por_archivo:,}
         print(f"\n🎉 DIVISIÓN COMPLETADA")
         print(f"📋 Revisa las instrucciones: {self.directorio_salida}/INSTRUCCIONES_IMPORTACION.txt")
         print(f"🚀 ¡Listo para importar a Shopify!")
+        print(f"🗂️ Categorías convertidas automáticamente usando mapeo SYSCOM → Shopify")
 
 def main():
     """Función principal"""
